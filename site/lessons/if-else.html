@@ -8,14 +8,15 @@
 <h1>If and else</h1><p>Show a win message when the player reaches ten points.</p>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/if-else.png" alt="Blockly sets score to ten and checks if it is at least ten, then prints a win message or a prompt to keep collecting."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>var score = 10
+<section class="panel" data-practice="snippet"><h3>GDScript</h3><pre><code>var score = 10
 if score &gt;= 10:
     print(&quot;You win!&quot;)
 else:
     print(&quot;Keep collecting!&quot;)</code></pre></section>
 </div>
 <p>The Blockly test becomes the expression after <code>if</code>. A colon starts each branch, and indentation puts a statement inside it. The <code>else</code> branch runs when the test is false.</p>
-<h2>Try it in Godot</h2><p>Run the scene with scores of <code>9</code>, <code>10</code>, and <code>11</code>. Then change <code>&gt;=</code> to <code>&gt;</code> and predict which result changes.</p>
+<h2>Try it</h2><p>Edit and run the example above, or follow the setup instructions to try it in Godot on your computer.</p><p>Run the scene with scores of <code>9</code>, <code>10</code>, and <code>11</code>. Then change <code>&gt;=</code> to <code>&gt;</code> and predict which result changes.</p>
 <details><summary>Check your result</summary><p>With <code>&gt;=</code>, the player wins at 10 and 11. With <code>&gt;</code>, only 11 wins. Testing 10 catches the difference between the two rules.</p></details><p><a href="loops.html">Next lesson · Repeat loops</a></p></main>
 <footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
+<script type="module" src="../assets/practice.js"></script>
 </body></html>

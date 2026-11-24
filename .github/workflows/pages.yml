@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Build browser GDScript runner
+        run: bash runner/build.sh
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

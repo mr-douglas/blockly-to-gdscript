@@ -1,0 +1,144 @@
+const controlsTemplate = document.createElement("template");
+controlsTemplate.innerHTML = `<div class="practice-controls">
+  <label for="practice-code">Edit the example</label>
+  <textarea id="practice-code" aria-describedby="practice-help" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off"></textarea>
+  <div class="practice-actions">
+    <button type="button" data-action="run">Run</button>
+    <button type="button" data-action="stop" disabled>Stop</button>
+    <button type="button" data-action="reset">Reset code</button>
+  </div>
+  <p id="practice-help">Run with Ctrl+Enter or ⌘+Enter. The first run downloads Godot.</p>
+  <p role="status">Ready to run.</p>
+  <div aria-labelledby="output-label" role="log">
+    <strong id="output-label">Output</strong>
+    <pre data-output></pre>
+  </div>
+</div>`;
+
+const runnerBase = new URL("../runner/", import.meta.url);
+let workerURL;
+
+function loadWorker() {
+  workerURL ??= fetch(new URL("worker.js", runnerBase))
+    .then((response) => {
+      if (!response.ok) throw new Error("Could not load the GDScript runner.");
+      return response.text();
+    })
+    .then((source) => `data:text/javascript,${encodeURIComponent(source)}`)
+    .catch((error) => {
+      workerURL = undefined;
+      throw error;
+    });
+  return workerURL;
+}
+
+for (const practice of document.querySelectorAll("[data-practice]")) {
+  const example = practice.querySelector("pre");
+  const starter = example.textContent;
+  const fullScript = practice.dataset.practice === "full";
+  const controls = controlsTemplate.content.cloneNode(true);
+  const editor = controls.querySelector("textarea");
+  const run = controls.querySelector('[data-action="run"]');
+  const stop = controls.querySelector('[data-action="stop"]');
+  const reset = controls.querySelector('[data-action="reset"]');
+  const status = controls.querySelector("[role=status]");
+  const consoleOutput = controls.querySelector("[data-output]");
+  let activeRun;
+
+  editor.value = starter;
+  editor.rows = Math.max(6, starter.split("\n").length + 1);
+  example.replaceWith(controls);
+
+  function complete(session, text) {
+    if (activeRun !== session) return;
+    clearTimeout(session.timeout);
+    session.worker?.terminate();
+    activeRun = undefined;
+    run.disabled = false;
+    stop.disabled = true;
+    status.textContent = text;
+  }
+
+  function append(text) {
+    if (consoleOutput.textContent.length >= 24000) return;
+    consoleOutput.append(`${text}\n`);
+  }
+
+  async function execute() {
+    if (activeRun) return;
+    const source = editor.value.replace(/^[ \t]+/gm, (indent) => indent.replaceAll("\t", "    "));
+    if (!source.trim()) {
+      status.textContent = "Enter some GDScript before running.";
+      return;
+    }
+
+    const session = {};
+    activeRun = session;
+    run.disabled = true;
+    stop.disabled = false;
+    consoleOutput.textContent = "";
+    status.textContent = "Loading Godot…";
+    session.timeout = setTimeout(() => complete(session, "Godot took too long to load. Try running again."), 45000);
+
+    try {
+      const url = await loadWorker();
+      if (activeRun !== session) return;
+      const worker = new Worker(url);
+      session.worker = worker;
+      worker.onerror = () => complete(session, "Could not start Godot in this browser.");
+      worker.onmessage = ({data}) => {
+        if (activeRun !== session) return;
+        switch (data.type) {
+          case "started":
+            clearTimeout(session.timeout);
+            status.textContent = "Running…";
+            session.timeout = setTimeout(() => complete(session, "Stopped after 3 seconds. Check for a loop that never ends."), 3000);
+            break;
+          case "output":
+            append(data.text);
+            break;
+          case "error":
+            session.hasError = true;
+            if (/res:\/\/runner\.gd:/.test(data.text)) break;
+            const lineNumber = (line) => Math.max(1, Number(line) - (fullScript ? 0 : 3));
+            append(data.text
+              .replace(/^Line (\d+):/, (_, line) => `Line ${lineNumber(line)}:`)
+              .replace(/gdscript:\/\/[^)\s]+\.gd:(\d+)/g, (_, line) => `line ${lineNumber(line)}`));
+            break;
+          case "done":
+            complete(session, session.hasError || data.code !== 0 ? "Run ended with errors." : "Run finished.");
+            if (!consoleOutput.textContent) append("No output.");
+            break;
+        }
+      };
+      const script = fullScript ? source : `extends Node\n\nfunc _ready():\n${source.split("\n").map((line) => `    ${line}`).join("\n")}`;
+      worker.postMessage({source: script, base: runnerBase.href});
+    } catch (error) {
+      complete(session, error.message);
+    }
+  }
+
+  run.addEventListener("click", execute);
+  stop.addEventListener("click", () => {
+    if (activeRun) complete(activeRun, "Run stopped.");
+  });
+  reset.addEventListener("click", () => {
+    if (activeRun) complete(activeRun, "");
+    editor.value = starter;
+    consoleOutput.textContent = "";
+    status.textContent = "Starter code restored.";
+    editor.focus();
+  });
+  editor.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      execute();
+    } else if (event.key === "Enter" && !event.isComposing) {
+      event.preventDefault();
+      const before = editor.value.slice(0, editor.selectionStart).split("\n").at(-1);
+      const indent = before.match(/^\s*/)[0];
+      const innerIndent = /:\s*$/.test(before) ? "    " : "";
+      editor.setRangeText(`\n${indent}${innerIndent}`, editor.selectionStart, editor.selectionEnd, "end");
+    }
+  });
+}

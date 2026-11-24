@@ -27,3 +27,33 @@ pre { background: #14243b; color: #ecf4ff; padding: 1rem; border-radius: .5rem; 
 summary { cursor: pointer; font-weight: 650; }
 footer { padding-block: 1rem; border-top: 1px solid #cfdae8; }
 @media (max-width: 46rem) { .comparison { grid-template-columns: 1fr; } }
+
+.practice-controls label { display: block; font-weight: 650; margin-bottom: .35rem; }
+.practice-controls textarea {
+  display: block;
+  width: 100%;
+  min-height: 8rem;
+  padding: .8rem;
+  border: 1px solid #314660;
+  border-radius: .5rem;
+  background: #14243b;
+  color: #ecf4ff;
+  font: 1rem/1.55 ui-monospace, monospace;
+  resize: vertical;
+  tab-size: 4;
+}
+.practice-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.practice-actions button {
+  min-height: 2.75rem;
+  padding: .4rem .85rem;
+  border: 1px solid #a9bbd1;
+  border-radius: .4rem;
+  background: #f1f5fa;
+  color: #182940;
+  font: inherit;
+  cursor: pointer;
+}
+.practice-actions button[data-action="run"] { background: #194da2; color: white; border-color: #194da2; }
+.practice-actions button:disabled { opacity: .6; cursor: default; }
+.practice-controls p { margin: .65rem 0; }
+.practice-controls pre { margin: .35rem 0 0; min-height: 3rem; max-height: 16rem; white-space: pre-wrap; overflow-wrap: anywhere; }

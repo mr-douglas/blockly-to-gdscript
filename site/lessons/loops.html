@@ -8,11 +8,12 @@
 <h1>Repeat loops</h1><p>Repeat an action a fixed number of times.</p>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/loops.png" alt="Blockly repeats the print block three times."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>for i in range(3):
+<section class="panel" data-practice="snippet"><h3>GDScript</h3><pre><code>for i in range(3):
     print(&quot;Spawn a coin!&quot;)</code></pre></section>
 </div>
 <p>The Blockly repeat count goes inside <code>range()</code>. The indented body runs once per value. Here, <code>i</code> takes the values <code>0</code>, <code>1</code>, and <code>2</code>.</p>
-<h2>Try it in Godot</h2><p>Change the count to five. Replace the print line with <code>print("Coin ", i + 1)</code> to number each coin in the Output panel.</p>
+<h2>Try it</h2><p>Edit and run the example above, or follow the setup instructions to try it in Godot on your computer.</p><p>Change the count to five. Replace the print line with <code>print("Coin ", i + 1)</code> to number each coin in the Output panel.</p>
 <details><summary>Check your result</summary><p>The labels should go from <code>Coin 1</code> through <code>Coin 5</code>. This exercise prints spawn messages. Later, the loop body could instantiate actual coin scenes.</p></details><p><a href="functions.html">Next lesson · Functions</a></p></main>
 <footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
+<script type="module" src="../assets/practice.js"></script>
 </body></html>
