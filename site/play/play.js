@@ -199,12 +199,64 @@ const artLessons = {
     "task": "Change the playback rate, then swap the Walking clip for Run.",
     "file": "art_character_3d.gd"
   },
+  "sound-effects": {
+    "title": "Animation lesson 3 · Import and play sound effects",
+    "goal": "Run, jump and collect apples. Listen for the jump, landing and coin sounds.",
+    "controls": "Left and Right to run, Space to jump, R to restart.",
+    "task": "Change PITCH_VARIATION, then jump several times and compare how repetitive the sound is.",
+    "file": "art_sound_effects.gd"
+  },
+  "music": {
+    "title": "Animation lesson 4 · Loop background music",
+    "goal": "Let the title track reach its end and listen to it loop. Switch tracks, pause and change the volume.",
+    "controls": "Left and Right to change track, Up and Down to change volume, Space to pause, R to restart.",
+    "task": "Set LOOP_MUSIC to false and predict what happens when the title track ends.",
+    "file": "art_music.gd"
+  },
+};
+const uiLessons = {
+  "hud": {
+    "title": "Interface lesson 1 · Show the score in a HUD",
+    "goal": "Collect apples and watch the score in the top-right corner.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Change FONT_SIZE and the anchor preset, then check which text changes.",
+    "file": "ui_hud.gd"
+  },
+  "health": {
+    "title": "Interface lesson 2 · Show health with hearts",
+    "goal": "Avoid the hazards and the gap. Each hit or fall costs a heart.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Set MAX_HEALTH to 5 and check that the hearts match health after each hit.",
+    "file": "ui_health.gd"
+  },
+  "game-over": {
+    "title": "Interface lesson 3 · Pause the game and show a game over screen",
+    "goal": "Lose all your hearts to open the game over panel, then press Try again.",
+    "controls": "Left and Right to move, Space to jump. Click a button or press Enter.",
+    "task": "Comment out the process_mode line and predict whether the button still works.",
+    "file": "ui_game_over.gd"
+  },
+  "start-menu": {
+    "title": "Interface lesson 4 · Add a start menu",
+    "goal": "Press Play to start, then lose or restart to see the menu again.",
+    "controls": "Click Play or press Enter. Left and Right to move, Space to jump.",
+    "task": "Change the game's title and how-to-play text, then change REQUIRED_COINS.",
+    "file": "ui_start_menu.gd"
+  },
+  "win-screen": {
+    "title": "Interface lesson 5 · Finish with a \"You win\" screen",
+    "goal": "Collect all three apples, reach the trophy and read your results.",
+    "controls": "Click a button or press Enter. Left and Right to move, Space to jump.",
+    "task": "Add a score line to the win message and test a careful run and a careless one.",
+    "file": "ui_win_screen.gd"
+  },
 };
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},
   "movement-3d": {path: "platformer-3d", lessons: platformer3DLessons},
   racing: {path: "racing", lessons: racingLessons},
   animation: {path: "animation", lessons: artLessons},
+  ui: {path: "ui", lessons: uiLessons},
 };
 const course = Object.hasOwn(lessonCourses, requested) ? lessonCourses[requested] : null;
 const lesson = course && Object.hasOwn(course.lessons, params.get("lesson"))
