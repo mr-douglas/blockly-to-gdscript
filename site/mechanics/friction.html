@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Friction on a slope · 9709 Mechanics</title>
+<link rel="stylesheet" href="../assets/course.css"><link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · 9709 Mechanics</p>
+<nav class="mechanics-nav" aria-label="Mechanics labs"><a href="pulleys.html">Pulleys</a><a href="slopes.html">Smooth slopes</a><a href="friction.html" aria-current="page">Friction</a></nav>
+<h1>Will the block slide?</h1>
+<p><strong>Objective.</strong> Decide whether a particle stays at rest, is in limiting equilibrium, or slides down a rough slope.</p>
+<p>The particle starts from rest. Use <var>g</var> = 10 m/s². The model uses the same coefficient μ for the limiting value and for sliding. Orange shows weight, blue shows the normal reaction, and yellow shows friction acting up the plane.</p>
+<h2>Predict, then test</h2>
+<ol>
+<li>For 2 kg on a 30° slope with μ = 0.30, calculate <var>R</var>, μ<var>R</var> and the down-slope component of weight. Will the block slide? If so, find its acceleration.</li>
+<li>Increase μ to 0.70. Predict the actual friction needed to keep the block at rest. Compare it with the maximum μ<var>R</var>.</li>
+<li>Set the angle to 45° and μ to 1. Explain why this is limiting equilibrium. Lower μ slightly and test again.</li>
+</ol>
+<section class="panel" aria-label="Rough slope model" data-lab data-duration="1">
+  <div class="lab-controls">
+    <label>Mass (kg) <output></output><input name="mass" type="range" min="1" max="6" step="0.5" value="2" data-parameter></label>
+    <label>Angle (°) <output></output><input name="degrees" type="range" min="0" max="45" step="1" value="30" data-parameter></label>
+    <label>Coefficient μ <output></output><input name="coefficient" type="range" min="0" max="1" step="0.01" value="0.30" data-parameter></label>
+  </div>
+  <canvas width="720" height="400" role="img" aria-label="Block on a rough slope with weight, normal reaction, and upslope friction arrows."></canvas>
+  <div class="lab-actions"><button type="button" data-play>Run</button><button type="button" data-step>Step 0.25 s</button><button type="button" data-reset>Reset</button></div>
+  <label class="lab-time">Elapsed time <span data-time-label></span><input type="range" min="0" max="1" step="0.01" value="0" data-time></label>
+  <p data-results></p>
+</section>
+<h2>Check your working</h2>
+<details><summary>Show the equations and answers</summary>
+<p>Find <var>R</var> = <var>m</var><var>g</var> cos θ. At rest, friction balances <var>m</var><var>g</var> sin θ as long as that force is at most μ<var>R</var>. At the limit they are equal. If the driving force exceeds the limit, friction is μ<var>R</var> in this model and <var>m</var><var>a</var> = <var>m</var><var>g</var> sin θ − μ<var>R</var>.</p>
+<p>At 30° and μ = 0.30, <var>R</var> ≈ 17.32 N and friction ≈ 5.20 N. The down-slope force is 10 N, giving acceleration ≈ 2.40 m/s². With μ = 0.70, actual friction is 10 N, below the limit of about 12.12 N. At 45° and μ = 1, sin 45° = cos 45°, so both parallel forces have equal magnitude and friction is at its limit.</p>
+</details>
+<h2>Try the equation in GDScript</h2>
+<p>Predict the result for μ = 0.70, then change the coefficient. Explain why the <code>maxf</code> line returns zero instead of an acceleration up the plane.</p>
+<section class="panel" data-practice="snippet"><pre><code>var angle = deg_to_rad(30.0)
+var coefficient = 0.30
+var acceleration = maxf(0.0, 10.0 * (sin(angle) - coefficient * cos(angle)))
+print(snappedf(acceleration, 0.001))</code></pre></section>
+</main>
+<script type="module" src="friction.js"></script>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>

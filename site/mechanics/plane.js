@@ -21,4 +21,7 @@ export function drawPlane(ctx, state) {
   }
   arrow(ctx, center[0] + 15, center[1], 0, 51, "#ffbd77");
   arrow(ctx, center[0] - 9, center[1] - 4, 49 * normal[0], 49 * normal[1], "#b8cfff");
+  if (state.friction > 0) {
+    arrow(ctx, center[0] - 13 * normal[0], center[1] - 13 * normal[1], -57 * along[0], -57 * along[1], "#ffe083");
+  }
 }
