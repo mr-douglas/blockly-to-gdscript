@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11. Ride a moving platform | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="patrol.html">Previous lesson</a> · Lesson 11</p>
+<h1>Ride a moving platform</h1>
+<p><strong>Objective.</strong> Use an AnimatableBody2D to carry a player across a gap.</p>
+<h2>Move the collision body with its art</h2>
+<p>An <code>AnimatableBody2D</code> is a solid body you can move by code. Godot calculates the platform’s velocity from its movement and lets the player ride it through <code>move_and_slide()</code>. In this example <code>blend</code> moves from 0 to 1 and back; <code>lerpf()</code> turns it into an x position between the two endpoints.</p>
+<pre><code>elapsed = fposmod(elapsed + delta, CYCLE_SECONDS)
+var blend := 0.5 - 0.5 * cos(TAU * elapsed / CYCLE_SECONDS)
+platform.position.x = lerpf(285.0, 328.0, blend)</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=moving-platforms&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=moving-platforms">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Wait for the platform at the left edge, step onto it and let go of the arrows. Predict what happens to the player while the platform moves.</li>
+<li>Change <code>CYCLE_SECONDS</code> from 3 to 6. Time a round trip and decide how the change affects boarding.</li>
+<li>Move the art alone by replacing the last line with <code>platform.get_child(0).position.x = lerpf(0.0, 43.0, blend)</code>. Test whether the visible surface still matches the collision shape, then restore the original line.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Godot carries the player with the solid platform when it is on the floor. Doubling the cycle time halves the speed at the same point in the trip. Moving only the art leaves the collision shape in its starting spot.</p></details>
+<p><strong>Success criteria.</strong> The platform crosses the gap and carries a standing player. The visible and solid parts stay together.</p>
+<p><strong>Apply it to your project.</strong> Give an AnimatableBody2D a collision shape and move the body during physics updates. Test getting on, riding with no input, and jumping off.</p>
+</main>
+<script type="module" src="lesson-editor.js"></script>
+</body>
+</html>

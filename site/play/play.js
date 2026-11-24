@@ -109,6 +109,13 @@ const platformerLessons = {
     "task": "Change the patrol speed and test the timing at both endpoints.",
     "file": "platformer_patrol.gd"
   },
+  "moving-platforms": {
+    "title": "Platformer lesson 11 · Ride a moving platform",
+    "goal": "Ride the blue platform across the gap, then jump off onto the far side.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Double the cycle time and compare how long the player waits for the platform.",
+    "file": "platformer_moving.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;
