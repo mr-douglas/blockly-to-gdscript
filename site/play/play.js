@@ -83,7 +83,7 @@ function run() {
   const preview = document.createElement("iframe");
   preview.title = `${demo.title} game preview`;
   preview.sandbox = "allow-scripts";
-  preview.src = "preview.html?v=editable-1";
+  preview.src = "preview.html?v=editable-2";
   frame = preview;
   const code = source.value;
   preview.addEventListener("load", () => {

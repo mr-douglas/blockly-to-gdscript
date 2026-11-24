@@ -24,7 +24,10 @@ window.addEventListener("message", async ({source, data}) => {
           send("output", text);
         }
       },
-      onPrintError: (text) => send("error", text),
+      onPrintError: (text) => {
+        // The sandboxed preview has no service-worker access.
+        if (text.trim() !== "Failed to assign PWA callback") send("error", text);
+      },
     });
     await Promise.all([
       engine.init("godot"),
