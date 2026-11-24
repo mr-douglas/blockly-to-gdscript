@@ -56,9 +56,10 @@ labs_godot() {
 }
 
 # Download the CC0 art that is not stored in the repository: Kenney's Racing
-# Kit for the racing lessons and Pixel Adventure 1 for the 2D platformers.
-bash "$labs/art/racing/fetch.sh"
-bash "$labs/art/pixel/fetch.sh"
+# Kit, Pixel Adventure 1 and Kenney's Starter Kit 3D Platformer.
+for fetch in "$labs"/art/*/fetch.sh; do
+  bash "$fetch"
+done
 labs_godot --import
 
 # Smoke-test the lessons before packaging them.
@@ -81,6 +82,5 @@ mkdir -p "$project/../site/animation/assets"
 find "$labs/art" -maxdepth 1 -type f ! -name '*.import' -exec cp {} "$project/../site/animation/assets/" \;
 (
   cd "$labs"
-  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art \
-    -x "art/*.import" "art/racing/*.import" "art/pixel/*.import"
+  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art -x "*.import"
 )
