@@ -67,6 +67,13 @@ const platformerLessons = {
     "task": "Compare JUMP_SPEED values of 240 and 440 on the same platform.",
     "file": "platformer_jump.gd"
   },
+  "respawn": {
+    "title": "Platformer lesson 5 · Recover after falling",
+    "goal": "Fall into the gap to test respawning, then jump across it.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Try an elevated spawn to see the effect of preserving or resetting velocity.",
+    "file": "platformer_respawn.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;
