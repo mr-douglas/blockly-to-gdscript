@@ -22,11 +22,11 @@ super._physics_process(delta)</code></pre>
 <h2>Predict, change, and test</h2>
 <ol>
 <li>Wait to land. Jump without moving. Press Space again while airborne and observe what happens.</li>
-<li>Walk towards the pink beam. Jump while moving forward and try to clear it.</li>
+<li>Walk towards the low brick wall. Jump while moving forward and try to clear it.</li>
 <li>Set JUMP_SPEED to 3. Try the same obstacle. Restore the original value.</li>
 </ol>
-<details><summary>Check the prediction</summary><p>Only a grounded press starts a jump. A smaller upward speed reduces the height. At 3 units/s the player cannot clear the pink beam.</p></details>
-<p><strong>Success criteria.</strong> You can jump across the beam, land, and jump again. A press in mid-air does not start a second jump.</p>
+<details><summary>Check the prediction</summary><p>Only a grounded press starts a jump. A smaller upward speed reduces the height. At 3 units/s the player cannot clear the brick wall.</p></details>
+<p><strong>Success criteria.</strong> You can jump across the wall, land, and jump again. A press in mid-air does not start a second jump.</p>
 <p><strong>Apply it to your project.</strong> Map Space to a jump action. Use a positive Y velocity and let gravity bring the player back down. Check both a grounded and an airborne press.</p>
 <p><a href="cameras-3d.html">Next lesson · Switch between first and third person</a></p>
 </main>
