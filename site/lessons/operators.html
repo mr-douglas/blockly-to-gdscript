@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4 · Operators and expressions</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="data-types.html">Lesson 3</a> · Lesson 4</p>
+<h1>Operators and expressions</h1>
+<p><strong>Learning objective.</strong> Use arithmetic to calculate a value and comparisons to test a game rule.</p>
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/operators.png" alt="A Blockly print block contains the addition expression 5 plus 3."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>print(5 + 3)</code></pre></section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> An expression gives you a value. An operator tells you what to do with one or more values.</li>
+<li><strong>GDScript.</strong> Use <code>+</code>, <code>-</code>, and <code>*</code> for arithmetic. Use <code>&gt;=</code> for at least and <code>==</code> for equal. A comparison produces <code>true</code> or <code>false</code>. <code>and</code> combines two tests.</li>
+<li><strong>Godot.</strong> Calculate a score from coins and a bonus, or test whether enough points have been earned to open a gate.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>What does each line print? Notice what the parentheses group.</p>
+<pre><code>print(2 + 3 * 4)
+print((2 + 3) * 4)
+print(10 &gt;= 10)</code></pre>
+<details><summary>Check the prediction</summary><p>The lines are <code>14</code>, <code>20</code>, and <code>true</code>. Multiplication runs before addition unless parentheses group the addition. The comparison includes equality.</p></details>
+<h2>Guided task · Calculate a reward</h2>
+<p>Each coin is worth 5 points. Update the score expression so 3 coins and a bonus of 2 give <code>17</code> points.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="17">
+<pre><code>var coins = 3
+var bonus = 2
+var score = coins + bonus
+print(score)</code></pre>
+</section>
+<h2>Debugging task · Include the target score</h2>
+<p>A gate opens at 10 points or more. Run the code at 10 points, work out why it prints <code>false</code>, then fix the operator.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="true">
+<pre><code>var score = 10
+print(score &gt; 10)</code></pre>
+</section>
+<details><summary>Show a hint</summary><p>Use the operator that includes the case where both values are equal.</p></details>
+<h2>Independent task · Test a round result</h2>
+<p>Start with 12 health, subtract 4 damage, then print the health left. Print whether the player is still alive and has at least 10 points. Try with 10 points and again with 9.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var health = 12
+var damage = 4
+var score = 10
+# Calculate and test the result.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> With 10 points the two lines are <code>8</code> and <code>true</code>. With 9 points only the second line changes to <code>false</code>.</p>
+<h2>Apply it to your project</h2>
+<p>Choose a scoring or damage rule in your game. Write a GDScript expression that calculates the result. Test two input values in a scene’s <code>_ready()</code> function and compare the output with a calculation on paper. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change the damage to 12 and explain why the final comparison is false even with enough points.</p>
+<h2>Reflection</h2>
+<p>Why should you test a gate rule with a score exactly equal to the target?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
