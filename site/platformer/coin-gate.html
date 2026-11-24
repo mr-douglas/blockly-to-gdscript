@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12. Unlock the exit with coins | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="moving-platforms.html">Previous lesson</a> · Lesson 12</p>
+<h1>Unlock the exit with coins</h1>
+<p><strong>Objective.</strong> Combine collision events and game state to enforce a win condition.</p>
+<h2>Check the score before completing the level</h2>
+<p>The exit uses the same <code>body_entered</code> signal as before. A new check reads the current score. If it is too low, show how many more coins are needed and return before completing the level. If it is high enough, call the existing finish handler.</p>
+<pre><code>if coins &lt; REQUIRED_COINS:
+    status.text = &quot;Locked. Find %d more.&quot; % (REQUIRED_COINS - coins)
+    return
+super._on_goal_entered(body)</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=coin-gate&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=coin-gate">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Reach the exit after missing the airborne coin. Predict the message and whether the run will count as complete.</li>
+<li>Collect all three coins and enter the exit again. Then press R and check the start of a fresh run.</li>
+<li>Change <code>REQUIRED_COINS</code> to 2 and try with exactly two coins. Test that the boundary is allowed and that one coin is still too few.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The original exit stays locked with two coins and asks for one more. It completes with three. With the target set to two, two is enough and one is too few.</p></details>
+<p><strong>Success criteria.</strong> The exit rejects a score below the target, accepts the exact target, and resets with the rest of the level.</p>
+<p><strong>Apply it to your project.</strong> Build your own short level with a clear goal. Test a failed run, a run at the exact requirement, and a restart. Explain the exit rule using the code.</p>
+</main>
+<script type="module" src="lesson-editor.js"></script>
+</body>
+</html>

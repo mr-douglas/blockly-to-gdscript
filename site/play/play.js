@@ -116,6 +116,13 @@ const platformerLessons = {
     "task": "Double the cycle time and compare how long the player waits for the platform.",
     "file": "platformer_moving.gd"
   },
+  "coin-gate": {
+    "title": "Platformer lesson 12 · Unlock the exit with coins",
+    "goal": "Collect all three coins, jump past the hazards, and reach the finish marker.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Change REQUIRED_COINS to 2 and test both sides of the new threshold.",
+    "file": "platformer_coin_gate.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;
