@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 24 · Debugging and tracing</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="validation.html">Lesson 23</a> · Lesson 24</p>
+<h1>Debugging and tracing</h1>
+<p><strong>Learning objective.</strong> Tell syntax, runtime and logic errors apart and use tracing to locate a faulty step.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>var score = 2
+print(score)
+score += 3
+print(score)
+score += 4
+print(score)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A trace records intermediate values. Compare the first wrong value with the statement that produced it.</li>
+<li><strong>GDScript.</strong> A syntax error stops the code being read. A runtime error happens during execution. A logic error gives the wrong result even when the code runs.</li>
+<li><strong>Godot.</strong> In Godot, read the error and line number first, then add temporary print statements to see how values change.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Which line first shows that the score is being replaced?</p>
+<pre><code>var score = 2
+print(score)
+score = 3
+print(score)
+score = 4
+print(score)</code></pre>
+<details><summary>Check the prediction</summary><p>The correct trace would be 2, 5, 9. This prints 2, 3, 4, so the first update is already wrong.</p></details>
+<h2>Guided task · Trace each update</h2>
+<p>Add a print immediately after the first update to expose the middle value 5.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="2&#10;5&#10;9">
+<pre><code>var score = 2
+print(score)
+score += 3
+score += 4
+print(score)</code></pre>
+</section>
+<h2>Debugging task · Read a syntax error</h2>
+<p>Run the broken code and repair the print call.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="2">
+<pre><code>var score = 2
+print(score</code></pre>
+</section>
+<h2>Independent task · Diagnose a runtime error</h2>
+<p>Run the code. Trace the array size before trying to access the item, then fix the index so the last item prints.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var items = [&quot;key&quot;, &quot;map&quot;]
+print(items[2])</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Your fixed program prints the size 2 and the last item map. You can describe why the original gave a runtime error.</p>
+<h2>Apply it to your project</h2>
+<p>Choose a value that changes incorrectly in your own game. Print it just before and after the change, fix the first wrong step, and remove temporary prints when done. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Write down the exact output you expected before running a second test with a different starting value.</p>
+<h2>Reflection</h2>
+<p>Why is it useful to find the first wrong value instead of looking only at the final result?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
