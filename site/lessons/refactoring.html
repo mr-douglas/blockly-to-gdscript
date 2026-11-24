@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 26 · Refactoring and readable code</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="decomposition.html">Lesson 25</a> · Lesson 26</p>
+<h1>Refactoring and readable code</h1>
+<p><strong>Learning objective.</strong> Remove duplication and improve names while keeping the same behaviour.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+const POINTS_PER_COIN = 5
+
+func reward(coins: int) -&gt; int:
+    return coins * POINTS_PER_COIN
+
+func _ready():
+    print(reward(2))
+    print(reward(4))</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> Refactoring improves the structure of a program. Existing test results should stay the same.</li>
+<li><strong>GDScript.</strong> Use meaningful names, consistent indentation, and constants for shared rules. Keep comments that explain why a rule exists.</li>
+<li><strong>Godot.</strong> Clean up duplicated score logic so later changes can be made in one place.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Compare this older version with the example. Should its output differ?</p>
+<pre><code>extends Node
+
+func _ready():
+    var a = 2 * 5
+    var b = 4 * 5
+    print(a)
+    print(b)</code></pre>
+<details><summary>Check the prediction</summary><p>Both versions print 10 and 20. The function and constant change how the code is organised.</p></details>
+<h2>Guided task · Name the rule</h2>
+<p>Replace the repeated 5 with one named constant. Keep both outputs at 10 and 20.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="10&#10;20">
+<pre><code>extends Node
+
+func _ready():
+    var a = 2 * 5
+    var b = 4 * 5
+    print(a)
+    print(b)</code></pre>
+</section>
+<h2>Debugging task · Fix a rename</h2>
+<p>The function was renamed to reward, but the first call still uses the old name. Update the call.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="10&#10;20">
+<pre><code>extends Node
+
+const POINTS_PER_COIN = 5
+
+func reward(coins: int) -&gt; int:
+    return coins * POINTS_PER_COIN
+
+func _ready():
+    print(points(2))
+    print(reward(4))</code></pre>
+</section>
+<h2>Independent task · Extract a function</h2>
+<p>Rewrite both reward calculations as calls to one function. Run the same two tests again.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    var a = 2 * 5
+    var b = 4 * 5
+    print(a)
+    print(b)</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The calculation exists once and both calls still print 10 and 20. Check the structure yourself as well as the output.</p>
+<h2>Apply it to your project</h2>
+<p>Pick a repeated line from your game. Record what it does for two inputs, refactor it, then rerun those inputs and compare the results. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Rename the function to describe exactly what it returns, then update every call.</p>
+<h2>Reflection</h2>
+<p>The output matches after running two tests. What other input would help you check that behaviour stayed the same?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
