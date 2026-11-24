@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smooth slopes · 9709 Mechanics</title>
+<link rel="stylesheet" href="../assets/course.css"><link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · 9709 Mechanics</p>
+<nav class="mechanics-nav" aria-label="Mechanics labs"><a href="pulleys.html">Pulleys</a><a href="slopes.html" aria-current="page">Smooth slopes</a></nav>
+<h1>A particle on a smooth slope</h1>
+<p><strong>Objective.</strong> Resolve weight parallel and perpendicular to the plane, then predict motion along it.</p>
+<p>A particle starts from rest. The plane is smooth, so there is no friction. Take <var>g</var> = 10 m/s² and choose down the plane as positive. In the diagram, the orange arrow shows weight and the blue arrow shows the normal reaction. Arrows show directions.</p>
+<h2>Predict, then test</h2>
+<ol>
+<li>Set a 2 kg particle on a 30° slope. Find the component of weight down the plane, the normal reaction, and the acceleration.</li>
+<li>Calculate its speed and distance along the plane after 1 s. Run to check.</li>
+<li>Double the mass and keep the angle fixed. Predict which readings change. Then set the angle to 0° and explain the result.</li>
+</ol>
+<section class="panel" aria-label="Smooth slope model" data-lab data-duration="1">
+  <div class="lab-controls">
+    <label>Mass (kg) <output></output><input name="mass" type="range" min="1" max="6" step="0.5" value="2" data-parameter></label>
+    <label>Angle (°) <output></output><input name="degrees" type="range" min="0" max="40" step="1" value="30" data-parameter></label>
+  </div>
+  <canvas width="720" height="370" role="img" aria-label="Block on a plane with downward weight and a normal reaction perpendicular to the surface."></canvas>
+  <div class="lab-actions"><button type="button" data-play>Run</button><button type="button" data-step>Step 0.25 s</button><button type="button" data-reset>Reset</button></div>
+  <label class="lab-time">Elapsed time <span data-time-label></span><input type="range" min="0" max="1" step="0.01" value="0" data-time></label>
+  <p data-results></p>
+</section>
+<h2>Check your working</h2>
+<details><summary>Show the equations and answers</summary>
+<p>Down the slope, <var>m</var><var>g</var> sin θ = <var>m</var><var>a</var>, so <var>a</var> = <var>g</var> sin θ. Perpendicular to the slope there is no acceleration, so <var>R</var> = <var>m</var><var>g</var> cos θ.</p>
+<p>For 2 kg at 30°, the down-slope force is 10 N, the reaction is about 17.32 N, and the acceleration is 5 m/s². After 1 s, the speed is 5 m/s and the distance is 2.5 m. Doubling the mass doubles both forces and leaves the acceleration unchanged. At 0°, the component along the plane is zero, so the particle stays at rest.</p>
+</details>
+<h2>Try the equation in GDScript</h2>
+<p>Predict how the result changes at 0°, then enter that angle and run. <code>sin()</code> takes radians, so the code converts degrees first.</p>
+<section class="panel" data-practice="snippet"><pre><code>var angle_deg = 30.0
+var angle = deg_to_rad(angle_deg)
+var acceleration = 10.0 * sin(angle)
+print(snappedf(acceleration, 0.001))</code></pre></section>
+</main>
+<script type="module" src="slopes.js"></script>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
