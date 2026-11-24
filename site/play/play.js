@@ -8,7 +8,7 @@ const playgrounds = {
   },
   platformer: {
     title: "Sky steps",
-    goal: "Jump across the gaps and reach the green marker on the final platform.",
+    goal: "Jump across the gaps and reach the trophy on the final platform.",
     controls: "Left and Right to move, Space to jump, and R to restart.",
     task: "Predict how changing JUMP_SPEED affects which platforms you can reach. Run your edited code and test the same gap twice. Explain why the floor check prevents a second jump in mid-air.",
     file: "platformer.gd",
@@ -41,7 +41,7 @@ const requested = params.get("demo");
 const platformerLessons = {
   movement: {
     title: "Platformer lesson 1 · Sideways movement",
-    goal: "Move the player left and right using the arrow keys.",
+    goal: "Move the frog left and right using the arrow keys.",
     controls: "Left and Right to move. R to restart.",
     task: "Predict what happens if you double SPEED. Change it, run the edited code, and compare with the original.",
     file: "platformer_move.gd",
@@ -76,49 +76,49 @@ const platformerLessons = {
   },
   "goal": {
     "title": "Platformer lesson 6 · Finish the level with a signal",
-    "goal": "Jump the gap and trigger the green finish marker.",
+    "goal": "Jump the gap and reach the trophy.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
     "task": "Disconnect and reconnect the goal signal, then test the difference by reaching the finish.",
     "file": "platformer_goal.gd"
   },
   "coins": {
     "title": "Platformer lesson 7 · Collect coins and count them",
-    "goal": "Collect coins on the ground and above the gap.",
+    "goal": "Collect the apple coins on the ground and above the gap.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
     "task": "Set COIN_VALUE to 5 and add a fourth position to the coin list.",
     "file": "platformer_coins.gd"
   },
   "hazards": {
     "title": "Platformer lesson 8 · Add hazards that reset the player",
-    "goal": "Jump the gap, then jump over the red strip on the far side.",
+    "goal": "Jump the gap, then jump over the spikes on the far side.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
     "task": "Add a second hazard and predict whether your return path is still playable.",
     "file": "platformer_hazards.gd"
   },
   "checkpoint": {
     "title": "Platformer lesson 9 · Save a checkpoint",
-    "goal": "Activate the blue flag, then deliberately hit the next hazard to test where you return.",
+    "goal": "Touch the checkpoint pole to raise its flag, then deliberately hit the spikes to test where you return.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
-    "task": "Move CHECKPOINT and check that the flag and the saved spawn position both move.",
+    "task": "Move CHECKPOINT and check that the pole and the saved spawn position both move.",
     "file": "platformer_checkpoint.gd"
   },
   "patrol": {
     "title": "Platformer lesson 10 · Make an enemy patrol",
-    "goal": "Time a jump over the moving enemy and reach the exit.",
+    "goal": "Time a jump over the spinning saw and reach the trophy.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
     "task": "Change the patrol speed and test the timing at both endpoints.",
     "file": "platformer_patrol.gd"
   },
   "moving-platforms": {
     "title": "Platformer lesson 11 · Ride a moving platform",
-    "goal": "Ride the blue platform across the gap, then jump off onto the far side.",
+    "goal": "Ride the wooden platform across the gap, then jump off onto the far side.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
     "task": "Double the cycle time and compare how long the player waits for the platform.",
     "file": "platformer_moving.gd"
   },
   "coin-gate": {
     "title": "Platformer lesson 12 · Unlock the exit with coins",
-    "goal": "Collect all three coins, jump past the hazards, and reach the finish marker.",
+    "goal": "Collect all three coins, jump past the hazards, and reach the trophy.",
     "controls": "Left and Right to move, Space to jump, R to restart.",
     "task": "Change REQUIRED_COINS to 2 and test both sides of the new threshold.",
     "file": "platformer_coin_gate.gd"
