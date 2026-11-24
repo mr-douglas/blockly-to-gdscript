@@ -153,6 +153,13 @@ const platformer3DLessons = {
     "task": "Make the scene start in first person, then use C to switch back.",
     "file": "platform3d_cameras.gd"
   },
+  "goal-3d": {
+    "title": "Platformer lesson 5 · Finish a 3D obstacle course",
+    "goal": "Jump the gap and reach the finish pad.",
+    "controls": "Left and Right to turn, Up and Down to move, Space to jump, C to switch camera, R to restart.",
+    "task": "Change the finish message and test a successful run in either view.",
+    "file": "platform3d_goal.gd"
+  },
 };
 const course = requested === "movement-3d" ? "platformer-3d" : "platformer";
 const lessons = requested === "movement-3d" ? platformer3DLessons : platformerLessons;

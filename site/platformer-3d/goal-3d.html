@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Finish a 3D obstacle course | Build a 3D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="cameras-3d.html">Previous lesson</a> · Lesson 5</p>
+<h1>Finish a 3D obstacle course</h1>
+<p><strong>Objective.</strong> Use an Area3D signal to mark the level complete after a jump across a gap.</p>
+<h2>Use a 3D trigger at the finish</h2>
+<p>The starter makes two platforms with a gap between them. Falling below the level still uses the same respawn code. The finish pad uses an <code>Area3D</code> instead of the <code>Area2D</code> from your previous course. Its <code>body_entered</code> signal gives the handler the body that entered.</p>
+<pre><code>func reach_goal(body: Node3D) -&gt; void:
+    if body == player and not finished:
+        finished = true
+        finish_label.text = &quot;Course complete! Press R to restart.&quot;</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer-3d" src="../play/?demo=movement-3d&amp;lesson=goal-3d&amp;embed=1"></iframe>
+<p><a href="../play/?demo=movement-3d&amp;lesson=goal-3d">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Walk off the near edge without jumping. Predict what happens to the player and the completion message.</li>
+<li>Jump across, switch cameras with C, then walk through the green pad. Check whether your view affects the finish rule.</li>
+<li>Change the completion message in GDScript. Test one fall, one successful jump, and a restart.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>A fall returns the player to the start. Entering the goal completes the level in either view. R creates a fresh run.</p></details>
+<p><strong>Success criteria.</strong> The gap can be crossed, only contact with the finish pad marks completion, and the camera can switch during the run.</p>
+<p><strong>Apply it to your project.</strong> Build a short 3D course with a jump and a finish trigger. Save one test for falling, one for reaching the finish, and one for switching cameras while moving.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
