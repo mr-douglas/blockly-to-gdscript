@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 13 · Dictionaries and structured data</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="iterate-arrays.html">Lesson 12</a> · Lesson 13</p>
+<h1>Dictionaries and structured data</h1>
+<p><strong>Learning objective.</strong> Create and update a game record using keys.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>var enemy = {&quot;name&quot;: &quot;Bat&quot;, &quot;health&quot;: 5}
+print(enemy[&quot;name&quot;])</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A dictionary maps keys to values. Use a key when a field has a meaningful name.</li>
+<li><strong>GDScript.</strong> Use braces and write each pair as <code>"key": value</code>. Read or update a field with <code>enemy["health"]</code>.</li>
+<li><strong>Godot.</strong> Group values for one enemy, item, or level setting so they travel together.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>What changes after the attack?</p>
+<pre><code>var enemy = {&quot;health&quot;: 5, &quot;damage&quot;: 2}
+enemy[&quot;health&quot;] -= 2
+print(enemy[&quot;health&quot;])
+print(enemy[&quot;damage&quot;])</code></pre>
+<details><summary>Check the prediction</summary><p>It prints 3 and then 2. Only the value under the health key changes.</p></details>
+<h2>Guided task · Read a field</h2>
+<p>Replace 0 with an expression that reads the item’s price.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="4">
+<pre><code>var item = {&quot;name&quot;: &quot;Map&quot;, &quot;price&quot;: 4}
+print(0)</code></pre>
+</section>
+<h2>Debugging task · Fix the key</h2>
+<p>Run the code and fix the key used to read health.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="5">
+<pre><code>var enemy = {&quot;health&quot;: 5}
+print(enemy[&quot;hp&quot;])</code></pre>
+</section>
+<details><summary>Show a hint</summary><p>Keys must match exactly, including spelling.</p></details>
+<h2>Independent task · Change level settings</h2>
+<p>Create a dictionary with a level name and time limit. Increase the limit by ten and print the name and new limit.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code># Start with a level called Cave and a time limit of 30.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> It prints Cave and then 40. The time changes while the name stays the same.</p>
+<h2>Apply it to your project</h2>
+<p>Represent one item or enemy from your game with at least two fields. In <code>_ready()</code>, change one field and print both to check it. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Add a new key for difficulty and read it back.</p>
+<h2>Reflection</h2>
+<p>Why might a named key be easier to understand than the index 1 for a health value?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
