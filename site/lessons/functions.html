@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Functions | Blockly to GDScript</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap"><p><a href="../index.html">All lessons and Godot setup</a></p>
+<h1>Functions</h1><p>Give a reusable action a name.</p>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/functions.png" alt="Blockly defines an award_coin procedure that prints a message, then calls it."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+func award_coin():
+    print(&quot;+1 coin!&quot;)
+
+func _ready():
+    award_coin()</code></pre></section>
+</div>
+<p>The Blockly procedure definition becomes <code>func award_coin():</code>. Its body runs when you call <code>award_coin()</code>. Godot calls <code>_ready()</code> when the node is ready.</p>
+<h2>Try it in Godot</h2><p>Replace your whole script with the example. Add a second call inside <code>_ready()</code> to simulate collecting two coins. Predict what happens if you remove both calls.</p>
+<details><summary>Check your result</summary><p>Two calls print two messages. With both calls removed, put <code>pass</code> in the empty <code>_ready()</code> body. The function is defined, and the message never prints.</p></details></main>
+<footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
+</body></html>
