@@ -1,19 +1,59 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Variables | Blockly to GDScript</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 2 · Variables and game state</title><link rel="stylesheet" href="../assets/course.css"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
-<main class="wrap"><p><a href="../index.html">All lessons and Godot setup</a></p>
-<h1>Variables</h1><p>Store and display the player’s score.</p>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="blocks-to-gdscript.html">Lesson 1</a> · Lesson 2</p>
+<h1>Variables and game state</h1>
+<p><strong>Learning objective.</strong> Create variables and update them to track what changes in a game.</p>
+<h2>Read the same program in two forms</h2>
 <div class="comparison">
-<figure class="panel"><h3>Blockly</h3><img src="../assets/variables.png" alt="Blockly sets score to zero, then prints the value of score."></figure>
-<section class="panel" data-practice="snippet"><h3>GDScript</h3><pre><code>var score = 0
+<figure class="panel"><h3>Blockly</h3><img src="../assets/variables.png" alt="Set score to 0, then print score."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>var score = 0
 print(score)</code></pre></section>
 </div>
-<p>In Blockly, the <strong>set</strong> block gives the variable a value. In GDScript, <code>var</code> creates the variable and <code>=</code> assigns its starting value. To read it, type its name.</p>
-<h2>Try it</h2><p>Edit and run the example above, or follow the setup instructions to try it in Godot on your computer.</p><p>Change the starting score to <code>5</code>. Add <code>score += 1</code> before <code>print(score)</code> to simulate collecting a coin. Predict the output, then run the scene.</p>
-<details><summary>Check your result</summary><p>The Output panel should show <code>6</code>. The <code>+=</code> operator adds to the current value and stores the result.</p></details><p><a href="if-else.html">Next lesson · If and else</a></p></main>
-<footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
-<script type="module" src="../assets/practice.js"></script>
-</body></html>
+<ul>
+<li><strong>Computer science.</strong> A variable gives a name to a value you can read and change.</li>
+<li><strong>GDScript.</strong> Use <code>var score = 0</code> to create a variable. Use <code>score = 5</code> to replace its value. Use <code>score += 5</code> to add to the current value.</li>
+<li><strong>Godot.</strong> A game’s current values, such as score, health, speed and lives, are part of its game state.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Trace the value of <code>score</code> after each statement. What two lines will this code print?</p>
+<pre><code>var score = 2
+score += 3
+print(score)
+score = 1
+print(score)</code></pre>
+<details><summary>Check the prediction</summary><p>It prints <code>5</code> and then <code>1</code>. The update adds 3. The last assignment replaces 5 with 1.</p></details>
+<h2>Guided task · Collect a coin</h2>
+<p>Change the starting score to 4. Add 3 to the score before the print statement. Check that the output is <code>7</code>.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="7">
+<pre><code>var score = 0
+# Update score here.
+print(score)</code></pre></section>
+<h2>Debugging task · Keep the current health</h2>
+<p>The player starts with 10 health and takes 3 damage. Run the code. Fix the update so the output shows the health left, <code>7</code>.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="7">
+<pre><code>var health = 10
+health = 3
+print(health)</code></pre></section>
+<details><summary>Show a debugging hint</summary><p><code>health = 3</code> sets health to 3. Use <code>health = health - 3</code> or <code>health -= 3</code> to subtract damage.</p></details>
+<h2>Independent task · Test a power-up</h2>
+<p>Start with 3 lives and a speed of 100. Simulate losing one life and picking up a boost that adds 20 to speed. Print lives, then speed. Change the starting lives and run again to check that the update still works.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var lives = 3
+var speed = 100
+# Update and print both values.</code></pre></section>
+<p><strong>Success criteria.</strong> The first run prints <code>2</code>, then <code>120</code>. With 5 starting lives, it prints <code>4</code>, then <code>120</code>.</p>
+<h2>Apply it to your project</h2>
+<p>Choose a value your game needs to track. In a scene’s <code>_ready()</code>, create a variable to test the starting value and one change. Print before and after the change. Run the scene and check both values in Output. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>In the independent task, add a second speed boost. Predict what two boosts do to the final speed and check your prediction.</p>
+<h2>Reflection</h2>
+<p>When would you use <code>score = 0</code>, and when would you use <code>score += 1</code> in a game?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
