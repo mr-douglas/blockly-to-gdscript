@@ -9,25 +9,29 @@ var score: Label
 
 func _ready() -> void:
 	super._ready()
-	add_gate(0, Vector3(0, 0.3, -3.58), Vector3(0.38, 0.95, 2.7))
-	add_gate(1, Vector3(6.04, 0.3, 0), Vector3(3.0, 0.95, 0.38))
-	add_gate(2, Vector3(0, 0.3, 3.58), Vector3(0.38, 0.95, 2.7))
-	add_gate(3, Vector3(-6.04, 0.3, 2.45), Vector3(3.0, 0.95, 0.38))
+	# Gates are placed by how far round the lap they are: 0.25 is a quarter lap.
+	add_gate(0, 0.25)
+	add_gate(1, 0.5)
+	add_gate(2, 0.75)
+	add_gate(3, 0.0)  # The finish line.
 	score = label("")
 	score.position.y = 44
 	refresh_score()
 
-func add_gate(index: int, at: Vector3, size: Vector3) -> void:
+func add_gate(index: int, lap_fraction: float) -> void:
 	var gate := Area3D.new()
-	gate.position = at
+	gate.transform = track_frame(lap_fraction)
+	gate.position.y = 0.035
 	gate.collision_layer = 0
 	var shape := BoxShape3D.new()
-	shape.size = size
+	shape.size = Vector3(ROAD_WIDTH + 2.0 * KERB_WIDTH, 1.0, 0.4)
 	add_shape(gate, shape)
 	gate.body_entered.connect(register_gate.bind(index))
 	add_child(gate)
 	if index < GATE_COUNT - 1:
-		paint(Vector3(at.x, 0.03, at.z), Vector3(size.x, 0.03, size.z), Color("#85dbb4"))
+		var strip := BoxMesh.new()
+		strip.size = Vector3(ROAD_WIDTH, 0.02, 0.3)
+		add_mesh(gate, strip, Color("#5fe0a8"))
 
 func register_gate(body: Node3D, index: int) -> void:
 	var racer := [car_a, car_b].find(body)
@@ -43,9 +47,9 @@ func register_gate(body: Node3D, index: int) -> void:
 
 func refresh_score() -> void:
 	if winner == -1:
-		score.text = "Laps · Gold %d / %d    Blue %d / %d" % [laps[0], LAPS_TO_WIN, laps[1], LAPS_TO_WIN]
+		score.text = "Laps · Orange %d / %d    Green %d / %d" % [laps[0], LAPS_TO_WIN, laps[1], LAPS_TO_WIN]
 	else:
-		score.text = "%s wins! Press R to race again." % ("Gold" if winner == 0 else "Blue")
+		score.text = "%s wins! Press R to race again." % ("Orange" if winner == 0 else "Green")
 
 func _physics_process(delta: float) -> void:
 	if winner == -1:

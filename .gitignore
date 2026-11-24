@@ -3,6 +3,9 @@
 /site/runner/engine.wasm
 /site/runner/engine.pck
 /labs/.godot/
+/labs/art/racing/*.glb
+/labs/art/racing/*.import
+/labs/art/racing/*.part
 /site/play/playgrounds.pck
 /site/play/playgrounds-godot.zip
 /site/play/source/

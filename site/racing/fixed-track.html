@@ -12,23 +12,26 @@
 <h1>Drive two cars on one track</h1>
 <p><strong>Objective.</strong> Use two sets of input actions to control two CharacterBody3D cars through one reusable function.</p>
 <h2>Share the movement code and separate the controls</h2>
-<p>Both cars use the same <code>drive()</code> function. Give each call its own body and input values. The camera is orthographic, so objects stay the same size with depth. Its position, rotation and size stay fixed, and the whole track stays visible.</p>
+<p>Both cars use the same <code>drive()</code> function. Give each call its own body and input values. The camera uses a perspective view. It sits above and behind the track and tilts down to look at it, so cars further away look smaller. Its position and angle stay fixed, and the whole circuit stays visible.</p>
 <pre><code>func drive(car: CharacterBody3D, turn: float, throttle: float, delta: float) -&gt; void:
     car.rotate_y(turn * TURN_SPEED * delta)
     car.velocity = -car.transform.basis.z * throttle * SPEED
     car.move_and_slide()</code></pre>
+<p>The cars are imported 3D models. <code>make_car()</code> gives each body a box-shaped collision shape and adds a model on top. The Kenney cars face +Z, so the model turns half a circle (<code>PI</code>) to face Godot's forward direction, −Z.</p>
 <h2>Try it on this page</h2>
 <iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable racing" src="../play/?demo=racing&amp;lesson=fixed-track&amp;embed=1"></iframe>
 <p><a href="../play/?demo=racing&amp;lesson=fixed-track">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
-<li>Move the gold car with arrows and the blue car with WASD. Predict what happens when only one player presses forward.</li>
+<li>Move the orange car with the arrow keys and the green car with WASD. Predict what happens when only one player presses forward.</li>
 <li>Swap the two bodies passed to drive(). Test the controls, then restore the original calls.</li>
-<li>Change TURN_SPEED and compare both cars on the same corner. Drive a practice lap with each car.</li>
+<li>Change TURN_SPEED and compare both cars on the same curve. Drive a practice lap with each car.</li>
+<li>Change CAMERA_AT to <code>Vector3(0, 20, 0.1)</code>. Compare the near-overhead view with the angled view, then restore it.</li>
 </ol>
-<details><summary>Check the prediction</summary><p>Only the car passed the active input moves. Swapping the bodies swaps the control sets. Changing TURN_SPEED affects both cars because both use drive().</p></details>
-<p><strong>Success criteria.</strong> Each player can drive independently, both can move at once, and the shared camera shows the whole track.</p>
+<details><summary>Check the prediction</summary><p>Only the car passed the active input moves. Swapping the bodies swaps the control sets. Changing TURN_SPEED affects both cars because both use drive(). Moving the camera overhead flattens the scene. The angled view shows the height of the cars, barriers and trees.</p></details>
+<p><strong>Success criteria.</strong> Each player can drive independently, both can move at once, and the fixed camera shows the whole track.</p>
 <p><strong>Apply it to your project.</strong> Create separate input actions for each player in Godot. Reuse one movement function by passing the correct body and input values into it.</p>
+<p><small>Cars, trees, gantry, flags, tents, cones, towers and floodlights: <a href="https://kenney.nl/assets/racing-kit">Racing Kit by Kenney</a> (CC0).</small></p>
 <p><a href="shared-camera.html">Next lesson · Pan and zoom to keep both cars visible</a></p>
 </main>
 <script type="module" src="../platformer/lesson-editor.js"></script>

@@ -49,14 +49,29 @@ curl --fail --silent --show-error --location --retry 3 \
   -o "$scratch/$editor_name.zip"
 printf '%s  %s\n' 'd0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3' "$scratch/$editor_name.zip" | sha256sum --check
 unzip -qjo "$scratch/$editor_name.zip" "$editor_name" -d "$scratch"
-XDG_CACHE_HOME="$scratch/cache" XDG_CONFIG_HOME="$scratch/config" XDG_DATA_HOME="$scratch/data" \
-  "$scratch/$editor_name" --headless --path "$labs" \
-  --export-pack Web "$play/playgrounds.pck"
+
+labs_godot() {
+  XDG_CACHE_HOME="$scratch/cache" XDG_CONFIG_HOME="$scratch/config" XDG_DATA_HOME="$scratch/data" \
+    "$scratch/$editor_name" --headless --path "$labs" "$@"
+}
+
+# The racing lessons use CC0 models from Kenney's Racing Kit.
+bash "$labs/art/racing/fetch.sh"
+labs_godot --import
+# Smoke-test the racing lessons before packaging them.
+labs_godot --script res://ci/smoke_racing.gd 2>&1 | tee "$scratch/smoke.log"
+if grep -qE 'SCRIPT ERROR|Parse Error|SMOKE FAIL' "$scratch/smoke.log" \
+  || ! grep -q 'SMOKE PASSED' "$scratch/smoke.log"; then
+  echo "The racing smoke test failed." >&2
+  exit 1
+fi
+
+labs_godot --export-pack Web "$play/playgrounds.pck"
 mkdir -p "$play/source"
 cp "$labs/"*.gd "$play/source/"
 mkdir -p "$project/../site/animation/assets"
 find "$labs/art" -maxdepth 1 -type f ! -name '*.import' -exec cp {} "$project/../site/animation/assets/" \;
 (
   cd "$labs"
-  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art -x "art/*.import"
+  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art -x "art/*.import" "art/racing/*.import"
 )

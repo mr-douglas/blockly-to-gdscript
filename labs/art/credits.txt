@@ -11,3 +11,11 @@ Author's pack and license: https://quaternius.com/packs/knightcharacter.html
 GLB distribution: https://github.com/trebeljahr/quaternius-showcase/tree/main/public/glb/single_knight_pack
 License: https://creativecommons.org/publicdomain/zero/1.0/
 The GLB was renamed for this course.
+
+racing/*.glb
+raceCarOrange, raceCarGreen, treeLarge, treeSmall, overheadLights, bannerTowerRed,
+lightPostLarge, tent, flagCheckers and pylon from Racing Kit by Kenney, CC0 1.0.
+Author's pack and license: https://kenney.nl/assets/racing-kit
+GLB distribution (pinned commit): https://github.com/kidscancode/3d_car_sphere/tree/cabc5c0019e68913012fc41d7b2ded6dcef3be31/assets/kenney_racing_kit
+License: https://creativecommons.org/publicdomain/zero/1.0/
+racing/fetch.sh downloads these files and checks each one against its git blob hash.

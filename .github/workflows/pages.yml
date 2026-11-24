@@ -2,13 +2,14 @@ name: Publish course
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
 concurrency:
-  group: pages
+  group: ${{ github.event_name == 'pull_request' && format('check-{0}', github.ref) || 'pages' }}
   cancel-in-progress: false
 jobs:
   package:
@@ -16,6 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
       - uses: actions/cache@v4
         with:
           path: .cache/godot/web-4.6.3.zip
@@ -26,6 +28,7 @@ jobs:
         with:
           path: site
   deploy:
+    if: github.event_name != 'pull_request'
     needs: package
     runs-on: ubuntu-latest
     environment:

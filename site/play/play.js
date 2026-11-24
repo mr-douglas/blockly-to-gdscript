@@ -164,22 +164,22 @@ const platformer3DLessons = {
 const racingLessons = {
   "fixed-track": {
     "title": "Racing lesson 1 · Drive two cars on one track",
-    "goal": "Drive both cars around the track from a fixed overhead view.",
-    "controls": "Gold uses arrows. Blue uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
+    "goal": "Drive both cars round the curved circuit. A fixed camera looks down at the whole track from an angle.",
+    "controls": "Orange uses arrows. Green uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
     "task": "Swap the two bodies in the drive calls, then test which keys control which car.",
     "file": "racing_fixed.gd"
   },
   "shared-camera": {
     "title": "Racing lesson 2 · Pan and zoom to keep both cars visible",
-    "goal": "Separate the cars to make the camera zoom out, then bring them together again.",
-    "controls": "Gold uses arrows and blue uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
+    "goal": "Separate the cars to make the camera pull back, then bring them together again.",
+    "controls": "Orange uses arrows and Green uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
     "task": "Change FRAME_MARGIN and test cars separated across the width and along the depth of the track.",
     "file": "racing_shared_camera.gd"
   },
   "laps": {
     "title": "Racing lesson 3 · Count laps and decide who wins",
     "goal": "Race clockwise. Pass the three green strips in order, then cross the chequered line. First to two laps wins.",
-    "controls": "Gold uses arrows. Blue uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
+    "controls": "Orange uses arrows. Green uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
     "task": "Change LAPS_TO_WIN to 1, then test the ordered checkpoint rule.",
     "file": "racing_laps.gd"
   },
