@@ -176,6 +176,13 @@ const racingLessons = {
     "task": "Change FRAME_MARGIN and test cars separated across the width and along the depth of the track.",
     "file": "racing_shared_camera.gd"
   },
+  "laps": {
+    "title": "Racing lesson 3 · Count laps and decide who wins",
+    "goal": "Race clockwise. Pass the three green strips in order, then cross the chequered line. First to two laps wins.",
+    "controls": "Gold uses arrows. Blue uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
+    "task": "Change LAPS_TO_WIN to 1, then test the ordered checkpoint rule.",
+    "file": "racing_laps.gd"
+  },
 };
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},

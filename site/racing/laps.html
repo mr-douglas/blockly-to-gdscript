@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Count laps and decide who wins | Build a Two-Player Racer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Racing course</a> · <a href="shared-camera.html">Previous lesson</a> · Lesson 3</p>
+<h1>Count laps and decide who wins</h1>
+<p><strong>Objective.</strong> Track checkpoint progress and laps separately for each player.</p>
+<h2>Give each racer its own progress</h2>
+<p>Three green strips and the finish line are Area3D triggers. Each signal passes the car and the gate number. <code>next_gate[racer]</code> says which gate that car needs next. Only after the last gate does its lap count increase. The first car to reach the target wins.</p>
+<pre><code>if winner != -1 or racer == -1 or index != next_gate[racer]:
+    return
+next_gate[racer] += 1
+if next_gate[racer] == GATE_COUNT:
+    next_gate[racer] = 0
+    laps[racer] += 1</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable racing" src="../play/?demo=racing&amp;lesson=laps&amp;embed=1"></iframe>
+<p><a href="../play/?demo=racing&amp;lesson=laps">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Cross the finish line immediately. Predict the lap count. Then drive clockwise through the three green strips and back across the line.</li>
+<li>Have Gold and Blue complete a lap at different times. Check that the counts are separate.</li>
+<li>Change LAPS_TO_WIN to 1. Finish a race and press R. Test when the race stops and whether the counts start over.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Crossing the line before the checkpoints leaves the count at zero. Each car advances only its own progress. With the target set to one lap, the first valid lap wins and R starts a fresh race.</p></details>
+<p><strong>Success criteria.</strong> The finish line alone cannot score a lap. Each player can complete a valid lap independently, and the winner is announced.</p>
+<p><strong>Apply it to your project.</strong> Arrange trigger areas on your own track. Test an out-of-order crossing, a valid lap, a win and a restart.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
