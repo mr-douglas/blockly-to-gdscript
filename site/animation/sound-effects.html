@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Import and play sound effects | Import Art and Animations</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Animation course</a> · <a href="characters-3d.html">Previous lesson</a> · Lesson 3</p>
+<h1>Import and play sound effects</h1>
+<p><strong>Objective.</strong> Import short sounds and play them from code at the moment something happens in the game.</p>
+<h2>Import the sounds and add a player for each</h2>
+<p>Download the three OGG files below and drag them into your Godot project’s FileSystem dock. Godot imports them as <code>AudioStreamOggVorbis</code> resources. A sound file cannot play by itself. It needs an <code>AudioStreamPlayer</code> node with the file set as its <code>stream</code>. In the editor, add one AudioStreamPlayer per sound and drag the file onto its Stream property. The browser starter does the same in <code>add_sound()</code>.</p>
+<pre><code>func add_sound(stream: AudioStream) -&gt; AudioStreamPlayer:
+    var sound := AudioStreamPlayer.new()
+    sound.stream = stream
+    add_child(sound)
+    return sound</code></pre>
+<h2>Play each sound at the right moment</h2>
+<p>Call <code>play()</code> in the same place as the action it belongs to: the jump sound where the jump starts and the coin sound where the coin is collected. Landing has no input of its own, so the code compares this frame with the last one. If the frog is on the floor now but was not before, it has just landed. Changing <code>pitch_scale</code> a little each time stops a repeated sound from becoming tiring.</p>
+<pre><code>if Input.is_action_just_pressed("action") and player.is_on_floor():
+    player.velocity.y = -JUMP_SPEED
+    play_varied(jump_sound)
+player.move_and_slide()
+if player.is_on_floor() and not was_on_floor:
+    land_sound.play()
+was_on_floor = player.is_on_floor()</code></pre>
+<p><a href="assets/jump.ogg" download>Download jump.ogg</a> · <a href="assets/coin.ogg" download>Download coin.ogg</a> · <a href="assets/land.ogg" download>Download land.ogg</a></p>
+<p>Sounds from Starter Kit 3D Platformer by Kenney, CC0. <a href="https://github.com/KenneyNL/Starter-Kit-3D-Platformer">Original kit and license</a> · <a href="assets/credits.txt">Asset credits</a></p>
+<h2>Try it on this page</h2>
+<p>Click the game before playing. Browsers only allow sound after you interact with the page.</p>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable sound effects" src="../play/?demo=animation&amp;lesson=sound-effects&amp;embed=1"></iframe>
+<p><a href="../play/?demo=animation&amp;lesson=sound-effects">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Jump five times in a row and listen. Then set <code>PITCH_VARIATION</code> to 0.0 and compare.</li>
+<li>Set <code>PITCH_VARIATION</code> to 0.5. Predict how the coin sound will change, then test it.</li>
+<li>Comment out <code>was_on_floor = player.is_on_floor()</code>. Predict when the landing sound plays now, test it, and restore the line.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>With no variation every jump sounds identical. A large variation makes some coins sound much higher or lower, which can seem like a different sound. Without updating <code>was_on_floor</code> it stays true from the start, so the landing check is never true and the landing sound never plays.</p></details>
+<p><strong>Success criteria.</strong> Each sound plays once, at the moment of its action, and repeated sounds vary slightly.</p>
+<p><strong>Apply it to your project.</strong> Import at least three sounds and give each its own AudioStreamPlayer. Play them from the code that handles each event. Use <code>volume_db</code> to balance them so no sound drowns out the others.</p>
+<p><a href="music.html">Next lesson · Loop background music</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

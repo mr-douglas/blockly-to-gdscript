@@ -55,6 +55,9 @@ jobs:
           sheet platformer-enemies platformer_patrol-*.png platformer_moving-*.png platformer_coin_gate-*.png platformer-*.png
           sheet playgrounds-3d movement_3d-*.png landing_pad_follow-*.png physics_3d-*.png top_down-*.png art_sprite_2d-*.png art_character_3d-*.png
           sheet platformer-3d platform3d_*.png
+          sheet ui-hud ui_hud-*.png ui_health-*.png
+          sheet ui-menus ui_game_over-*.png ui_start_menu-*.png ui_win_screen-*.png
+          sheet audio art_sound_effects-*.png art_music-*.png
       - name: Publish to the ci-screenshots branch
         if: always()
         run: |
@@ -63,7 +66,7 @@ jobs:
           cd "$RUNNER_TEMP/shots"
           git init -q -b ci-screenshots
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A
           git commit -qm "Screenshots for ${GITHUB_SHA}"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-screenshots

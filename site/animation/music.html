@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Loop background music | Import Art and Animations</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Animation course</a> · <a href="sound-effects.html">Previous lesson</a> · Lesson 4</p>
+<h1>Loop background music</h1>
+<p><strong>Objective.</strong> Import a music track, make it loop without a gap, and control its playback and volume from code.</p>
+<h2>Make the track loop</h2>
+<p>Music is played by an <code>AudioStreamPlayer</code>, just like a sound effect. The difference is that it should start again when it reaches the end. OGG music can loop in two ways. In the editor, select the file, tick <strong>Loop</strong> in the Import dock and press Reimport. In code, set <code>loop</code> on the stream before playing it. These tracks were written to loop seamlessly, so the join cannot be heard.</p>
+<pre><code>func play_track(index: int) -&gt; void:
+    track = index
+    var stream: AudioStreamOggVorbis = TRACKS[index]
+    stream.loop = LOOP_MUSIC
+    music.stream = stream
+    music.play()</code></pre>
+<h2>Pause, volume and the playback position</h2>
+<p><code>stream_paused</code> pauses the music and keeps its place. <code>volume_db</code> is measured in decibels: 0 is full volume, and each step of −6 dB roughly halves how loud it sounds. <code>get_playback_position()</code> reports how many seconds into the track the player is.</p>
+<pre><code>if Input.is_action_just_pressed("action"):
+    music.stream_paused = not music.stream_paused
+if Input.is_action_just_pressed("down"):
+    music.volume_db = maxf(music.volume_db - VOLUME_STEP, QUIETEST)</code></pre>
+<p><a href="assets/music-title.ogg" download>Download the title track</a> · <a href="assets/music-level.ogg" download>Download the level track</a></p>
+<p>Music from 5 Chiptunes (Action) by Juhani Junkala, CC0. <a href="https://opengameart.org/content/5-chiptunes-action">Original tracks and license</a> · <a href="assets/credits.txt">Asset credits</a></p>
+<h2>Try it on this page</h2>
+<p>Click the game first. Browsers only allow sound after you interact with the page.</p>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable music player" src="../play/?demo=animation&amp;lesson=music&amp;embed=1"></iframe>
+<p><a href="../play/?demo=animation&amp;lesson=music">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>The title track lasts about 11 seconds. Watch the timer as it reaches the end and listen to what happens.</li>
+<li>Set <code>LOOP_MUSIC</code> to false and run again. Predict what the status shows after 11 seconds.</li>
+<li>Press Down several times, then Space twice. Check whether the volume and the position in the track are kept.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>With loop on, the timer returns to 0:00 and the music continues without a gap. With loop off, the player stops at the end and the status changes to Stopped. Pausing keeps both the position and the volume.</p></details>
+<p><strong>Success criteria.</strong> The music loops with no gap. You can switch tracks, pause and resume, and change the volume without restarting the track.</p>
+<p><strong>Apply it to your project.</strong> Import a looping track and turn on Loop in its import settings. Add an AudioStreamPlayer with Autoplay on to your main scene. Set its <code>volume_db</code> lower than your sound effects so the music stays in the background.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

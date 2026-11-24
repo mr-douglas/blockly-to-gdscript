@@ -15,6 +15,9 @@ const SCENES := [
 	"res://platform3d_walk.gd", "res://platform3d_fall.gd", "res://platform3d_jump.gd",
 	"res://platform3d_cameras.gd", "res://platform3d_goal.gd", "res://art_character_3d.gd",
 	"res://racing_fixed.gd", "res://racing_shared_camera.gd", "res://racing_laps.gd",
+	"res://ui_hud.gd", "res://ui_health.gd", "res://ui_game_over.gd",
+	"res://ui_start_menu.gd", "res://ui_win_screen.gd",
+	"res://art_sound_effects.gd", "res://art_music.gd",
 ]
 const KEYS := [&"left", &"right", &"up", &"down", &"action", &"reset", &"view",
 	&"p2_left", &"p2_right", &"p2_up", &"p2_down"]
@@ -48,6 +51,9 @@ func visit(path: String) -> void:
 	var label := path.get_file().get_basename()
 	await wait(40)
 	await shoot(label + "-1")
+	# Lessons with a start menu wait, paused, until Play is pressed.
+	if scene.has_method(&"start_game"):
+		scene.call(&"start_game")
 	var player = scene.get(&"player")
 	var start: Vector3 = position_of(player)
 	# Drive forward or right, with a jump part of the way through.
@@ -70,6 +76,16 @@ func visit(path: String) -> void:
 		player.position = lesson.CHECKPOINT
 		await wait(60)
 		await shoot(label + "-3")
+	# Show the end screen in the interface lessons.
+	if scene.has_method(&"win"):
+		scene.call(&"win")
+		await wait(5)
+		await shoot(label + "-4")
+	elif scene.has_method(&"out_of_health"):
+		scene.call(&"out_of_health")
+		await wait(5)
+		await shoot(label + "-4")
+	paused = false
 	print("TOUR OK ", path)
 	scene.queue_free()
 	await process_frame

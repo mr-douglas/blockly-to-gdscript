@@ -36,4 +36,6 @@ trophy.png 6e67748223af76ed84f5d4ed38fea2ffb1e42f4a Items/Checkpoints/End/End (I
 spikes.png 133f58681f1992ffa3f33a261ad49d11077527f8 Traps/Spikes/Idle.png
 saw.png 9f3a811dd59d0049adf2223f43579ebaab926825 Traps/Saw/On (38x38).png
 platform.png a66da57acf963073c11dea35e19fb216166c1f13 Traps/Platforms/Brown On (32x8).png
+button-play.png 04f3791e5c72729ef0e27b1c3d7123c9be4b3ffd Menu/Buttons/Play.png
+button-restart.png b12b24d53603e49308ddebfc43c7c78c2d72aade Menu/Buttons/Restart.png
 IMAGES

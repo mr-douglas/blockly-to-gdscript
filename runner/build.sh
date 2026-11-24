@@ -80,7 +80,11 @@ mkdir -p "$play/source"
 cp "$labs/"*.gd "$play/source/"
 mkdir -p "$project/../site/animation/assets"
 find "$labs/art" -maxdepth 1 -type f ! -name '*.import' -exec cp {} "$project/../site/animation/assets/" \;
+# The sound and interface lessons offer their sounds, music, font and icons
+# as downloads.
+cp "$labs/art/audio/"*.ogg "$labs/art/ui/"*.ttf "$labs/art/ui/"*.png "$project/../site/animation/assets/"
 (
   cd "$labs"
-  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art -x "*.import"
+  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art \
+    -x "*.import"
 )

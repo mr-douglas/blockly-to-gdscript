@@ -33,6 +33,7 @@ func play_clip(wanted: StringName) -&gt; void:
 <details><summary>Check the prediction</summary><p>The knight starts in Idle, plays Walking while you hold a direction, and returns to Idle when you release it. Playback rate changes clip speed. MOVE_SPEED controls travel. The second argument to play() blends the outgoing and incoming clips for 0.18 seconds.</p></details>
 <p><strong>Success criteria.</strong> Godot imports the rig and clips. The scripted transition plays the correct clip, and you can change the clip or its rate without changing travel speed.</p>
 <p><strong>Apply it to your project.</strong> Instance the GLB in your own scene. Use get_animation_list() to check the names, enable looping on your locomotion clips in the import settings or through code, and call play() from a script on the parent scene. Test idle, movement and stopping.</p>
+<p><a href="sound-effects.html">Next lesson · Import and play sound effects</a></p>
 </main>
 <script type="module" src="../platformer/lesson-editor.js"></script>
 </body>

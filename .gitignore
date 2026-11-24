@@ -13,6 +13,13 @@
 /labs/art/platformer3d/*.import
 /labs/art/platformer3d/*.part
 /labs/art/platformer3d/Textures/
+/labs/art/audio/*.ogg
+/labs/art/audio/*.import
+/labs/art/audio/*.part
+/labs/art/ui/*.ttf
+/labs/art/ui/*.png
+/labs/art/ui/*.import
+/labs/art/ui/*.part
 /site/play/playgrounds.pck
 /site/play/playgrounds-godot.zip
 /site/play/source/

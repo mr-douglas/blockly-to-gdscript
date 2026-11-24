@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Pause the game and show a game over screen | Build a Game Interface</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Interface course</a> · <a href="health.html">Previous lesson</a> · Lesson 3</p>
+<h1>Pause the game and show a game over screen</h1>
+<p><strong>Objective.</strong> Build a panel with a button, pause the game behind it, and restart the scene when the button is pressed.</p>
+<h2>Build the panel in a function</h2>
+<p><code>make_panel()</code> builds a <code>PanelContainer</code> holding a <code>VBoxContainer</code> with a title, a message and a <code>Button</code>. Each node is given a name, so other code can find it later with a path such as <code>"Column/Button"</code>. The button’s <code>pressed</code> signal is connected to whichever function you pass in. The next two lessons reuse this function for the start menu and the win screen.</p>
+<pre><code>var button := Button.new()
+button.name = "Button"
+button.text = button_text
+button.icon = icon
+button.pressed.connect(on_pressed)</code></pre>
+<h2>Pause, then restart</h2>
+<p>Setting <code>get_tree().paused</code> to <code>true</code> stops every node that is pausable: the player, the saw, the moving platform and their physics. The interface would stop too, so its <code>process_mode</code> is set to <code>PROCESS_MODE_ALWAYS</code>. <code>grab_focus()</code> lets Enter or Space press the button as well as the mouse. To restart, unpause and reload the whole scene.</p>
+<pre><code>func show_panel(panel: PanelContainer) -&gt; void:
+    panel.show()
+    get_tree().paused = true
+    panel.get_node("Column/Button").grab_focus()
+
+func restart() -&gt; void:
+    get_tree().paused = false
+    get_tree().reload_current_scene()</code></pre>
+<p><code>style_theme()</code> adds <code>StyleBoxFlat</code> backgrounds to the Theme for panels and for each button state: normal, hover, pressed and focus.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=ui&amp;lesson=game-over&amp;embed=1"></iframe>
+<p><a href="../play/?demo=ui&amp;lesson=game-over">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Lose all three hearts. Predict what the saw and the moving platform do while the panel is open. Press Try again with the mouse, then test Enter.</li>
+<li>Comment out <code>ui.process_mode = Node.PROCESS_MODE_ALWAYS</code>. Lose again and try the button. Restore the line.</li>
+<li>Change the <code>"hover"</code> colour in <code>style_theme()</code> and move the mouse over the button to test it.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Everything in the level freezes because it is paused. Without the process mode line the button is paused as well, so it cannot be clicked and the game is stuck. The hover colour appears only while the pointer is over the button.</p></details>
+<p><strong>Success criteria.</strong> At zero hearts the game freezes and the panel appears. The button works with the mouse and the keyboard and starts a fresh run.</p>
+<p><strong>Apply it to your project.</strong> In Godot, build the panel as its own scene and instance it in your HUD. Set its Process Mode to Always in the Inspector, connect the button’s pressed signal in the Node dock, and call <code>reload_current_scene()</code> to restart.</p>
+<p><a href="start-menu.html">Next lesson · Add a start menu</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
