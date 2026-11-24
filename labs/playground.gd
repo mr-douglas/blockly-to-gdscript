@@ -5,6 +5,7 @@ const DEMOS := {
 	"platformer": preload("res://platformer.gd"),
 	"movement-3d": preload("res://movement_3d.gd"),
 	"physics-3d": preload("res://physics_3d.gd"),
+	"landing-pad-follow": preload("res://landing_pad_follow.gd"),
 }
 
 var demo: Node

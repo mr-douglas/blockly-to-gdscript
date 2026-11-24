@@ -38,6 +38,9 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
 	player.velocity.x = direction.x * SPEED
 	player.velocity.z = direction.y * SPEED
+	move_player(delta)
+
+func move_player(delta: float) -> void:
 	if not player.is_on_floor():
 		player.velocity.y -= GRAVITY * delta
 	player.move_and_slide()

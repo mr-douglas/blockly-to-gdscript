@@ -21,7 +21,7 @@ const playgrounds = {
     controls: "Arrow keys to move. R to restart.",
     task: "Find the lines that map input to the x and z axes. Predict what happens if you negate direction.y in the z assignment, then try that change in Godot.",
     file: "movement_3d.gd",
-    end: "\n\n\tif player.position",
+    end: "\n\nfunc move_player",
   },
   "physics-3d": {
     title: "Ramp and crates",
@@ -29,6 +29,14 @@ const playgrounds = {
     controls: "Space to release the ball. R to reset the simulation.",
     task: "Predict what happens if you double ball.mass while keeping IMPULSE the same. Change one value at a time in Godot and compare how the ball and crates move after release.",
     file: "physics_3d.gd",
+  },
+  "landing-pad-follow": {
+    title: "Landing Pad with a follow camera",
+    goal: "Turn towards the green landing pad and steer around the obstacles. The camera stays behind your character.",
+    controls: "Left and Right to turn. Up to move forward, Down to reverse, and R to restart.",
+    task: "Compare this version with the original Landing Pad. Find how the code turns the character and uses its local forward direction. Predict what halving TURN_SPEED will change, then test it in Godot.",
+    file: "landing_pad_follow.gd",
+    version: "?v=follow-camera",
   },
 };
 
@@ -43,7 +51,7 @@ document.querySelector(`nav a[href="?demo=${key}"]`).setAttribute("aria-current"
 
 const source = document.querySelector("#source");
 const snippet = document.querySelector("#snippet");
-fetch(`source/${demo.file}`)
+fetch(`source/${demo.file}${demo.version ?? ""}`)
   .then((response) => {
     if (!response.ok) throw new Error("Could not load the script.");
     return response.text();
@@ -78,7 +86,13 @@ start.addEventListener("click", async () => {
     canvas.height = 432;
     canvas.hidden = false;
     start.hidden = true;
-    await engine.startGame();
+    if (demo.version) {
+      await engine.preloadFile(`playgrounds.pck${demo.version}`, "playgrounds.pck");
+      await engine.init("godot");
+      await engine.start({args: ["--main-pack", "playgrounds.pck", "--", key]});
+    } else {
+      await engine.startGame();
+    }
     canvas.focus();
     status.textContent = "Game ready. Press the keys shown above.";
   } catch (error) {
