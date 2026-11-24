@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Finish with a "You win" screen | Build a Game Interface</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Interface course</a> · <a href="start-menu.html">Previous lesson</a> · Lesson 5</p>
+<h1>Finish with a "You win" screen</h1>
+<p><strong>Objective.</strong> Time the run and show the player’s results on a win screen, completing a game with a menu, health, points and an ending.</p>
+<h2>Time the run</h2>
+<p><code>run_time</code> adds <code>delta</code> on every physics step. While the game is paused, <code>_physics_process()</code> does not run at all. That means time spent on the start menu is not counted.</p>
+<pre><code>func _physics_process(delta: float) -&gt; void:
+    run_time += delta
+    super._physics_process(delta)</code></pre>
+<h2>Fill in the panel, then show it</h2>
+<p>The exit already checks the coins before it completes the level. This lesson calls that version with <code>super</code>, then shows the win screen if the level is now complete. <code>get_node()</code> finds the message label by its path inside the panel. A format string puts the coins, hearts and time into the text. <code>%.1f</code> shows the time to one decimal place.</p>
+<pre><code>func win() -&gt; void:
+    var message: Label = win_panel.get_node("Column/Message")
+    message.text = "Coins: %d\nHearts left: %d\nTime: %.1f seconds" % [coins, health, run_time]
+    show_panel(win_panel)</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=ui&amp;lesson=win-screen&amp;embed=1"></iframe>
+<p><a href="../play/?demo=ui&amp;lesson=win-screen">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Wait on the start menu for ten seconds, then play and win. Predict whether those ten seconds are included in the time.</li>
+<li>Reach the trophy with only two coins. Predict whether the win screen appears.</li>
+<li>Add a score to the message, for example coins × 100 + hearts × 50. Test it with a careful run and a careless one.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Time on the menu is not counted because physics does not run while the game is paused. With two coins the exit stays locked, so <code>completed</code> stays false and <code>win()</code> is not called. The score line needs one more <code>%d</code> and one more value in the array.</p></details>
+<p><strong>Success criteria.</strong> The game has a start menu, a points display, hearts, a game over screen and a win screen. Each screen’s button works, and the results shown match the run.</p>
+<p><strong>Apply it to your project.</strong> Add a win condition and an end screen to your own game. Show at least two values the player earned. Then test a winning run, a losing run and a restart from each screen.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

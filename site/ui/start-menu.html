@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Add a start menu | Build a Game Interface</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Interface course</a> · <a href="game-over.html">Previous lesson</a> · Lesson 4</p>
+<h1>Add a start menu</h1>
+<p><strong>Objective.</strong> Reuse a function to build a start menu that keeps the game paused until the player presses Play.</p>
+<h2>Same function, different arguments</h2>
+<p>The start menu is another panel, so this lesson calls <code>make_panel()</code> again with a new title, message, icon and function. <code>show_panel()</code> pauses the game straight away in <code>_ready()</code>. The level is drawn behind the menu but nothing moves. Pressing Play calls <code>start_game()</code>, which hides the menu and unpauses the game.</p>
+<pre><code>start_menu = make_panel("Frog Run", how_to_play, "Play", PLAY_ICON, start_game)
+show_panel(start_menu)
+
+func start_game() -&gt; void:
+    start_menu.hide()
+    get_tree().paused = false</code></pre>
+<p>The <code>\n</code> in the message starts a new line. <code>%d</code> puts the value of <code>REQUIRED_COINS</code> into the text, so the menu stays correct if the number changes.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=ui&amp;lesson=start-menu&amp;embed=1"></iframe>
+<p><a href="../play/?demo=ui&amp;lesson=start-menu">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Before pressing Play, hold Right. Predict whether the frog moves. Then press Play.</li>
+<li>Lose all your hearts and press Try again. Predict which screen you see first, and explain why.</li>
+<li>Change the game’s title and the how-to-play text. Set <code>REQUIRED_COINS</code> to 2 and check that the menu updates.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The frog cannot move while the menu is open because the game is paused. <code>reload_current_scene()</code> runs <code>_ready()</code> again, so the start menu appears again after a restart. The <code>%d</code> placeholder always shows the current value of the constant.</p></details>
+<p><strong>Success criteria.</strong> The game starts paused behind the menu. Play starts it with the mouse or the keyboard, and a restart returns to the menu.</p>
+<p><strong>Apply it to your project.</strong> Make a separate menu scene and set it as the main scene in Project Settings. Its Play button can call <code>get_tree().change_scene_to_file()</code> with the path of your level scene.</p>
+<p><a href="win-screen.html">Next lesson · Finish with a "You win" screen</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

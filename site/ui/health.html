@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Show health with hearts | Build a Game Interface</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Interface course</a> · <a href="hud.html">Previous lesson</a> · Lesson 2</p>
+<h1>Show health with hearts</h1>
+<p><strong>Objective.</strong> Store health in a variable and keep a row of heart icons in step with it.</p>
+<h2>One number, drawn as icons</h2>
+<p>The game keeps health as a single number. The HUD creates one <code>TextureRect</code> per heart in an <code>HBoxContainer</code>. Each time health changes, <code>update_hearts()</code> loops over the hearts. It shows a full heart while the index is less than <code>health</code> and an empty one after that. The data and the picture are kept separate, so changing <code>MAX_HEALTH</code> changes both.</p>
+<pre><code>func update_hearts() -&gt; void:
+    for i in hearts.get_child_count():
+        var heart: TextureRect = hearts.get_child(i)
+        heart.texture = HEART_FULL if i &lt; health else HEART_EMPTY</code></pre>
+<h2>Losing a heart</h2>
+<p>Touching a hazard or falling off the bottom of the screen now calls <code>lose_heart()</code> instead of respawning straight away. A tween fades the frog from red back to white so the player can see the hit. When health reaches zero, <code>set_physics_process(false)</code> stops the game loop.</p>
+<pre><code>if health &gt; 0:
+    respawn()
+else:
+    out_of_health()</code></pre>
+<p><a href="../animation/assets/heart-full.png" download>Download the full heart</a> · <a href="../animation/assets/heart-empty.png" download>Download the empty heart</a> · Pixel Platformer by Kenney, CC0. <a href="https://kenney.nl/assets/pixel-platformer">Original pack</a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=ui&amp;lesson=health&amp;embed=1"></iframe>
+<p><a href="../play/?demo=ui&amp;lesson=health">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Walk into the gap once, then into the spikes twice. Predict the hearts after each hit and what happens on the last one.</li>
+<li>Set <code>MAX_HEALTH</code> to 5 and run the game. Count the hearts before and after a hit.</li>
+<li>Swap <code>HEART_FULL</code> and <code>HEART_EMPTY</code> in <code>update_hearts()</code>. Explain what the row now shows.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Each hit empties one heart from the right. The third hit stops the game and shows the message. With five hearts, five icons are made because the loop runs <code>MAX_HEALTH</code> times. Swapping the textures shows the hearts you have lost instead of the ones you have left.</p></details>
+<p><strong>Success criteria.</strong> The number of full hearts always matches <code>health</code>. Hazards and falls both cost a heart, and the game stops at zero.</p>
+<p><strong>Apply it to your project.</strong> Add a health variable and a function that draws it in your HUD. Call that function every time health changes, rather than changing the icons in several places.</p>
+<p><a href="game-over.html">Next lesson · Pause the game and show a game over screen</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

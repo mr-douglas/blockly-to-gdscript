@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Show the score in a HUD | Build a Game Interface</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Interface course</a> · Lesson 1</p>
+<h1>Show the score in a HUD</h1>
+<p><strong>Objective.</strong> Use a CanvasLayer, Control nodes and a Theme to show the score in a fixed corner of the screen.</p>
+<h2>Start from the finished platformer</h2>
+<p>This script <code>extends</code> the last lesson of the 2D platformer course, so the level, coins, hazards and locked exit are already there. Until now the labels were drawn as part of the level. A real game puts its interface on a <code>CanvasLayer</code>. That layer is drawn on top of the level and does not move when a camera moves.</p>
+<h2>Containers, anchors and a Theme</h2>
+<p>Every interface node is a <code>Control</code>. An <code>HBoxContainer</code> lines its children up in a row, so the apple icon and the count stay side by side. Anchors pin a Control to part of the screen: <code>PRESET_TOP_RIGHT</code> keeps the score in the top-right corner. A <code>Theme</code> set on the root Control is shared by every Control inside it, so one line changes the font everywhere.</p>
+<pre><code>ui_theme.default_font = PIXEL_FONT
+ui_theme.default_font_size = FONT_SIZE
+ui.theme = ui_theme
+...
+score_bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT, Control.PRESET_MODE_MINSIZE, 16)
+score_bar.grow_horizontal = Control.GROW_DIRECTION_BEGIN</code></pre>
+<p><code>reparent()</code> moves the existing coin and message labels from the level into the HUD. Their old font size override is removed first, because an override on a node always beats the Theme.</p>
+<p><a href="../animation/assets/kenney-pixel.ttf" download>Download the Kenney Pixel font</a> · Kenney Fonts by Kenney, CC0. <a href="https://kenney.nl/assets/kenney-fonts">Original pack</a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=ui&amp;lesson=hud&amp;embed=1"></iframe>
+<p><a href="../play/?demo=ui&amp;lesson=hud">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Collect a coin. Predict how the score text changes, and why it no longer says “Coins:”.</li>
+<li>Change <code>FONT_SIZE</code> to 48. Which pieces of text change size, and which do not?</li>
+<li>Change <code>PRESET_TOP_RIGHT</code> to <code>PRESET_BOTTOM_RIGHT</code>. Then try <code>PRESET_TOP_LEFT</code> and explain why <code>grow_horizontal</code> matters less there.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>This lesson’s <code>collect_coin()</code> calls the old version with <code>super</code>, then replaces the text with “collected / required”. Every label using the Theme gets bigger, but labels with their own font size override do not. The anchor preset moves the bar to a different corner.</p></details>
+<p><strong>Success criteria.</strong> The score stays in the corner, uses the pixel font and updates when a coin is collected.</p>
+<p><strong>Apply it to your project.</strong> In Godot, add a CanvasLayer to your level scene with a Control child set to Full Rect. Create a Theme resource, set its default font, and assign it to that Control. Add an HBoxContainer with a TextureRect and a Label, anchor it to a corner, and update the Label from your score code.</p>
+<p><a href="health.html">Next lesson · Show health with hearts</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
