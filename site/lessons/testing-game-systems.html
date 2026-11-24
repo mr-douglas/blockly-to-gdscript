@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 27 · Testing game systems</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="refactoring.html">Lesson 26</a> · Lesson 27</p>
+<h1>Testing game systems</h1>
+<p><strong>Learning objective.</strong> Choose test inputs, predict the expected results, and compare them with actual results.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+func can_finish(coins: int) -&gt; bool:
+    return coins &gt;= 3
+
+func _ready():
+    print(can_finish(4) == true)
+    print(can_finish(3) == true)
+    print(can_finish(-1) == false)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A test case pairs an input with an expected result. A boundary is where the outcome changes, so test just below, at, and above it.</li>
+<li><strong>GDScript.</strong> Use <code>==</code> to compare an actual result with the expected result. A test printing true means the two values matched.</li>
+<li><strong>Godot.</strong> Test a rule in a small script before relying on it during play. Add labels to distinguish cases when a test fails.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>The rule needs at least 3 coins. Which test exposes the wrong comparison?</p>
+<pre><code>extends Node
+
+func can_finish(coins: int) -&gt; bool:
+    return coins &gt; 3
+
+func _ready():
+    print(can_finish(4) == true)
+    print(can_finish(3) == true)
+    print(can_finish(-1) == false)</code></pre>
+<details><summary>Check the prediction</summary><p>Only the boundary test fails. It prints true, false, true.</p></details>
+<h2>Guided task · Add the boundary test</h2>
+<p>Add a second test for exactly three coins. Output should show true twice.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="true&#10;true">
+<pre><code>extends Node
+
+func can_finish(coins: int) -&gt; bool:
+    return coins &gt;= 3
+
+func _ready():
+    print(can_finish(4) == true)</code></pre>
+</section>
+<h2>Debugging task · Use the right expectation</h2>
+<p>A negative coin count cannot finish the level. Fix the expected result.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="true">
+<pre><code>extends Node
+
+func can_finish(coins: int) -&gt; bool:
+    return coins &gt;= 3
+
+func _ready():
+    print(can_finish(-1) == true)</code></pre>
+</section>
+<h2>Independent task · Test inventory slots</h2>
+<p>For a three-slot inventory, write tests for an ordinary valid slot, the last valid slot and the first slot outside the array. Also test slot 0 in an empty inventory.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func valid_slot(index: int, size: int) -&gt; bool:
+    return index &gt;= 0 and index &lt; size
+
+func _ready():
+    pass</code></pre>
+</section>
+<p><strong>Success criteria.</strong> All four checks print true. Your invalid inputs include an index equal to the size and a slot in an empty inventory.</p>
+<h2>Apply it to your project</h2>
+<p>Choose a rule in your game. Write three GDScript tests for normal, boundary and invalid inputs. Make one small change to the rule and identify a test that catches it. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Test the slot rule with index -1 and label the result so you can tell which case ran.</p>
+<h2>Reflection</h2>
+<p>Why might a test with 4 coins pass even though the code fails when the player has exactly 3?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
