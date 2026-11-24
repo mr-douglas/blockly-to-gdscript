@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum on impact · 9709 Mechanics</title>
+<link rel="stylesheet" href="../assets/course.css"><link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · 9709 Mechanics</p>
+<nav class="mechanics-nav" aria-label="Mechanics labs"><a href="pulleys.html">Pulleys</a><a href="slopes.html">Smooth slopes</a><a href="friction.html">Friction</a><a href="momentum.html" aria-current="page">Momentum</a></nav>
+<h1>Two carts that stick on impact</h1>
+<p><strong>Objective.</strong> Use conservation of linear momentum to find a common velocity after a direct impact.</p>
+<p>The carts move along a smooth horizontal track and stick together when they collide. Choose right as positive. Weight and the normal reaction balance vertically, so <var>g</var> = 10 m/s² does not enter the horizontal equation. The diagram uses particle positions, with the cart shapes added for visibility.</p>
+<h2>Predict, then test</h2>
+<ol>
+<li>Start with A at 2 kg moving at +4 m/s and B at 3 kg moving at −2 m/s. Find the total momentum and the common velocity. Predict which way the joined carts move.</li>
+<li>Scrub across the collision. Compare total momentum before and after. <strong>Extension:</strong> calculate the total kinetic energy at both times.</li>
+<li>Keep the velocities. Set A to 1 kg and B to 2 kg, then change B to 3 kg. Predict the direction after impact in each case.</li>
+</ol>
+<section class="panel" aria-label="Collision model" data-lab data-duration="2">
+  <div class="lab-controls">
+    <label>Mass A (kg) <output></output><input name="a" type="range" min="1" max="5" step="0.5" value="2" data-parameter></label>
+    <label>Mass B (kg) <output></output><input name="b" type="range" min="1" max="5" step="0.5" value="3" data-parameter></label>
+    <label>Initial velocity A (m/s) <output></output><input name="ua" type="range" min="2" max="6" step="0.5" value="4" data-parameter></label>
+    <label>Initial velocity B (m/s) <output></output><input name="ub" type="range" min="-3" max="0" step="0.5" value="-2" data-parameter></label>
+  </div>
+  <canvas width="720" height="300" role="img" aria-label="Two carts approach one another along a horizontal track, then move together following impact."></canvas>
+  <div class="lab-actions"><button type="button" data-play>Run</button><button type="button" data-step>Step 0.25 s</button><button type="button" data-reset>Reset</button></div>
+  <label class="lab-time">Elapsed time <span data-time-label></span><input type="range" min="0" max="2" step="0.01" value="0" data-time></label>
+  <p data-results></p>
+</section>
+<h2>Check your working</h2>
+<details><summary>Show the equation and answers</summary>
+<p><var>m</var><sub>A</sub><var>u</var><sub>A</sub> + <var>m</var><sub>B</sub><var>u</var><sub>B</sub> = (<var>m</var><sub>A</sub> + <var>m</var><sub>B</sub>)<var>v</var>. The velocities are signed.</p>
+<p>The first run has total momentum +2 kg·m/s. The common velocity is +0.4 m/s, so the carts move right. Total kinetic energy changes from 22 J to 0.4 J. With masses 1 kg and 2 kg the total momentum is zero, so the joined carts stop. With masses 1 kg and 3 kg the common velocity is −0.5 m/s, so they move left.</p>
+</details>
+<h2>Try the equation in GDScript</h2>
+<p>Change just the mass of A to 1 kg. Predict the sign of the output and explain what it means before running.</p>
+<section class="panel" data-practice="snippet"><pre><code>var mass_a = 2.0
+var mass_b = 3.0
+var velocity_a = 4.0
+var velocity_b = -2.0
+var momentum = mass_a * velocity_a + mass_b * velocity_b
+print(momentum / (mass_a + mass_b))</code></pre></section>
+</main>
+<script type="module" src="momentum.js"></script>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
