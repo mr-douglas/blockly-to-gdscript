@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 9 · Nested control structures</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="condition-controlled-loops.html">Lesson 8</a> · Lesson 9</p>
+<h1>Nested control structures</h1>
+<p><strong>Learning objective.</strong> Use selection inside iteration and trace which statements run.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>for wave in range(3):
+    if wave == 1:
+        print(&quot;Boss&quot;)
+    else:
+        print(&quot;Enemy&quot;)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> Nesting puts one control structure inside another. The program can make a fresh decision on every loop step.</li>
+<li><strong>GDScript.</strong> Indent the <code>if</code> and <code>else</code> one level inside the <code>for</code>. Indent each branch’s body one more level.</li>
+<li><strong>Godot.</strong> A wave plan can spawn a different enemy on a chosen wave.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Which wave is special, and how many lines print?</p>
+<pre><code>for wave in range(1, 4):
+    if wave == 3:
+        print(&quot;Boss&quot;)
+    print(wave)</code></pre>
+<details><summary>Check the prediction</summary><p>It prints 1, 2, Boss, then 3. The last <code>print()</code> is in the loop and outside the branch.</p></details>
+<h2>Guided task · Choose a special wave</h2>
+<p>Captain should appear on wave 2 instead of wave 1. Keep all three waves.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="Scout&#10;Captain&#10;Scout">
+<pre><code>for wave in range(1, 4):
+    if wave == 1:
+        print(&quot;Captain&quot;)
+    else:
+        print(&quot;Scout&quot;)</code></pre>
+</section>
+<h2>Debugging task · Fix a repeated warning</h2>
+<p>The warning should appear once, on the last wave. Fix the indentation.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="Last wave&#10;Warning">
+<pre><code>for wave in range(1, 4):
+    if wave == 3:
+        print(&quot;Last wave&quot;)
+    print(&quot;Warning&quot;)</code></pre>
+</section>
+<h2>Independent task · Plan a level</h2>
+<p>Print one room type for each of rooms 1 to 4. Use <code>Treasure</code> in rooms 2 and 4 and <code>Empty</code> in the others.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code># Write the loop and branch.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> It prints four lines in this order, Empty, Treasure, Empty, Treasure.</p>
+<h2>Apply it to your project</h2>
+<p>Pick a list of numbered rooms or waves in your game. In <code>_ready()</code>, print what should happen on each step, using a condition to mark one step as special. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change the plan to six rooms. Use <code>room % 2 == 0</code> to select every even room. The <code>%</code> gives the remainder after division.</p>
+<h2>Reflection</h2>
+<p>How does one extra level of indentation change how often the Warning line runs?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
