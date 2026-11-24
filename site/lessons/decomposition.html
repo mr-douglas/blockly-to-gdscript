@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 25 · Decomposition and pseudocode</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="debugging-tracing.html">Lesson 24</a> · Lesson 25</p>
+<h1>Decomposition and pseudocode</h1>
+<p><strong>Learning objective.</strong> Turn a short plan into state, inputs, outputs and reusable functions.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+const GOAL = 3
+var collected = 0
+
+func collect_coin() -&gt; void:
+    collected += 1
+
+func goal_met() -&gt; bool:
+    return collected &gt;= GOAL
+
+func _ready():
+    for coin in range(3):
+        collect_coin()
+    print(goal_met())</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> Decomposition breaks a feature into small jobs. Pseudocode describes the steps in plain language before you write them in GDScript.</li>
+<li><strong>GDScript.</strong> A comment can record the plan. A named function can implement each job. In the example, store the count, repeat collection, test the goal and print the result.</li>
+<li><strong>Godot.</strong> Prototype a rule in <code>_ready()</code>. Later, a pickup signal can call the same collection function.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Predict the result if the loop runs only twice. Which function makes the decision?</p>
+<pre><code>extends Node
+
+const GOAL = 3
+var collected = 0
+
+func collect_coin() -&gt; void:
+    collected += 1
+
+func goal_met() -&gt; bool:
+    return collected &gt;= GOAL
+
+func _ready():
+    for coin in range(2):
+        collect_coin()
+    print(goal_met())</code></pre>
+<details><summary>Check the prediction</summary><p>It prints false because goal_met() compares 2 with the goal of 3.</p></details>
+<h2>Guided task · Finish a job in the plan</h2>
+<p>Complete goal_met() so it checks the current count against the goal.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="true">
+<pre><code>extends Node
+
+const GOAL = 3
+var collected = 0
+
+func collect_coin() -&gt; void:
+    collected += 1
+
+func goal_met() -&gt; bool:
+    return false
+
+func _ready():
+    for coin in range(3):
+        collect_coin()
+    print(goal_met())</code></pre>
+</section>
+<h2>Debugging task · Fix the decision step</h2>
+<p>At exactly 3 coins, the goal should be met. Fix the comparison in goal_met().</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="true">
+<pre><code>extends Node
+
+const GOAL = 3
+var collected = 0
+
+func collect_coin() -&gt; void:
+    collected += 1
+
+func goal_met() -&gt; bool:
+    return collected &gt; GOAL
+
+func _ready():
+    for coin in range(3):
+        collect_coin()
+    print(goal_met())</code></pre>
+</section>
+<h2>Independent task · Build a reward calculator</h2>
+<p>Write comments for these jobs: take the coin count, calculate points at five per coin, and display the reward. Implement calculation and display in separate functions. Test with 2 coins and then 0.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    pass</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The calculation function returns the points without printing. The display function prints Reward: 10 for two coins and Reward: 0 for none.</p>
+<h2>Apply it to your project</h2>
+<p>Write a GDScript comment plan for one feature. Identify state, input, decision, repeated step and output. Code one function from the plan and test it. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Add a separate function for a bonus when the coin goal is met.</p>
+<h2>Reflection</h2>
+<p>Which part of your reward system can be reused if you change how messages are shown?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
