@@ -139,6 +139,13 @@ const platformer3DLessons = {
     "task": "Halve GRAVITY and compare the time taken to land.",
     "file": "platform3d_fall.gd"
   },
+  "jump-3d": {
+    "title": "Platformer lesson 3 · Jump over a 3D obstacle",
+    "goal": "Clear the pink beam with a grounded jump.",
+    "controls": "Left and Right to turn, Up and Down to move, Space to jump, R to restart.",
+    "task": "Try JUMP_SPEED at 3 and 5.9 and compare the result at the same obstacle.",
+    "file": "platform3d_jump.gd"
+  },
 };
 const course = requested === "movement-3d" ? "platformer-3d" : "platformer";
 const lessons = requested === "movement-3d" ? platformer3DLessons : platformerLessons;
