@@ -7,9 +7,9 @@ func _ready() -> void:
 	player.position.y = 110
 
 func build_level() -> void:
-	wall(Vector2(384, 371), Vector2(768, 40), Color("#538097"))
-	wall(Vector2(13, 249), Vector2(26, 204), Color("#538097"))
-	wall(Vector2(755, 249), Vector2(26, 204), Color("#538097"))
+	block(Vector2(384, 371), Vector2(768, 40))
+	block(Vector2(13, 249), Vector2(26, 204))
+	block(Vector2(755, 249), Vector2(26, 204))
 
 func apply_gravity(delta: float) -> void:
 	if not player.is_on_floor():

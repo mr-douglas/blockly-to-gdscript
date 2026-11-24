@@ -15,7 +15,7 @@ func add_coin(spot: Vector2) -> void:
 	var coin := Area2D.new()
 	coin.position = spot
 	coin.collision_layer = 0
-	rectangle(coin, Vector2.ZERO, Vector2(16, 16), Color("#ffcf6b"))
+	strip(coin, APPLE, 32)
 	add_box(coin, Vector2(22, 24))
 	coin.body_entered.connect(collect_coin.bind(coin))
 	add_child(coin)

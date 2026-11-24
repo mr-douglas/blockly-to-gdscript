@@ -8,7 +8,7 @@ func _ready() -> void:
 	super._ready()
 	platform = AnimatableBody2D.new()
 	platform.position = Vector2(285, 364)
-	rectangle(platform, Vector2.ZERO, Vector2(80, 16), Color("#8fd3ff"))
+	planks(platform, Vector2(80, 16))
 	add_box(platform, Vector2(80, 16))
 	add_child(platform)
 

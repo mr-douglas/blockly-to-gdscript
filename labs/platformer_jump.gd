@@ -4,7 +4,7 @@ const JUMP_SPEED := 440.0
 
 func build_level() -> void:
 	super.build_level()
-	wall(Vector2(420, 315), Vector2(134, 24), Color("#79b2ab"))
+	block(Vector2(420, 315), Vector2(134, 24))
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("action") and player.is_on_floor():

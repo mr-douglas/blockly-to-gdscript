@@ -5,6 +5,15 @@ Source ZIP: https://opengameart.org/content/pixel-adventure-1
 License: https://creativecommons.org/publicdomain/zero/1.0/
 The original PNG sheets were renamed for this course.
 
+pixel/*.png
+Ninja Frog jump and fall, terrain, blue background, apple, checkpoint, trophy
+(End), spikes, saw and brown platform from Pixel Adventure 1 by Pixel Frog, CC0 1.0.
+Author's pack: https://pixelfrog-assets.itch.io/pixel-adventure-1
+PNG distribution (pinned commit): https://github.com/SlayHorizon/godot-2d-platformer-demo/tree/6944ec4c323dcbad470ff7654fec665f010f50d1/assets/pixel-adventure
+License: https://creativecommons.org/publicdomain/zero/1.0/
+pixel/fetch.sh downloads these files, checks each one against its git blob hash
+and gives it a short name.
+
 knight.glb
 KnightCharacter from Animated Knight Pack by Quaternius, CC0 1.0.
 Author's pack and license: https://quaternius.com/packs/knightcharacter.html

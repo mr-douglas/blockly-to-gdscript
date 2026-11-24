@@ -9,8 +9,8 @@ var target_x := PATROL_RIGHT
 
 func _ready() -> void:
 	super._ready()
-	enemy = add_hazard(Vector2(PATROL_LEFT, 338), Vector2(20, 25))
-	rectangle(enemy, Vector2(3, -4), Vector2(5, 5), Color("#54234e"))
+	enemy = add_hazard(Vector2(PATROL_LEFT, 338), Vector2(20, 25), false)
+	strip(enemy, SAW, 38).scale = Vector2(0.7, 0.7)
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)

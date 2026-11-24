@@ -6,6 +6,9 @@
 /labs/art/racing/*.glb
 /labs/art/racing/*.import
 /labs/art/racing/*.part
+/labs/art/pixel/*.png
+/labs/art/pixel/*.import
+/labs/art/pixel/*.part
 /site/play/playgrounds.pck
 /site/play/playgrounds-godot.zip
 /site/play/source/
