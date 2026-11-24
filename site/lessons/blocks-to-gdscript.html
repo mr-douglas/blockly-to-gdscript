@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 · From blocks to GDScript</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · Lesson 1</p>
+<h1>From blocks to GDScript</h1>
+<p><strong>Learning objective.</strong> Read, write, and fix short GDScript programs. Explain what order statements run in and what comments and indentation do.</p>
+
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel">
+<h3>Blockly</h3>
+<img src="../assets/blocks-to-gdscript.png" alt="Two connected print blocks. The top block prints Ready, and the second prints Go!">
+</figure>
+<section class="panel">
+<h3>GDScript</h3>
+<pre><code>print("Ready")
+# Start the round
+print("Go!")</code></pre>
+</section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> A statement is an instruction. In this sequence, statements run from top to bottom.</li>
+<li><strong>GDScript.</strong> Syntax means the rules for writing code. <code>print("Ready")</code> uses parentheses around what to print and quotes around the text. A line starting with <code>#</code> is a comment for the reader. GDScript skips it.</li>
+<li><strong>Godot.</strong> <code>print()</code> writes to the Output panel. It helps you check when something happens in a game.</li>
+</ul>
+
+<h2>Predict and match</h2>
+<p>Read the GDScript above. Write the exact lines you expect to see in Output, in order.</p>
+<details><summary>Check the prediction</summary>
+<pre>Ready
+Go!</pre>
+<p>Both print statements run. The comment produces no output.</p>
+</details>
+<p>Which GDScript example matches this screenshot? Use the order of the statements to explain your choice.</p>
+<img src="../assets/blocks-to-gdscript-match.png" alt="A print Checkpoint block followed by a print Saved block.">
+<div class="comparison">
+<section class="panel"><h3>Example A</h3><pre><code>print("Saved")
+print("Checkpoint")</code></pre></section>
+<section class="panel"><h3>Example B</h3><pre><code>print("Checkpoint")
+print("Saved")</code></pre></section>
+</div>
+<details><summary>Check the match</summary>
+<p><strong>B.</strong> The first statement prints <code>Checkpoint</code> and the second prints <code>Saved</code>.</p>
+</details>
+
+<h2>Guided task · Complete the code</h2>
+<p>Add a <code>print()</code> statement below the comment. Run the code. Your goal is two lines in this order.</p>
+<pre>Level loaded
+Go!</pre>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="Level loaded&#10;Go!">
+<pre><code>print("Level loaded")
+# Add your second statement below</code></pre>
+</section>
+
+<h2>Debugging task · Fix the indentation</h2>
+<p>Run the code as written and read the error. The line ending in <code>:</code> opens a group of statements. Here <code>if true:</code> means the group will run. Add four spaces before the second line so it belongs to that group. The goal is one line of output, <code>Door open</code>.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="Door open">
+<pre><code>if true:
+print("Door open")</code></pre>
+</section>
+
+<h2>Independent task · Write a game log</h2>
+<p>Write three <code>print()</code> statements for events in a game of your choice. Put a comment above the middle statement that explains why that event matters. Run your program and compare the output with what you expected.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code># Write your game log below</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Your program runs without errors, prints exactly three messages in the order you planned, and skips the comment. You can explain why the debugging task needed indentation.</p>
+
+<h2>Apply it to your project</h2>
+<p>Choose a scene in your own Godot game. In its <code>_ready()</code> function, add a short comment and a <code>print()</code> message that names the scene. Run the scene and check that your message appears in Godot’s Output panel. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<details><summary>See an example Godot script</summary>
+<p>For a new script attached to a plain <code>Node</code>, this prints <code>Training room loaded</code> when the scene starts. If your scene already has a script, add just the indented lines to its <code>_ready()</code> function, or create that function if it is missing.</p>
+<pre><code>extends Node
+
+func _ready():
+    # Confirm that this scene has loaded.
+    print("Training room loaded")</code></pre>
+</details>
+
+<h2>Optional extension</h2>
+<p>Move one of your three <code>print()</code> statements to the top. Predict how the output will change, then run it. Next, put <code>#</code> before that statement and check what happens.</p>
+
+<h2>Reflection</h2>
+<p>How would you explain to a classmate why changing the order of <code>print()</code> statements changes the output, while moving a comment does not?</p>
+<p><a href="../index.html">Back to the course</a></p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>

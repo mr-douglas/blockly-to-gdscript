@@ -32,7 +32,7 @@ function loadWorker() {
   return workerURL;
 }
 
-for (const practice of document.querySelectorAll("[data-practice]")) {
+for (const [index, practice] of [...document.querySelectorAll("[data-practice]")].entries()) {
   const example = practice.querySelector("pre");
   const starter = example.textContent;
   const fullScript = practice.dataset.practice === "full";
@@ -41,6 +41,15 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
     : null;
   const controls = controlsTemplate.content.cloneNode(true);
   const editor = controls.querySelector("textarea");
+  const label = controls.querySelector("label");
+  const help = controls.querySelector("#practice-help");
+  const outputLabel = controls.querySelector("#output-label");
+  for (const element of [editor, help, outputLabel]) element.id += `-${index + 1}`;
+  label.htmlFor = editor.id;
+  label.textContent = practice.dataset.editorLabel || label.textContent;
+  editor.setAttribute("aria-describedby", help.id);
+  controls.querySelector('[role="log"]').setAttribute("aria-labelledby", outputLabel.id);
+  const expectedOutput = practice.dataset.expectedOutput;
   const run = controls.querySelector('[data-action="run"]');
   const stop = controls.querySelector('[data-action="stop"]');
   const reset = controls.querySelector('[data-action="reset"]');
@@ -110,8 +119,14 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
               .replace(/gdscript:\/\/[^)\s]+\.gd:(\d+)/g, (_, line) => `line ${lineNumber(line)}`));
             break;
           case "done":
-            complete(session, session.hasError || data.code !== 0 ? "Run ended with errors." : "Run finished.");
-            if (turtle && !session.hasError && data.code === 0) turtle.play();
+            const passed = !session.hasError && data.code === 0;
+            complete(session, passed ? "Run finished." : "Run ended with errors.");
+            if (passed && expectedOutput !== undefined) {
+              status.textContent = consoleOutput.textContent.replace(/\n$/, "") === expectedOutput
+                ? "Success. Your output matches the goal."
+                : "Compare your output with the goal, then try again.";
+            }
+            if (turtle && passed) turtle.play();
             if (!turtle && !consoleOutput.textContent) append("No output.");
             break;
         }
