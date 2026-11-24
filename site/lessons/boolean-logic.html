@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6 · Boolean logic</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="selection.html">Lesson 5</a> · Lesson 6</p>
+<h1>Boolean logic</h1>
+<p><strong>Learning objective.</strong> Combine and reverse true-or-false conditions for game rules.</p>
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/boolean-logic.png" alt="A print block contains the Blockly expression true and false."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>print(true and false)</code></pre></section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> A boolean expression produces true or false. A game can combine smaller tests to decide whether an action is allowed.</li>
+<li><strong>GDScript.</strong> <code>and</code> needs both sides to be true. <code>or</code> needs at least one side to be true, and allows both. <code>not</code> reverses a boolean. Use parentheses to make the order clear when combining tests.</li>
+<li><strong>Godot.</strong> A locked level could allow entry with a key or a pass, as long as the game is not paused.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Read the three expressions. Which lines will print true?</p>
+<pre><code>var has_key = true
+var has_pass = false
+print(has_key and has_pass)
+print(has_key or has_pass)
+print(not has_pass)</code></pre>
+<details><summary>Check the prediction</summary><p>The results are <code>false</code>, <code>true</code>, and <code>true</code> in that order.</p></details>
+<h2>Guided task · Allow either item</h2>
+<p>Change the operator so a player who has just the pass can enter. The program should print <code>true</code>.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="true">
+<pre><code>var has_key = false
+var has_pass = true
+print(has_key and has_pass)</code></pre>
+</section>
+<h2>Debugging task · Pause the action</h2>
+<p>The player may jump only while grounded and while the game is running. Fix the expression so it prints <code>false</code> when the game is paused.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="false">
+<pre><code>var grounded = true
+var paused = true
+print(grounded and paused)</code></pre>
+</section>
+<details><summary>Show a hint</summary><p>Use <code>not paused</code> to test whether the game is running.</p></details>
+<h2>Independent task · Write a gate rule</h2>
+<p>Use <code>and</code>, <code>or</code> and <code>not</code> to print whether a player can enter. They need a key or a pass, and the game must be running. Test with just a key, with pause on, and with neither item.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var has_key = true
+var has_pass = false
+var paused = false
+# Print whether entry is allowed.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> With just a key and the game running, the code prints <code>true</code>. With pause on or with neither item, it prints <code>false</code>.</p>
+<h2>Apply it to your project</h2>
+<p>Pick an action in your game that has two conditions. Write one GDScript expression for it and print the result for three pairs of test values in <code>_ready()</code>. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Try with both a key and a pass while the game is running. Does <code>or</code> still allow entry?</p>
+<h2>Reflection</h2>
+<p>Why does <code>(has_key or has_pass) and not paused</code> put the item checks inside parentheses?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
