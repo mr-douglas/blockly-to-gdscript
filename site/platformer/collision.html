@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Make walls solid | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="movement.html">Previous lesson</a> · Lesson 2</p>
+<h1>Make walls solid</h1>
+<p><strong>Objective.</strong> Use collision shapes and move_and_slide() to move without passing through walls.</p>
+<h2>Give both bodies a shape</h2>
+<p>The wall is a <code>StaticBody2D</code>. The player is a <code>CharacterBody2D</code>. Each needs a <code>CollisionShape2D</code>. The visible rectangles show where they are. The collision shapes tell Godot which space is solid. Set <code>velocity.x</code> in pixels per second. <code>move_and_slide()</code> uses the physics tick internally.</p>
+<pre><code>func _physics_process(_delta: float) -&gt; void:
+    var direction := Input.get_axis(&quot;left&quot;, &quot;right&quot;)
+    player.velocity.x = direction * SPEED
+    player.move_and_slide()</code></pre>
+<p><a href="../play/?demo=platformer&amp;lesson=collision"><strong>Open the editable collision starter</strong></a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Hold Right until the player reaches the wall. Predict what happens if you keep holding the key.</li>
+<li>Temporarily replace <code>player.move_and_slide()</code> with <code>player.position.x += player.velocity.x * _delta</code>. Test the same wall, then restore the call.</li>
+<li>Increase the width of the player’s <code>add_box()</code> shape. Predict where the visible rectangle will stop and test it.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The player stops at the wall when using <code>move_and_slide()</code>. Setting position directly bypasses that collision check. A wider collision shape makes the visible rectangle stop farther from the wall.</p></details>
+<p><strong>Success criteria.</strong> The player stops at either wall and can move away. You can explain why a visible shape alone does not make an object solid.</p>
+<p><strong>Apply it to your project.</strong> Give the player and wall matching rectangle collision shapes in your editor scene. Replace direct position updates with velocity and <code>move_and_slide()</code>. Test a wall in each direction.</p>
+</main>
+</body>
+</html>

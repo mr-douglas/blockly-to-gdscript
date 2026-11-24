@@ -46,6 +46,13 @@ const platformerLessons = {
     task: "Predict what happens if you double SPEED. Change it, run the edited code, and compare with the original.",
     file: "platformer_move.gd",
   },
+  "collision": {
+    "title": "Platformer lesson 2 · Make walls solid",
+    "goal": "Move into a wall and see where the character stops.",
+    "controls": "Left and Right to move. R to restart.",
+    "task": "Compare move_and_slide() with a direct position update. Test the same wall in both versions.",
+    "file": "platformer_collision.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;
