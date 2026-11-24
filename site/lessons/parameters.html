@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 15 · Parameters and return values</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="reusable-functions.html">Lesson 14</a> · Lesson 15</p>
+<h1>Parameters and return values</h1>
+<p><strong>Learning objective.</strong> Write and call a function that takes inputs and returns a result.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+func remaining_health(health: int, amount: int) -&gt; int:
+    return health - amount
+
+func _ready():
+    print(remaining_health(10, 3))</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A parameter names an input. A return value is the result of the call.</li>
+<li><strong>GDScript.</strong> In <code>func remaining_health(health: int, amount: int) -> int:</code>, the two names are parameters. The arrow gives the result type. <code>return</code> hands a value back to the caller.</li>
+<li><strong>Godot.</strong> Reuse a damage calculation for different players, enemies and attack strengths.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Predict the two results. Which parameter changes between calls?</p>
+<pre><code>extends Node
+
+func remaining_health(health: int, amount: int) -&gt; int:
+    return health - amount
+
+func _ready():
+    print(remaining_health(10, 0))
+    print(remaining_health(10, 10))</code></pre>
+<details><summary>Check the prediction</summary><p>It prints 10 then 0. The second argument changes from 0 to 10.</p></details>
+<h2>Guided task · Supply the damage</h2>
+<p>Change the call so an attack of 3 leaves health 7.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="7">
+<pre><code>extends Node
+
+func remaining_health(health: int, amount: int) -&gt; int:
+    return health - amount
+
+func _ready():
+    print(remaining_health(10, 1))</code></pre>
+</section>
+<h2>Debugging task · Fix the calculation</h2>
+<p>Run the program and fix the return expression so damage reduces health.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="7">
+<pre><code>extends Node
+
+func remaining_health(health: int, amount: int) -&gt; int:
+    return health + amount
+
+func _ready():
+    print(remaining_health(10, 3))</code></pre>
+</section>
+<h2>Independent task · Write a bonus function</h2>
+<p>Define <code>add_bonus(score, bonus)</code> to return their sum. Print the result for 10 and 3, then for 4 and 0.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    pass</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Two calls with different arguments print 13 and 4. The function returns the result and the caller prints it.</p>
+<h2>Apply it to your project</h2>
+<p>Move one calculation from your game into a function. Give it parameters for the values that change. Compare results for at least two calls in Godot. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Return <code>max(0, health - amount)</code> to prevent a negative result when damage is greater than health.</p>
+<h2>Reflection</h2>
+<p>What is the difference between printing a result inside a function and returning it to the caller?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
