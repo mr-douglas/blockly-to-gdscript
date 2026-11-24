@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Fall and land in 3D | Build a 3D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="walk-3d.html">Previous lesson</a> · Lesson 2</p>
+<h1>Fall and land in 3D</h1>
+<p><strong>Objective.</strong> Apply gravity on the Y axis and use floor collision to land.</p>
+<h2>Keep vertical and horizontal motion separate</h2>
+<p>Steering sets X and Z velocity. Gravity changes Y. Positive Y points up in 3D, so subtract gravity. After <code>move_and_slide()</code>, the body can tell whether it landed on a floor. The starter respawns below a fall limit so you can keep testing.</p>
+<pre><code>if not player.is_on_floor():
+    player.velocity.y -= GRAVITY * delta
+player.move_and_slide()</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer-3d" src="../play/?demo=movement-3d&amp;lesson=fall-3d&amp;embed=1"></iframe>
+<p><a href="../play/?demo=movement-3d&amp;lesson=fall-3d">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Watch the player fall at the start. Predict what halving GRAVITY will do to the time to land.</li>
+<li>Change GRAVITY and compare two drops from the same height.</li>
+<li>Change -= to +=, observe the direction, then repair it.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Lower gravity makes the drop take longer. Adding to vertical velocity accelerates upward because positive Y points up.</p></details>
+<p><strong>Success criteria.</strong> The player falls, stops on the floor, and respawns after walking off the map.</p>
+<p><strong>Apply it to your project.</strong> Place the player above a StaticBody3D floor. Update vertical velocity in the physics callback, then call move_and_slide() and test a fall.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

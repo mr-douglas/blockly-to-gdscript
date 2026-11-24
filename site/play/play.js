@@ -132,6 +132,13 @@ const platformer3DLessons = {
     "task": "Change TURN_RATE and compare turning in place.",
     "file": "platform3d_walk.gd"
   },
+  "fall-3d": {
+    "title": "Platformer lesson 2 · Fall and land in 3D",
+    "goal": "Compare the initial drop at two gravity values.",
+    "controls": "Left and Right to turn, Up and Down to move, R to restart.",
+    "task": "Halve GRAVITY and compare the time taken to land.",
+    "file": "platform3d_fall.gd"
+  },
 };
 const course = requested === "movement-3d" ? "platformer-3d" : "platformer";
 const lessons = requested === "movement-3d" ? platformer3DLessons : platformerLessons;
