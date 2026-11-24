@@ -53,6 +53,13 @@ const platformerLessons = {
     "task": "Compare move_and_slide() with a direct position update. Test the same wall in both versions.",
     "file": "platformer_collision.gd"
   },
+  "gravity": {
+    "title": "Platformer lesson 3 · Fall and land with gravity",
+    "goal": "Watch the character fall onto a solid floor.",
+    "controls": "Left and Right to move. R to repeat the fall.",
+    "task": "Change GRAVITY and compare the time it takes to reach the floor.",
+    "file": "platformer_gravity.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;

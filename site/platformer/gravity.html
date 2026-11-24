@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Fall and land with gravity | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="collision.html">Previous lesson</a> · Lesson 3</p>
+<h1>Fall and land with gravity</h1>
+<p><strong>Objective.</strong> Use gravity to change vertical speed and let collision stop the fall.</p>
+<h2>Apply gravity every physics tick while in the air</h2>
+<p>In Godot 2D, positive y points down. Gravity adds to <code>velocity.y</code>, so the player falls faster over time. <code>delta</code> converts acceleration (pixels/s²) to a change in speed (pixels/s). <code>is_on_floor()</code> uses the last <code>move_and_slide()</code> result. The starter puts the player above the floor so you can watch it fall.</p>
+<pre><code>func apply_gravity(delta: float) -&gt; void:
+    if not player.is_on_floor():
+        player.velocity.y += GRAVITY * delta</code></pre>
+<p><a href="../play/?demo=platformer&amp;lesson=gravity"><strong>Open the editable gravity starter</strong></a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Run the starter. Watch the player accelerate and then stop at the solid floor.</li>
+<li>Halve <code>GRAVITY</code> and predict what will happen to the fall time. Run both versions to compare.</li>
+<li>Change <code>+=</code> to <code>-=</code>. Explain the resulting direction, then fix it.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>With less gravity, the player gains speed more slowly and takes longer to land. Subtracting a positive amount makes the player accelerate up.</p></details>
+<p><strong>Success criteria.</strong> The player falls on start, stops on the floor, and can still move sideways. You can explain the difference between velocity and acceleration.</p>
+<p><strong>Apply it to your project.</strong> Add a gravity constant to your player script. Update the player’s own <code>velocity.y</code> while airborne, then call <code>move_and_slide()</code>. Move the player above your floor in the editor and run the scene.</p>
+</main>
+</body>
+</html>
