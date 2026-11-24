@@ -1,0 +1,29 @@
+:root {
+  color-scheme: light;
+  font: 100%/1.6 system-ui, sans-serif;
+  color: #182940;
+  background: #f1f5fa;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+header { background: #152846; color: white; }
+header a { color: inherit; }
+header .wrap { padding-block: 1rem; font-weight: 700; }
+.wrap { width: min(100% - 2rem, 65rem); margin-inline: auto; }
+main { padding-block: 2rem 4rem; }
+h1, h2, h3 { line-height: 1.2; }
+h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin: .5rem 0 1rem; }
+h2 { margin-top: 2rem; }
+p { max-width: 68ch; }
+a { color: #194da2; text-underline-offset: .15em; }
+.comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.panel, .lesson-list li, details { border: 1px solid #cfdae8; border-radius: .75rem; background: white; padding: 1rem; }
+.panel h3 { margin-top: 0; }
+figure { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+pre { background: #14243b; color: #ecf4ff; padding: 1rem; border-radius: .5rem; overflow: auto; font-size: 1rem; }
+.lesson-list { list-style: none; padding: 0; display: grid; gap: .75rem; }
+.lesson-list p { margin: .35rem 0 0; }
+summary { cursor: pointer; font-weight: 650; }
+footer { padding-block: 1rem; border-top: 1px solid #cfdae8; }
+@media (max-width: 46rem) { .comparison { grid-template-columns: 1fr; } }
