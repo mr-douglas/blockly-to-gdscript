@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 19 · Frame-independent movement</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="coordinates.html">Lesson 18</a> · Lesson 19</p>
+<h1>Frame-independent movement</h1>
+<p><strong>Learning objective.</strong> Use delta to turn speed per second into a distance for one frame.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node2D
+
+var speed = 120.0
+
+func _process(delta: float) -&gt; void:
+    position.x += speed * delta
+
+func _ready() -&gt; void:
+    for frame in range(2):
+        _process(0.5)
+    print(roundi(position.x))</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> The time between frames can change. Distance for one frame equals speed multiplied by elapsed time.</li>
+<li><strong>GDScript.</strong> Godot passes <code>delta</code> in seconds to <code>_process(delta)</code>. Multiply a speed in pixels per second by <code>delta</code> and add that distance to position.</li>
+<li><strong>Godot.</strong> These console examples call <code>_process()</code> with sample times from <code>_ready()</code>. In a running scene, Godot calls <code>_process()</code> each frame.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>How far does the node move over four frames of 0.25 seconds?</p>
+<pre><code>extends Node2D
+
+var speed = 120.0
+
+func _process(delta: float) -&gt; void:
+    position.x += speed * delta
+
+func _ready() -&gt; void:
+    for frame in range(4):
+        _process(0.25)
+    print(roundi(position.x))</code></pre>
+<details><summary>Check the prediction</summary><p>It moves 30 pixels on each call, so it prints 120 after one second.</p></details>
+<h2>Guided task · Complete the movement formula</h2>
+<p>Use delta so two half-second frames move the node a total of 120 pixels.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="120">
+<pre><code>extends Node2D
+
+var speed = 120.0
+
+func _process(delta: float) -&gt; void:
+    position.x += speed
+
+func _ready() -&gt; void:
+    for frame in range(2):
+        _process(0.5)
+    print(roundi(position.x))</code></pre>
+</section>
+<h2>Debugging task · Fix the time in a test</h2>
+<p>This test is meant to simulate one second across four frames. Change the time passed per frame.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="120">
+<pre><code>extends Node2D
+
+var speed = 120.0
+
+func _process(delta: float) -&gt; void:
+    position.x += speed * delta
+
+func _ready() -&gt; void:
+    for frame in range(4):
+        _process(0.5)
+    print(roundi(position.x))</code></pre>
+</section>
+<h2>Independent task · Compare two frame rates</h2>
+<p>Test one second split into either ten frames or twenty frames. Write the correct delta for each test. Keep the speed at 120.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node2D
+
+var speed = 120.0
+
+func _process(delta: float) -&gt; void:
+    position.x += speed * delta
+
+func _ready() -&gt; void:
+    for frame in range(1):
+        _process(1.0)
+    print(roundi(position.x))</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Both runs print 120. Explain why the second run makes smaller steps and still travels the same distance.</p>
+<h2>Apply it to your project</h2>
+<p>Attach a script to a visible Node2D. Put the movement formula in <code>_process(delta)</code> and let Godot call it. Remove the browser test’s manual calls before using it in your scene. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Switch to movement along y and use a negative speed. Predict the direction.</p>
+<h2>Reflection</h2>
+<p>Why would adding a fixed number of pixels per frame make the game behave differently on faster computers?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
