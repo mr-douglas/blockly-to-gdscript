@@ -19,7 +19,7 @@ jobs:
       - name: Install a virtual display and software OpenGL
         run: |
           sudo apt-get update -q
-          sudo apt-get install -yq xvfb libgl1-mesa-dri libglx-mesa0 libxcursor1 libxinerama1 libxrandr2 libxi6 libxkbcommon0
+          sudo apt-get install -yq xvfb libgl1-mesa-dri libglx-mesa0 libxcursor1 libxinerama1 libxrandr2 libxi6 libxkbcommon0 imagemagick
       - name: Download Godot 4.6.3
         run: |
           editor=Godot_v4.6.3-stable_linux.x86_64
@@ -38,6 +38,23 @@ jobs:
             --rendering-driver opengl3 --audio-driver Dummy --resolution 768x432 \
             --script res://ci/tour.gd -- --shots="$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/tour.log"
           grep -q 'TOUR PASSED' "$RUNNER_TEMP/tour.log"
+      - name: Make contact sheets
+        if: always()
+        run: |
+          cd "$RUNNER_TEMP/shots" || exit 0
+          sheet() {
+            local out=$1; shift
+            local files=()
+            for f in "$@"; do [[ -f "$f" ]] && files+=("$f"); done
+            (( ${#files[@]} )) && montage "${files[@]}" -tile 3x -geometry +4+4 -background '#222' "sheets/$out.png"
+          }
+          mkdir -p sheets
+          sheet platformer-basics platformer_move-[12].png platformer_collision-[12].png platformer_gravity-[12].png \
+            platformer_jump-[12].png platformer_respawn-[12].png platformer_goal-[12].png
+          sheet platformer-items platformer_coins-*.png platformer_hazards-*.png platformer_checkpoint-*.png
+          sheet platformer-enemies platformer_patrol-*.png platformer_moving-*.png platformer_coin_gate-*.png platformer-*.png
+          sheet playgrounds-3d movement_3d-*.png landing_pad_follow-*.png physics_3d-*.png top_down-*.png art_sprite_2d-*.png art_character_3d-*.png
+          sheet platformer-3d platform3d_*.png
       - name: Publish to the ci-screenshots branch
         if: always()
         run: |
