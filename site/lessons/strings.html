@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 10 · Strings and player-facing text</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="nested-control.html">Lesson 9</a> · Lesson 10</p>
+<h1>Strings and player-facing text</h1>
+<p><strong>Learning objective.</strong> Join text and values to produce readable game messages.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>var pilot = &quot;Mina&quot;
+print(&quot;Hello, &quot; + pilot + &quot;!&quot;)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A string is a sequence of characters. Spaces and punctuation are characters, too.</li>
+<li><strong>GDScript.</strong> Put text in quotes. Use <code>+</code> to join strings and <code>str()</code> to convert a number to text.</li>
+<li><strong>Godot.</strong> Build the text for dialogue, a score label, or a short instruction.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Predict the spaces and punctuation in the output.</p>
+<pre><code>var coins = 3
+print(&quot;Coins: &quot; + str(coins) + &quot;/5&quot;)</code></pre>
+<details><summary>Check the prediction</summary><p>It prints <code>Coins: 3/5</code>. The space after the colon is inside the first string.</p></details>
+<h2>Guided task · Complete a status message</h2>
+<p>Join the text and the number so the message is <code>Lives: 3</code>.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="Lives: 3">
+<pre><code>var lives = 3
+print(&quot;Lives: &quot;)</code></pre>
+</section>
+<h2>Debugging task · Fix a mixed-type expression</h2>
+<p>Run the code. Convert the number to a string before joining it to the label.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="Score: 12">
+<pre><code>var score = 12
+print(&quot;Score: &quot; + score)</code></pre>
+</section>
+<details><summary>Show a hint</summary><p>Use <code>str(score)</code> to convert the current value.</p></details>
+<h2>Independent task · Write a quest message</h2>
+<p>Use variables to print a player name and a key count. Run with two different counts and keep the message readable.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var player_name = &quot;Mina&quot;
+var keys = 2
+# Print a quest update.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Your output includes the name and current count, with spaces between words. Changing the count updates the message.</p>
+<h2>Apply it to your project</h2>
+<p>Write a line in <code>_ready()</code> that builds a message from a value in your game. Print the message and check that a player could understand it. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Use selection to print <code>1 key</code> for a count of one and <code>keys</code> for other counts.</p>
+<h2>Reflection</h2>
+<p>Why do you need to put a space inside the string before joining it to a number?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
