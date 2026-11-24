@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7 · Count-controlled loops</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="boolean-logic.html">Lesson 6</a> · Lesson 7</p>
+<h1>Count-controlled loops</h1>
+<p><strong>Learning objective.</strong> Use for and range() to repeat a game action and use the loop counter.</p>
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/loops.png" alt="Repeat three times: print Spawn a coin!"></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>for coin in range(3):
+    print(&quot;Spawn a coin!&quot;)</code></pre></section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> Use a count-controlled loop when you know how many times an action should happen.</li>
+<li><strong>GDScript.</strong> <code>for coin in range(3):</code> gives <code>coin</code> the values 0, 1, and 2. The indented body runs once for each value.</li>
+<li><strong>Godot.</strong> A level can repeat a spawn action to place several items using the same rule.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Predict all three lines. Why do we add 1 to the counter?</p>
+<pre><code>for slot in range(3):
+    print(slot + 1)</code></pre>
+<details><summary>Check the prediction</summary><p>The lines are <code>1</code>, <code>2</code>, and <code>3</code>. The counter starts at 0, but the labels start at 1.</p></details>
+<h2>Guided task · Repeat a spawn</h2>
+<p>Fix the count so the code prints <code>Spawn</code> once for each of four items.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="Spawn&#10;Spawn&#10;Spawn&#10;Spawn">
+<pre><code>for item in range(2):
+    print(&quot;Spawn&quot;)</code></pre>
+</section>
+<h2>Debugging task · Fix the labels</h2>
+<p>The waves should be labelled 1, 2 and 3. Fix what the code prints.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="1&#10;2&#10;3">
+<pre><code>for wave in range(3):
+    print(wave)</code></pre>
+</section>
+<h2>Independent task · Place a row of coins</h2>
+<p>Write a loop that prints five x positions spaced 20 pixels apart, starting at x = 0. Run it again with six coins.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code># Print one x position per loop step.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Five coins give positions <code>0, 20, 40, 60, 80</code>, each on its own line. Six coins add <code>100</code>.</p>
+<h2>Apply it to your project</h2>
+<p>Pick a repeated item in your level. In <code>_ready()</code>, use a loop to print the positions you would use. Check that each position is in the playable area. You can also <a href="turtle-loops.html">run a loop that moves the rover</a>. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change your formula to start the row 10 pixels from the edge, keeping the same gaps.</p>
+<h2>Reflection</h2>
+<p>Why is changing the loop count easier than adding a separate line of code for each coin?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
