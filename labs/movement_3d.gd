@@ -1,4 +1,4 @@
-extends "res://scene_3d.gd"
+extends "res://kenney_art_3d.gd"
 
 const SPEED := 4.1
 const GRAVITY := 9.8
@@ -10,17 +10,9 @@ var reached := false
 
 func _ready() -> void:
 	stage(Vector3(0, 12, 11), Vector3.ZERO, 14.5)
-	block(Vector3(0, -0.25, 0), Vector3(12, 0.5, 8), Color("#386887"))
-	var dot := BoxMesh.new()
-	dot.size = Vector3(0.05, 0.01, 0.05)
-	for x in range(-5, 6):
-		for z in range(-3, 4):
-			var marker := Node3D.new()
-			marker.position = Vector3(x, 0.005, z)
-			add_mesh(marker, dot, Color("#78a5ba"))
-			add_child(marker)
-	block(Vector3(-1.2, 0.55, 0.9), Vector3(0.8, 1.1, 3.2), Color("#cf759b"))
-	block(Vector3(1.7, 0.45, -1.1), Vector3(2.4, 0.9, 0.7), Color("#cf759b"))
+	solid(Vector3(0, -0.25, 0), Vector3(12, 0.5, 8))
+	solid(Vector3(-1.2, 0.55, 0.9), Vector3(0.8, 1.1, 3.2), "brick")
+	solid(Vector3(1.7, 0.45, -1.1), Vector3(2.4, 0.9, 0.7), "brick")
 	var beacon := Node3D.new()
 	beacon.position = GOAL
 	add_child(beacon)
@@ -29,8 +21,12 @@ func _ready() -> void:
 	mesh.top_radius = 0.65
 	mesh.bottom_radius = 0.65
 	add_mesh(beacon, mesh, Color("#75ffbe"))
+	prop(beacon, "flag", Vector3(0, 0, -0.45))
 	player.position = START
-	box(player, Vector3(0.72, 0.96, 0.7), Color("#ffd073"))
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(0.72, 0.96, 0.7)
+	add_shape(player, shape)
+	character(player, player, shape.size.y, true)
 	add_child(player)
 	status = label("Navigate to the green landing pad")
 

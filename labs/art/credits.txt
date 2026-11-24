@@ -14,6 +14,14 @@ License: https://creativecommons.org/publicdomain/zero/1.0/
 pixel/fetch.sh downloads these files, checks each one against its git blob hash
 and gives it a short name.
 
+platformer3d/*.glb and platformer3d/Textures/colormap.png
+character, platform-large, brick, block-coin and flag from Starter Kit 3D Platformer
+by Kenney. The kit's art is CC0 1.0 (its code is MIT).
+Author's kit and license: https://github.com/KenneyNL/Starter-Kit-3D-Platformer
+GLB distribution (pinned commit): https://github.com/KenneyNL/Starter-Kit-3D-Platformer/tree/3fa8a04b1c01ab23db43123d4ce814a34c3fc7f0/models
+License: https://creativecommons.org/publicdomain/zero/1.0/
+platformer3d/fetch.sh downloads these files and checks each one against its git blob hash.
+
 knight.glb
 KnightCharacter from Animated Knight Pack by Quaternius, CC0 1.0.
 Author's pack and license: https://quaternius.com/packs/knightcharacter.html

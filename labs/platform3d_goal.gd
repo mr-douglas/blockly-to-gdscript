@@ -4,10 +4,10 @@ var finished := false
 var finish_label: Label
 
 func build_level() -> void:
-	block(Vector3(0, -0.25, 2.1), Vector3(5, 0.5, 5.2), Color("#386887"))
-	block(Vector3(0, -0.25, -4.65), Vector3(5, 0.5, 5.3), Color("#538b98"))
+	solid(Vector3(0, -0.25, 2.1), Vector3(5, 0.5, 5.2))
+	solid(Vector3(0, -0.25, -4.65), Vector3(5, 0.5, 5.3))
 	for x in [-1.8, 1.8]:
-		block(Vector3(x, 0.6, -5.8), Vector3(0.24, 1.2, 0.24), Color("#75ffbe"))
+		prop(self, "flag", Vector3(x, 0, -5.8))
 
 func _ready() -> void:
 	super._ready()

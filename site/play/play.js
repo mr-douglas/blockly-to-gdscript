@@ -15,7 +15,7 @@ const playgrounds = {
   },
   "movement-3d": {
     title: "Landing pad",
-    goal: "Guide the yellow character around the obstacles to the green landing pad.",
+    goal: "Guide the character around the brick walls to the green landing pad.",
     controls: "Arrow keys to move. R to restart.",
     task: "Find the lines that map input to the x and z axes. Predict what happens if you negate direction.y in the z assignment, then run that change here.",
     file: "movement_3d.gd",
@@ -127,7 +127,7 @@ const platformerLessons = {
 const platformer3DLessons = {
   "walk-3d": {
     "title": "Platformer lesson 1 · Steer a 3D character",
-    "goal": "Steer around the pink barrier.",
+    "goal": "Steer around the brick barrier.",
     "controls": "Left and Right to turn, Up and Down to move, R to restart.",
     "task": "Change TURN_RATE and compare turning in place.",
     "file": "platform3d_walk.gd"
@@ -141,7 +141,7 @@ const platformer3DLessons = {
   },
   "jump-3d": {
     "title": "Platformer lesson 3 · Jump over a 3D obstacle",
-    "goal": "Clear the pink beam with a grounded jump.",
+    "goal": "Clear the low brick wall with a grounded jump.",
     "controls": "Left and Right to turn, Up and Down to move, Space to jump, R to restart.",
     "task": "Try JUMP_SPEED at 3 and 5.9 and compare the result at the same obstacle.",
     "file": "platform3d_jump.gd"
@@ -155,7 +155,7 @@ const platformer3DLessons = {
   },
   "goal-3d": {
     "title": "Platformer lesson 5 · Finish a 3D obstacle course",
-    "goal": "Jump the gap and reach the finish pad.",
+    "goal": "Jump the gap and reach the finish pad between the flags.",
     "controls": "Left and Right to turn, Up and Down to move, Space to jump, C to switch camera, R to restart.",
     "task": "Change the finish message and test a successful run in either view.",
     "file": "platform3d_goal.gd"
