@@ -2,6 +2,7 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1. Sideways movement | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
 </head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
@@ -15,7 +16,9 @@
     var direction := Input.get_axis("left", "right")
     player.position.x += direction * SPEED * delta</code></pre>
 <p><code>Input.get_axis()</code> gives −1 for Left, +1 for Right, and 0 with neither or both. <code>SPEED</code> is in pixels per second. Multiplying by <code>delta</code> gives the distance for one physics tick.</p>
-<p><a href="../play/?demo=platformer&amp;lesson=movement"><strong>Open the editable movement starter</strong></a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=movement&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=movement">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
 <li>At 180 pixels per second, predict how far the player travels while Right is held for half a second.</li>
@@ -27,5 +30,6 @@
 <p><strong>Apply it to your project.</strong> Add actions named <code>left</code> and <code>right</code> in Project Settings → Input Map and bind them to the Left and Right arrow keys. Attach a script to your player, define <code>SPEED</code>, and use <code>position.x</code> in place of <code>player.position.x</code>. Test both keys.</p>
 <p><a href="collision.html">Next lesson · Make walls solid</a></p>
 </main>
+<script type="module" src="lesson-editor.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3. Fall and land with gravity | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
 </head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
@@ -15,7 +16,9 @@
 <pre><code>func apply_gravity(delta: float) -&gt; void:
     if not player.is_on_floor():
         player.velocity.y += GRAVITY * delta</code></pre>
-<p><a href="../play/?demo=platformer&amp;lesson=gravity"><strong>Open the editable gravity starter</strong></a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=gravity&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=gravity">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
 <li>Run the starter. Watch the player accelerate and then stop at the solid floor.</li>
@@ -27,5 +30,6 @@
 <p><strong>Apply it to your project.</strong> Add a gravity constant to your player script. Update the player’s own <code>velocity.y</code> while airborne, then call <code>move_and_slide()</code>. Move the player above your floor in the editor and run the scene.</p>
 <p><a href="jump.html">Next lesson · Jump only from the floor</a></p>
 </main>
+<script type="module" src="lesson-editor.js"></script>
 </body>
 </html>

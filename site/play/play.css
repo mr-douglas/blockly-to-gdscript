@@ -36,3 +36,11 @@ nav a[aria-current="page"], #start { background: #194da2; color: #fff; border-co
 }
 .play-actions button:disabled { opacity:.6; cursor:default; }
 #messages { white-space:pre-wrap; overflow-wrap:anywhere; }
+
+.embedded-lesson { overflow: hidden; }
+.embedded-lesson body { background: #fff; }
+.embedded-lesson header,
+.embedded-lesson .play-navigation,
+.embedded-lesson .play-download { display: none; }
+.embedded-lesson main { width: auto; margin: 0; padding: .75rem 1rem 1rem; }
+.embedded-lesson .play-stage { width: 100%; }

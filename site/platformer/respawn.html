@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>5. Recover after falling | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
 </head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
@@ -15,7 +16,9 @@
 <pre><code>func respawn() -&gt; void:
     player.position = START
     player.velocity = Vector2.ZERO</code></pre>
-<p><a href="../play/?demo=platformer&amp;lesson=respawn"><strong>Open the editable respawn starter</strong></a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=respawn&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=respawn">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
 <li>Walk into the gap without jumping. Predict where the player will reappear.</li>
@@ -27,5 +30,6 @@
 <p><strong>Apply it to your project.</strong> Add a gap to your own level. Choose a spawn point above a solid floor and a fall limit below your scene. Test a missed jump and a successful one.</p>
 <p><a href="goal.html">Next lesson · Finish the level with a signal</a></p>
 </main>
+<script type="module" src="lesson-editor.js"></script>
 </body>
 </html>

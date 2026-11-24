@@ -1,0 +1,8 @@
+.platformer-editor {
+  display: block;
+  width: 100%;
+  height: 76rem;
+  border: 1px solid #cfdae8;
+  border-radius: .75rem;
+  background: #fff;
+}

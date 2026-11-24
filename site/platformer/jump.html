@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>4. Jump only from the floor | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
 </head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
@@ -14,7 +15,9 @@
 <p>Space is mapped to the <code>action</code> input. Check <code>is_action_just_pressed()</code> so holding the key does not repeatedly jump. Check <code>is_on_floor()</code> so a press in mid-air is ignored. Up is negative y. <code>super._physics_process(delta)</code> runs the previous lesson’s movement and gravity code.</p>
 <pre><code>if Input.is_action_just_pressed(&quot;action&quot;) and player.is_on_floor():
     player.velocity.y = -JUMP_SPEED</code></pre>
-<p><a href="../play/?demo=platformer&amp;lesson=jump"><strong>Open the editable jump starter</strong></a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=jump&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=jump">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
 <li>Wait until you land. Press Space and then press it again while airborne. Predict what each press will do.</li>
@@ -26,5 +29,6 @@
 <p><strong>Apply it to your project.</strong> Add the <code>action</code> input and bind it to Space. Put the jump check before moving the CharacterBody2D, and apply gravity while it is airborne. Test a short jump and a jump onto a higher platform.</p>
 <p><a href="respawn.html">Next lesson · Recover after falling</a></p>
 </main>
+<script type="module" src="lesson-editor.js"></script>
 </body>
 </html>

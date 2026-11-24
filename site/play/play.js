@@ -97,6 +97,10 @@ document.querySelector("#controls").textContent = demo.controls + " Click the ga
 document.querySelector("#task").textContent = demo.task;
 document.querySelector(`nav a[href="?demo=${key}"]`).setAttribute("aria-current", "page");
 
+if (lesson && params.get("embed") === "1" && window.parent !== window) {
+  document.documentElement.classList.add("embedded-lesson");
+}
+
 const source = document.querySelector("#source");
 const start = document.querySelector("#start");
 const apply = document.querySelector("#apply");
