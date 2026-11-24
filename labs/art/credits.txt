@@ -7,11 +7,41 @@ The original PNG sheets were renamed for this course.
 
 pixel/*.png
 Ninja Frog jump and fall, terrain, blue background, apple, checkpoint, trophy
-(End), spikes, saw and brown platform from Pixel Adventure 1 by Pixel Frog, CC0 1.0.
+(End), spikes, saw, brown platform and the Play and Restart menu buttons from
+Pixel Adventure 1 by Pixel Frog, CC0 1.0.
 Author's pack: https://pixelfrog-assets.itch.io/pixel-adventure-1
 PNG distribution (pinned commit): https://github.com/SlayHorizon/godot-2d-platformer-demo/tree/6944ec4c323dcbad470ff7654fec665f010f50d1/assets/pixel-adventure
 License: https://creativecommons.org/publicdomain/zero/1.0/
 pixel/fetch.sh downloads these files, checks each one against its git blob hash
+and gives it a short name.
+
+ui/kenney-pixel.ttf
+Kenney Pixel from Kenney Fonts by Kenney, CC0 1.0.
+Author's pack and license: https://kenney.nl/assets/kenney-fonts
+TTF distribution (pinned commit): https://github.com/SelinaDev/Godot-Roguelike-Tutorial/tree/25cf7f708f93c1ad334f40ddbca0b6d431471d41/part_12/assets/fonts/kenney_kenney-fonts
+License: https://creativecommons.org/publicdomain/zero/1.0/
+
+ui/heart-full.png and ui/heart-empty.png
+Tiles 0044 and 0046 from Pixel Platformer by Kenney, CC0 1.0.
+Author's pack and license: https://kenney.nl/assets/pixel-platformer
+PNG distribution (pinned commit): https://github.com/milosfarkas/coolest-project-2024/tree/850dd1516ba77e53f53468d55265a1d6dfd28016/godot/assets/kenney_pixel-platformer
+License: https://creativecommons.org/publicdomain/zero/1.0/
+ui/fetch.sh downloads these files, checks each one against its git blob hash
+and gives it a short name.
+
+audio/jump.ogg, audio/coin.ogg and audio/land.ogg
+Sounds from Starter Kit 3D Platformer by Kenney. The kit's art and sounds are
+CC0 1.0 (its code is MIT).
+Author's kit and license: https://github.com/KenneyNL/Starter-Kit-3D-Platformer
+OGG distribution (pinned commit): https://github.com/KenneyNL/Starter-Kit-3D-Platformer/tree/3fa8a04b1c01ab23db43123d4ce814a34c3fc7f0/sounds
+License: https://creativecommons.org/publicdomain/zero/1.0/
+
+audio/music-title.ogg and audio/music-level.ogg
+"Title Screen" and "Level 1" from 5 Chiptunes (Action) by Juhani Junkala, CC0 1.0.
+Author's release and license: https://opengameart.org/content/5-chiptunes-action
+OGG distribution (pinned commit): https://github.com/Boyquotes/alpha-space/tree/85a87f6c091a2a4ed5ba49b3b226f7ecc8280089/game/music
+License: https://creativecommons.org/publicdomain/zero/1.0/
+audio/fetch.sh downloads these files, checks each one against its git blob hash
 and gives it a short name.
 
 platformer3d/*.glb and platformer3d/Textures/colormap.png

@@ -17,6 +17,9 @@ func _ready() -> void:
 		&"down": KEY_DOWN, &"action": KEY_SPACE, &"reset": KEY_R, &"view": KEY_C,
 		&"p2_left": KEY_A, &"p2_right": KEY_D, &"p2_up": KEY_W, &"p2_down": KEY_S}
 	for key in keys:
+		# The actions already exist when a lesson calls reload_current_scene().
+		if InputMap.has_action(key):
+			continue
 		InputMap.add_action(key)
 		var event := InputEventKey.new()
 		event.physical_keycode = keys[key]
@@ -49,6 +52,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_load_demo()
 
 func _load_demo() -> bool:
+	get_tree().paused = false
 	if is_instance_valid(demo):
 		remove_child(demo)
 		demo.queue_free()
