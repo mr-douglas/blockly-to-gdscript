@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 11 · Arrays and inventories</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="strings.html">Lesson 10</a> · Lesson 11</p>
+<h1>Arrays and inventories</h1>
+<p><strong>Learning objective.</strong> Use an array to store items in order and update its contents.</p>
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/lists.png" alt="Blockly stores coin, key, and potion in inventory, then prints inventory."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;, &quot;potion&quot;]
+print(inventory)</code></pre></section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> An array stores several values in order. An index tells you an item’s position.</li>
+<li><strong>GDScript.</strong> Use square brackets for an array. <code>inventory[0]</code> reads the first item. <code>append()</code> adds to the end, <code>remove_at()</code> removes at an index, and <code>in</code> tests membership.</li>
+<li><strong>Godot.</strong> An inventory can be an array of item names. Use membership to check whether the player has a required item.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Which item moves to index 0 after the removal?</p>
+<pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;]
+inventory.remove_at(0)
+print(inventory[0])</code></pre>
+<details><summary>Check the prediction</summary><p>It prints <code>key</code>. After the coin is removed, the key moves to index 0.</p></details>
+<h2>Guided task · Pick up a map</h2>
+<p>Add <code>map</code> to inventory and print whether it is present.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="true">
+<pre><code>var inventory = [&quot;coin&quot;]
+print(&quot;map&quot; in inventory)</code></pre>
+</section>
+<h2>Debugging task · Fix the index</h2>
+<p>Print the last item, <code>potion</code>. Run the broken code and fix the index.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="potion">
+<pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;, &quot;potion&quot;]
+print(inventory[3])</code></pre>
+</section>
+<details><summary>Show a hint</summary><p>Three items have indexes 0, 1, and 2.</p></details>
+<h2>Independent task · Use up a potion</h2>
+<p>Start with coin and potion. Add a key, remove the potion, then print whether the potion is present and print the final array.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var inventory = [&quot;coin&quot;, &quot;potion&quot;]
+# Update and inspect the inventory.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Your output is <code>false</code> followed by an array with <code>coin</code> then <code>key</code>.</p>
+<h2>Apply it to your project</h2>
+<p>Choose two items for your game. In <code>_ready()</code>, model collecting one item and removing another. Print the inventory before and after. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Add a second coin. Remove just the first coin using its index and print the new inventory.</p>
+<h2>Reflection</h2>
+<p>What changes about the indexes after you remove the first item?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>

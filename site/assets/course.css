@@ -26,7 +26,7 @@ pre { background: #14243b; color: #ecf4ff; padding: 1rem; border-radius: .5rem; 
 .lesson-list p { margin: .35rem 0 0; }
 summary { cursor: pointer; font-weight: 650; }
 footer { padding-block: 1rem; border-top: 1px solid #cfdae8; }
-@media (max-width: 46rem) { .comparison { grid-template-columns: 1fr; } }
+@media (max-width: 46rem) { .comparison { grid-template-columns: minmax(0, 1fr); } }
 
 .practice-controls label { display: block; font-weight: 650; margin-bottom: .35rem; }
 .practice-controls textarea {
