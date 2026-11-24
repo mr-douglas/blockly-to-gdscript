@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 9 · Nested control structures</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 9 · Nested control structures</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,11 +11,11 @@
 <h1>Nested control structures</h1>
 <p><strong>Learning objective.</strong> Use selection inside iteration and trace which statements run.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>for wave in range(3):
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>for wave in range(3):
     if wave == 1:
         print(&quot;Boss&quot;)
     else:
-        print(&quot;Enemy&quot;)</code></pre></section>
+        print(&quot;Enemy&quot;)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Nesting puts one control structure inside another. The program can make a fresh decision on every loop step.</li>
 <li><strong>GDScript.</strong> Indent the <code>if</code> and <code>else</code> one level inside the <code>for</code>. Indent each branch’s body one more level.</li>
@@ -23,10 +23,10 @@
 </ul>
 <h2>Predict the output</h2>
 <p>Which wave is special, and how many lines print?</p>
-<pre><code>for wave in range(1, 4):
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>for wave in range(1, 4):
     if wave == 3:
         print(&quot;Boss&quot;)
-    print(wave)</code></pre>
+    print(wave)</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints 1, 2, Boss, then 3. The last <code>print()</code> is in the loop and outside the branch.</p></details>
 <h2>Guided task · Choose a special wave</h2>
 <p>Captain should appear on wave 2 instead of wave 1. Keep all three waves.</p>
@@ -59,6 +59,6 @@
 <p>How does one extra level of indentation change how often the Warning line runs?</p>
 <p><a href="strings.html">Next lesson · Strings and player-facing text</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

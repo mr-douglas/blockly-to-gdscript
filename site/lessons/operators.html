@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 4 · Operators and expressions</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 4 · Operators and expressions</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -13,7 +13,7 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/operators.png" alt="A Blockly print block contains the addition expression 5 plus 3."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>print(5 + 3)</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>print(5 + 3)</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> An expression gives you a value. An operator tells you what to do with one or more values.</li>
@@ -22,9 +22,9 @@
 </ul>
 <h2>Predict the output</h2>
 <p>What does each line print? Notice what the parentheses group.</p>
-<pre><code>print(2 + 3 * 4)
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>print(2 + 3 * 4)
 print((2 + 3) * 4)
-print(10 &gt;= 10)</code></pre>
+print(10 &gt;= 10)</code></pre></div>
 <details><summary>Check the prediction</summary><p>The lines are <code>14</code>, <code>20</code>, and <code>true</code>. Multiplication runs before addition unless parentheses group the addition. The comparison includes equality.</p></details>
 <h2>Guided task · Calculate a reward</h2>
 <p>Each coin is worth 5 points. Update the score expression so 3 coins and a bonus of 2 give <code>17</code> points.</p>
@@ -58,6 +58,6 @@ var score = 10
 <p>Why should you test a gate rule with a score exactly equal to the target?</p>
 <p><a href="selection.html">Next lesson · Selection</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

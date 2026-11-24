@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 14 · Functions</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 14 · Functions</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -13,13 +13,13 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/functions.png" alt="Define the award_coin procedure to print +1 coin!, then call award_coin."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 func award_coin():
     print(&quot;+1 coin!&quot;)
 
 func _ready():
-    award_coin()</code></pre></section>
+    award_coin()</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> A function groups statements under a name. A call runs that group.</li>
@@ -28,14 +28,14 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>How many times does the function body run?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 func flash():
     print(&quot;Shield&quot;)
 
 func _ready():
     flash()
-    flash()</code></pre>
+    flash()</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints Shield twice. Defining the function adds no output; each call runs it once.</p></details>
 <h2>Guided task · Call the same action twice</h2>
 <p>Add a second call so the shield message prints twice.</p>
@@ -76,6 +76,6 @@ func _ready():
 <p>If you want to change the intro text everywhere, which line do you edit and why?</p>
 <p><a href="parameters.html">Next lesson · Parameters and return values</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

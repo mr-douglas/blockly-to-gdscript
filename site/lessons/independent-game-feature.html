@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 30 · Independent PBL game feature</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 30 · Independent PBL game feature</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Independent PBL game feature</h1>
 <p><strong>Learning objective.</strong> Build a substantial game feature in GDScript and use tests to explain your design decisions.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 var coins = 5
 var stock = [{&quot;name&quot;: &quot;Map&quot;, &quot;price&quot;: 5}]
@@ -30,7 +30,7 @@ func buy(slot: int) -&gt; bool:
 
 func _ready():
     print(buy(0))
-    print(coins)</code></pre></section>
+    print(coins)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> An algorithm is a sequence of steps that solves a problem. Define what your feature should do, including what it should do when given invalid input.</li>
 <li><strong>GDScript.</strong> Use meaningful variables, a data structure, selection and at least one reusable function that takes an input or returns a result. Use a loop where the feature repeats work.</li>
@@ -38,7 +38,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>A player has exactly 5 coins. What is printed, and what changes if they try to buy the same slot again?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 var coins = 5
 var stock = [{&quot;name&quot;: &quot;Map&quot;, &quot;price&quot;: 5}]
@@ -58,7 +58,7 @@ func buy(slot: int) -&gt; bool:
 func _ready():
     print(buy(0))
     print(buy(0))
-    print(coins)</code></pre>
+    print(coins)</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints true, false, then 0. The first purchase spends the coins and removes the stock entry. The second call is rejected because the slot no longer exists.</p></details>
 <h2>Guided task · Test an invalid action</h2>
 <p>Add a call with slot -1. Print whether the purchase failed, and print the balance. A rejected purchase should leave 5 coins.</p>
@@ -135,6 +135,6 @@ func _ready():
 <h2>Reflection</h2>
 <p>Which design decision mattered most in your feature? Use one test result to explain why.</p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

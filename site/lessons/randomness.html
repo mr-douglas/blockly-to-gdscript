@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 17 · Randomness and probability</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 17 · Randomness and probability</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,8 +11,8 @@
 <h1>Randomness and probability</h1>
 <p><strong>Learning objective.</strong> Choose a random range and explain the chance of a game result.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var roll = randi_range(1, 10)
-print(roll &gt;= 1 and roll &lt;= 10)</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var roll = randi_range(1, 10)
+print(roll &gt;= 1 and roll &lt;= 10)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> For an equally likely roll from 1 to 10, two winning numbers give two chances out of ten, or 20%. A short run may give a different result.</li>
 <li><strong>GDScript.</strong> <code>randi_range(1, 10)</code> chooses an integer and includes both ends. The example prints whether its result is inside the range.</li>
@@ -20,8 +20,8 @@ print(roll &gt;= 1 and roll &lt;= 10)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>For each possible roll from 1 to 4, will a gem drop?</p>
-<pre><code>for roll in range(1, 5):
-    print(roll &lt;= 2)</code></pre>
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>for roll in range(1, 5):
+    print(roll &lt;= 2)</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints true twice, then false twice. Two of the four rolls drop a gem.</p></details>
 <h2>Guided task · Set a 20% chance</h2>
 <p>The loop checks all ten possible rolls. Change the threshold so exactly two give a gem.</p>
@@ -52,6 +52,6 @@ print(roll &lt; 1)</code></pre>
 <p>Why might a game with a 20% drop chance give no drops across ten attempts?</p>
 <p><a href="coordinates.html">Next lesson · Coordinates and vectors</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

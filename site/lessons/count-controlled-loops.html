@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 7 · Count-controlled loops</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 7 · Count-controlled loops</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -13,8 +13,8 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/loops.png" alt="Repeat three times: print Spawn a coin!"></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>for coin in range(3):
-    print(&quot;Spawn a coin!&quot;)</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>for coin in range(3):
+    print(&quot;Spawn a coin!&quot;)</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> Use a count-controlled loop when you know how many times an action should happen.</li>
@@ -23,8 +23,8 @@
 </ul>
 <h2>Predict the output</h2>
 <p>Predict all three lines. Why do we add 1 to the counter?</p>
-<pre><code>for slot in range(3):
-    print(slot + 1)</code></pre>
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>for slot in range(3):
+    print(slot + 1)</code></pre></div>
 <details><summary>Check the prediction</summary><p>The lines are <code>1</code>, <code>2</code>, and <code>3</code>. The counter starts at 0, but the labels start at 1.</p></details>
 <h2>Guided task · Repeat a spawn</h2>
 <p>Fix the count so the code prints <code>Spawn</code> once for each of four items.</p>
@@ -52,6 +52,6 @@
 <p>Why is changing the loop count easier than adding a separate line of code for each coin?</p>
 <p><a href="condition-controlled-loops.html">Next lesson · Condition-controlled loops</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

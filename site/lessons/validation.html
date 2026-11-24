@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 23 · Validation and defensive programming</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 23 · Validation and defensive programming</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,10 +11,10 @@
 <h1>Validation and defensive programming</h1>
 <p><strong>Learning objective.</strong> Check inputs before using them and keep game values in range.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var health = 4
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var health = 4
 var damage = 7
 health = max(0, health - damage)
-print(health)</code></pre></section>
+print(health)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Validation checks that a value meets your rules before code uses it. Decide what your program should do when the value is invalid.</li>
 <li><strong>GDScript.</strong> Use <code>max(0, value)</code> to set a lower limit. Check array indexes on both sides. <code>dictionary.get(key, fallback)</code> supplies a value when a key is missing.</li>
@@ -22,8 +22,8 @@ print(health)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>The item has no price. What value does the program use?</p>
-<pre><code>var item = {&quot;name&quot;: &quot;Map&quot;}
-print(item.get(&quot;price&quot;, 0))</code></pre>
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var item = {&quot;name&quot;: &quot;Map&quot;}
+print(item.get(&quot;price&quot;, 0))</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints 0, the fallback. The dictionary is unchanged.</p></details>
 <h2>Guided task · Keep health at zero or above</h2>
 <p>Change the assignment so damage cannot make health negative.</p>
@@ -55,6 +55,6 @@ var index = 0
 <p>What should your game do when an inventory slot is invalid, and why?</p>
 <p><a href="debugging-tracing.html">Next lesson · Debugging and tracing</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

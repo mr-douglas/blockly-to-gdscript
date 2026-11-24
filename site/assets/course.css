@@ -61,3 +61,7 @@ footer { padding-block: 1rem; border-top: 1px solid #cfdae8; }
 .rover-lesson .panel h2 { margin-top: 0; }
 .route-panel canvas { display: block; width: 100%; height: auto; border-radius: .5rem; }
 .route-panel [data-route-summary] { margin: .75rem 0 0; font-weight: 650; }
+
+[data-reference] details { margin-bottom: 1rem; }
+[data-reference] .practice-controls { margin-top: .7rem; }
+.load-example { font:inherit; color:#182940; background:#f1f5fa; border:1px solid #a9bbd1; border-radius:.45rem; cursor:pointer; padding:.45rem .7rem; }

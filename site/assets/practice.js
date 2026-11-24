@@ -37,7 +37,7 @@ for (const [index, practice] of [...document.querySelectorAll("[data-practice]")
   const starter = example.textContent;
   const fullScript = practice.dataset.practice === "full";
   const turtle = practice.dataset.practice === "turtle"
-    ? (await import("./turtle-preview.js?v=beacons-1")).createTurtlePreview(document.querySelector("[data-route-stage]"))
+    ? (await import("./turtle-preview.js?v=editable-1")).createTurtlePreview(document.querySelector("[data-route-stage]"))
     : null;
   const controls = controlsTemplate.content.cloneNode(true);
   const editor = controls.querySelector("textarea");
@@ -58,8 +58,16 @@ for (const [index, practice] of [...document.querySelectorAll("[data-practice]")
   let activeRun;
 
   editor.value = starter;
-  editor.rows = Math.max(6, starter.split("\n").length + 1);
-  example.replaceWith(controls);
+  editor.rows = Math.min(16, Math.max(6, starter.split("\n").length + 1));
+  if (practice.hasAttribute("data-reference")) {
+    const disclosure = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = "Edit and run this example";
+    disclosure.append(summary, controls);
+    example.after(disclosure);
+  } else {
+    example.replaceWith(controls);
+  }
 
   function complete(session, text) {
     if (activeRun !== session) return;
@@ -113,7 +121,7 @@ for (const [index, practice] of [...document.querySelectorAll("[data-practice]")
           case "error":
             session.hasError = true;
             if (/res:\/\/runner\.gd:/.test(data.text)) break;
-            const lineNumber = (line) => Math.max(1, Number(line) - (fullScript ? 0 : 3));
+            const lineNumber = (line) => Math.max(1, Number(line) - (fullScript || turtle && /^extends\s/m.test(source) ? 0 : 3));
             append(data.text
               .replace(/^Line (\d+):/, (_, line) => `Line ${lineNumber(line)}:`)
               .replace(/gdscript:\/\/[^)\s]+\.gd:(\d+)/g, (_, line) => `line ${lineNumber(line)}`));
@@ -135,6 +143,20 @@ for (const [index, practice] of [...document.querySelectorAll("[data-practice]")
       worker.postMessage({source: script, base: runnerBase.href});
     } catch (error) {
       complete(session, error.message);
+    }
+  }
+
+  if (turtle) {
+    for (const button of document.querySelectorAll("[data-load-rover]")) {
+      button.addEventListener("click", () => {
+        if (activeRun) complete(activeRun, "");
+        turtle.reset();
+        const exampleCode = button.previousElementSibling.textContent;
+        editor.value = button.dataset.loadRover === "functions" ? turtle.wrap(starter) : starter + "\n" + exampleCode;
+        consoleOutput.textContent = "";
+        status.textContent = "Example loaded. Run it to see the route.";
+        editor.focus();
+      });
     }
   }
 

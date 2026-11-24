@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 16 · Scope and constants</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 16 · Scope and constants</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Scope and constants</h1>
 <p><strong>Learning objective.</strong> Distinguish local variables, member variables and constants.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 const POINTS_PER_COIN = 5
 var score = 0
@@ -23,7 +23,7 @@ func collect_coin():
 func _ready():
     collect_coin()
     collect_coin()
-    print(score)</code></pre></section>
+    print(score)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Scope means where a name can be used. A constant names a value that stays fixed.</li>
 <li><strong>GDScript.</strong> A <code>var</code> inside a function is local to that function or block. A <code>var</code> outside the functions belongs to the node. Set a fixed rule with <code>const</code>.</li>
@@ -31,7 +31,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>After one call, what can _ready() read, and what will it print?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 const POINTS_PER_COIN = 5
 var score = 0
@@ -42,7 +42,7 @@ func collect_coin():
 
 func _ready():
     collect_coin()
-    print(score)</code></pre>
+    print(score)</code></pre></div>
 <details><summary>Check the prediction</summary><p>It reads the member variable score and prints 7. The local bonus stays inside collect_coin().</p></details>
 <h2>Guided task · Change the rule in one place</h2>
 <p>Set the constant to 3. Two coins with a bonus of 2 each should give 10.</p>
@@ -94,6 +94,6 @@ func _ready():
 <p>What would happen to repeated hits if health were created inside hit() every time?</p>
 <p><a href="randomness.html">Next lesson · Randomness and probability</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

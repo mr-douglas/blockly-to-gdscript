@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 5 · Selection</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 5 · Selection</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -13,11 +13,11 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/if-else.png" alt="Set score to 10. If score is at least 10, print You win! Otherwise print Keep collecting!"></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>var score = 10
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var score = 10
 if score &gt;= 10:
     print(&quot;You win!&quot;)
 else:
-    print(&quot;Keep collecting!&quot;)</code></pre></section>
+    print(&quot;Keep collecting!&quot;)</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> Selection means a program chooses what to do based on a condition.</li>
@@ -26,13 +26,13 @@ else:
 </ul>
 <h2>Predict the output</h2>
 <p>Trace the branches at score 7. Which message appears? Which branch would run at score 10?</p>
-<pre><code>var score = 7
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var score = 7
 if score &gt;= 10:
     print(&quot;Goal reached&quot;)
 elif score &gt;= 5:
     print(&quot;Halfway&quot;)
 else:
-    print(&quot;Keep going&quot;)</code></pre>
+    print(&quot;Keep going&quot;)</code></pre></div>
 <details><summary>Check the prediction</summary><p>At 7, <code>Halfway</code> prints. At 10, the first branch prints <code>Goal reached</code> and the other branches are skipped.</p></details>
 <h2>Guided task · Add a middle branch</h2>
 <p>Add an <code>elif</code> branch between <code>if</code> and <code>else</code>. At scores of 5 to 9 it should print <code>Halfway</code>.</p>
@@ -67,6 +67,6 @@ else:
 <p>Why does checking <code>coins >= 5</code> first prevent the Gold branch from running?</p>
 <p><a href="boolean-logic.html">Next lesson · Boolean logic</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

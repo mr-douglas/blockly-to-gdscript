@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 2 · Variables and game state</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 2 · Variables and game state</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,8 +11,8 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/variables.png" alt="Set score to 0, then print score."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>var score = 0
-print(score)</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var score = 0
+print(score)</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> A variable gives a name to a value you can read and change.</li>
@@ -21,11 +21,11 @@ print(score)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>Trace the value of <code>score</code> after each statement. What two lines will this code print?</p>
-<pre><code>var score = 2
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var score = 2
 score += 3
 print(score)
 score = 1
-print(score)</code></pre>
+print(score)</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints <code>5</code> and then <code>1</code>. The update adds 3. The last assignment replaces 5 with 1.</p></details>
 <h2>Guided task · Collect a coin</h2>
 <p>Change the starting score to 4. Add 3 to the score before the print statement. Check that the output is <code>7</code>.</p>
@@ -55,6 +55,6 @@ var speed = 100
 <p>When would you use <code>score = 0</code>, and when would you use <code>score += 1</code> in a game?</p>
 <p><a href="data-types.html">Next lesson · Data types</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

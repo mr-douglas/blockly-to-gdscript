@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 27 · Testing game systems</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 27 · Testing game systems</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Testing game systems</h1>
 <p><strong>Learning objective.</strong> Choose test inputs, predict the expected results, and compare them with actual results.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 func can_finish(coins: int) -&gt; bool:
     return coins &gt;= 3
@@ -19,7 +19,7 @@ func can_finish(coins: int) -&gt; bool:
 func _ready():
     print(can_finish(4) == true)
     print(can_finish(3) == true)
-    print(can_finish(-1) == false)</code></pre></section>
+    print(can_finish(-1) == false)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A test case pairs an input with an expected result. A boundary is where the outcome changes, so test just below, at, and above it.</li>
 <li><strong>GDScript.</strong> Use <code>==</code> to compare an actual result with the expected result. A test printing true means the two values matched.</li>
@@ -27,7 +27,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>The rule needs at least 3 coins. Which test exposes the wrong comparison?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 func can_finish(coins: int) -&gt; bool:
     return coins &gt; 3
@@ -35,7 +35,7 @@ func can_finish(coins: int) -&gt; bool:
 func _ready():
     print(can_finish(4) == true)
     print(can_finish(3) == true)
-    print(can_finish(-1) == false)</code></pre>
+    print(can_finish(-1) == false)</code></pre></div>
 <details><summary>Check the prediction</summary><p>Only the boundary test fails. It prints true, false, true.</p></details>
 <h2>Guided task · Add the boundary test</h2>
 <p>Add a second test for exactly three coins. Output should show true twice.</p>
@@ -79,6 +79,6 @@ func _ready():
 <p>Why might a test with 4 coins pass even though the code fails when the player has exactly 3?</p>
 <p><a href="grid-algorithms.html">Next lesson · Grid-based algorithms</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

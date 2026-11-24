@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 13 · Dictionaries and structured data</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 13 · Dictionaries and structured data</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,8 +11,8 @@
 <h1>Dictionaries and structured data</h1>
 <p><strong>Learning objective.</strong> Create and update a game record using keys.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var enemy = {&quot;name&quot;: &quot;Bat&quot;, &quot;health&quot;: 5}
-print(enemy[&quot;name&quot;])</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var enemy = {&quot;name&quot;: &quot;Bat&quot;, &quot;health&quot;: 5}
+print(enemy[&quot;name&quot;])</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A dictionary maps keys to values. Use a key when a field has a meaningful name.</li>
 <li><strong>GDScript.</strong> Use braces and write each pair as <code>"key": value</code>. Read or update a field with <code>enemy["health"]</code>.</li>
@@ -20,10 +20,10 @@ print(enemy[&quot;name&quot;])</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>What changes after the attack?</p>
-<pre><code>var enemy = {&quot;health&quot;: 5, &quot;damage&quot;: 2}
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var enemy = {&quot;health&quot;: 5, &quot;damage&quot;: 2}
 enemy[&quot;health&quot;] -= 2
 print(enemy[&quot;health&quot;])
-print(enemy[&quot;damage&quot;])</code></pre>
+print(enemy[&quot;damage&quot;])</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints 3 and then 2. Only the value under the health key changes.</p></details>
 <h2>Guided task · Read a field</h2>
 <p>Replace 0 with an expression that reads the item’s price.</p>
@@ -52,6 +52,6 @@ print(enemy[&quot;hp&quot;])</code></pre>
 <p>Why might a named key be easier to understand than the index 1 for a health value?</p>
 <p><a href="reusable-functions.html">Next lesson · Functions</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

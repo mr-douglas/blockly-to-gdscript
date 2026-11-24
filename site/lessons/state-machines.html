@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 22 · State machines</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 22 · State machines</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>State machines</h1>
 <p><strong>Learning objective.</strong> Represent named states and test transitions between them.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 enum State { IDLE, MOVING, PAUSED }
 var state = State.IDLE
@@ -30,7 +30,7 @@ func handle(action: String) -&gt; void:
 
 func _ready():
     handle(&quot;walk&quot;)
-    print(state == State.MOVING)</code></pre></section>
+    print(state == State.MOVING)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A state machine has a current state and rules for changing it in response to an action.</li>
 <li><strong>GDScript.</strong> <code>enum</code> names the possible states. <code>match state:</code> picks the branch for the current state. An assignment such as <code>state = State.MOVING</code> changes it.</li>
@@ -38,7 +38,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>Trace walk, pause, and resume. Which states are checked by the print statements?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 enum State { IDLE, MOVING, PAUSED }
 var state = State.IDLE
@@ -60,7 +60,7 @@ func _ready():
     handle(&quot;pause&quot;)
     print(state == State.PAUSED)
     handle(&quot;resume&quot;)
-    print(state == State.MOVING)</code></pre>
+    print(state == State.MOVING)</code></pre></div>
 <details><summary>Check the prediction</summary><p>After pause it is PAUSED, and after resume it is MOVING. Both lines print true.</p></details>
 <h2>Guided task · Add a pause action</h2>
 <p>Insert a pause before the last line. The final check should say true.</p>
@@ -143,6 +143,6 @@ func _ready():
 <p>Why should the same action sometimes do different things in different states?</p>
 <p><a href="validation.html">Next lesson · Validation and defensive programming</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

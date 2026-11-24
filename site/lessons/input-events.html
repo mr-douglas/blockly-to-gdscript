@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 20 · Input and events</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 20 · Input and events</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Input and events</h1>
 <p><strong>Learning objective.</strong> Distinguish reacting to one key event from checking input every frame.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 func _unhandled_key_input(event: InputEvent) -&gt; void:
     if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
@@ -21,7 +21,7 @@ func _ready() -&gt; void:
     var sample = InputEventKey.new()
     sample.keycode = KEY_SPACE
     sample.pressed = true
-    _unhandled_key_input(sample)</code></pre></section>
+    _unhandled_key_input(sample)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> An event reports something that happened. A continuous check asks about the current state each time it runs.</li>
 <li><strong>GDScript.</strong> <code>event.pressed</code> tells you whether it was a press. <code>event.keycode</code> identifies the key. Comparing both lets the code react to one kind of event.</li>
@@ -29,7 +29,7 @@ func _ready() -&gt; void:
 </ul>
 <h2>Predict the output</h2>
 <p>What will this sample key release print?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 func _unhandled_key_input(event: InputEvent) -&gt; void:
     if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
@@ -39,7 +39,7 @@ func _ready() -&gt; void:
     var sample = InputEventKey.new()
     sample.keycode = KEY_SPACE
     sample.pressed = false
-    _unhandled_key_input(sample)</code></pre>
+    _unhandled_key_input(sample)</code></pre></div>
 <details><summary>Check the prediction</summary><p>There is no output. A release has <code>pressed</code> set to false.</p></details>
 <h2>Guided task · Test a press</h2>
 <p>Change the sample from releasing Space to pressing Space. Check for Jump in Output.</p>
@@ -95,6 +95,6 @@ func _ready() -&gt; void:
 <p>Why is a continuous held-key check a good fit for walking and a press event a good fit for opening a menu?</p>
 <p><a href="signals.html">Next lesson · Signals</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

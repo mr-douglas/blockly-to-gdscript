@@ -144,6 +144,7 @@ export function createTurtlePreview(stage) {
   }
 
   function wrap(source) {
+    if (/^extends\s/m.test(source)) return source;
     return `extends Node2D
 
 func _ready():

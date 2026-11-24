@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 26 · Refactoring and readable code</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 26 · Refactoring and readable code</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Refactoring and readable code</h1>
 <p><strong>Learning objective.</strong> Remove duplication and improve names while keeping the same behaviour.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 const POINTS_PER_COIN = 5
 
@@ -20,7 +20,7 @@ func reward(coins: int) -&gt; int:
 
 func _ready():
     print(reward(2))
-    print(reward(4))</code></pre></section>
+    print(reward(4))</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Refactoring improves the structure of a program. Existing test results should stay the same.</li>
 <li><strong>GDScript.</strong> Use meaningful names, consistent indentation, and constants for shared rules. Keep comments that explain why a rule exists.</li>
@@ -28,13 +28,13 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>Compare this older version with the example. Should its output differ?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 func _ready():
     var a = 2 * 5
     var b = 4 * 5
     print(a)
-    print(b)</code></pre>
+    print(b)</code></pre></div>
 <details><summary>Check the prediction</summary><p>Both versions print 10 and 20. The function and constant change how the code is organised.</p></details>
 <h2>Guided task · Name the rule</h2>
 <p>Replace the repeated 5 with one named constant. Keep both outputs at 10 and 20.</p>
@@ -81,6 +81,6 @@ func _ready():
 <p>The output matches after running two tests. What other input would help you check that behaviour stayed the same?</p>
 <p><a href="testing-game-systems.html">Next lesson · Testing game systems</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

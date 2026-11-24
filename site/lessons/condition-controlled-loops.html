@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 8 · Condition-controlled loops</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 8 · Condition-controlled loops</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,11 +11,11 @@
 <h1>Condition-controlled loops</h1>
 <p><strong>Learning objective.</strong> Use while for a repeated action and explain why the loop stops.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var charge = 3
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var charge = 3
 while charge &gt; 0:
     print(charge)
     charge -= 1
-print(&quot;Empty&quot;)</code></pre></section>
+print(&quot;Empty&quot;)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A condition-controlled loop repeats while its test is true. If the test is false at the start, the body runs zero times.</li>
 <li><strong>GDScript.</strong> Write <code>while condition:</code> and indent the body. Update a value in the body so the test can eventually become false.</li>
@@ -23,10 +23,10 @@ print(&quot;Empty&quot;)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>What prints? Can the loop run with energy exactly equal to the cost?</p>
-<pre><code>var energy = 4
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var energy = 4
 while energy &gt;= 2:
     energy -= 2
-    print(energy)</code></pre>
+    print(energy)</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints <code>2</code> then <code>0</code>. With 2 energy, the condition is still true because the comparison includes equality.</p></details>
 <h2>Guided task · Complete a countdown</h2>
 <p>Add a line inside the loop that lowers <code>seconds</code> by one. Write the update before changing the starting value to 3. Your output should count down from 3 to 1.</p>
@@ -59,6 +59,6 @@ while charge &gt; 2:
 <p>What would happen if you removed the line that changes the shield inside the loop? Explain using the condition.</p>
 <p><a href="nested-control.html">Next lesson · Nested control structures</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

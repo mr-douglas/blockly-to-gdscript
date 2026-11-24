@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 12 · Iterating through arrays</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 12 · Iterating through arrays</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,9 +11,9 @@
 <h1>Iterating through arrays</h1>
 <p><strong>Learning objective.</strong> Loop over an array and combine or select its values.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var enemies = [&quot;bat&quot;, &quot;slime&quot;]
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var enemies = [&quot;bat&quot;, &quot;slime&quot;]
 for enemy in enemies:
-    print(enemy)</code></pre></section>
+    print(enemy)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Iteration processes each element of a collection, in order. An empty array has no elements to process.</li>
 <li><strong>GDScript.</strong> In <code>for enemy in enemies:</code>, <code>enemy</code> is the current value. It holds an item from the array itself.</li>
@@ -21,11 +21,11 @@ for enemy in enemies:
 </ul>
 <h2>Predict the output</h2>
 <p>What gets added to total each time?</p>
-<pre><code>var scores = [2, 5, 3]
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var scores = [2, 5, 3]
 var total = 0
 for score in scores:
     total += score
-print(total)</code></pre>
+print(total)</code></pre></div>
 <details><summary>Check the prediction</summary><p>The total goes from 0 to 2, to 7, to 10. The final line prints <code>10</code>.</p></details>
 <h2>Guided task · Print item names</h2>
 <p>Change the print statement so it prints the item from the array.</p>
@@ -58,6 +58,6 @@ print(total)</code></pre>
 <p>Why is <code>total = score</code> different from <code>total += score</code> in the loop?</p>
 <p><a href="dictionaries.html">Next lesson · Dictionaries and structured data</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

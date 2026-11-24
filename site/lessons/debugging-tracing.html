@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 24 · Debugging and tracing</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 24 · Debugging and tracing</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,12 +11,12 @@
 <h1>Debugging and tracing</h1>
 <p><strong>Learning objective.</strong> Tell syntax, runtime and logic errors apart and use tracing to locate a faulty step.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var score = 2
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var score = 2
 print(score)
 score += 3
 print(score)
 score += 4
-print(score)</code></pre></section>
+print(score)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A trace records intermediate values. Compare the first wrong value with the statement that produced it.</li>
 <li><strong>GDScript.</strong> A syntax error stops the code being read. A runtime error happens during execution. A logic error gives the wrong result even when the code runs.</li>
@@ -24,12 +24,12 @@ print(score)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>Which line first shows that the score is being replaced?</p>
-<pre><code>var score = 2
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var score = 2
 print(score)
 score = 3
 print(score)
 score = 4
-print(score)</code></pre>
+print(score)</code></pre></div>
 <details><summary>Check the prediction</summary><p>The correct trace would be 2, 5, 9. This prints 2, 3, 4, so the first update is already wrong.</p></details>
 <h2>Guided task · Trace each update</h2>
 <p>Add a print immediately after the first update to expose the middle value 5.</p>
@@ -61,6 +61,6 @@ print(items[2])</code></pre>
 <p>Why is it useful to find the first wrong value instead of looking only at the final result?</p>
 <p><a href="decomposition.html">Next lesson · Decomposition and pseudocode</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

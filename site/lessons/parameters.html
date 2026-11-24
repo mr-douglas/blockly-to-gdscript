@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 15 · Parameters and return values</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 15 · Parameters and return values</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,13 +11,13 @@
 <h1>Parameters and return values</h1>
 <p><strong>Learning objective.</strong> Write and call a function that takes inputs and returns a result.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 func remaining_health(health: int, amount: int) -&gt; int:
     return health - amount
 
 func _ready():
-    print(remaining_health(10, 3))</code></pre></section>
+    print(remaining_health(10, 3))</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A parameter names an input. A return value is the result of the call.</li>
 <li><strong>GDScript.</strong> In <code>func remaining_health(health: int, amount: int) -> int:</code>, the two names are parameters. The arrow gives the result type. <code>return</code> hands a value back to the caller.</li>
@@ -25,14 +25,14 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>Predict the two results. Which parameter changes between calls?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 func remaining_health(health: int, amount: int) -&gt; int:
     return health - amount
 
 func _ready():
     print(remaining_health(10, 0))
-    print(remaining_health(10, 10))</code></pre>
+    print(remaining_health(10, 10))</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints 10 then 0. The second argument changes from 0 to 10.</p></details>
 <h2>Guided task · Supply the damage</h2>
 <p>Change the call so an attack of 3 leaves health 7.</p>
@@ -73,6 +73,6 @@ func _ready():
 <p>What is the difference between printing a result inside a function and returning it to the caller?</p>
 <p><a href="scope.html">Next lesson · Scope and constants</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 29 · Searching, sorting and high scores</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 29 · Searching, sorting and high scores</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Searching, sorting and high scores</h1>
 <p><strong>Learning objective.</strong> Use linear search and sort scores into leaderboard order.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 func find_score(scores: Array, target: int) -&gt; int:
     for index in range(scores.size()):
@@ -21,7 +21,7 @@ func find_score(scores: Array, target: int) -&gt; int:
 
 func _ready():
     print(find_score([12, 7, 12], 12))
-    print(find_score([12, 7, 12], 2))</code></pre></section>
+    print(find_score([12, 7, 12], 2))</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Linear search checks entries in order, one at a time. Sorting puts all entries into a chosen order.</li>
 <li><strong>GDScript.</strong> Return the index as soon as the target matches. Use -1 to signal a missing score. <code>sort()</code> orders an array from low to high; <code>reverse()</code> reverses that order.</li>
@@ -29,7 +29,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>There are two scores of 12. Which index will the function return?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 func find_score(scores: Array, target: int) -&gt; int:
     for index in range(scores.size()):
@@ -38,7 +38,7 @@ func find_score(scores: Array, target: int) -&gt; int:
     return -1
 
 func _ready():
-    print(find_score([7, 12, 12], 12))</code></pre>
+    print(find_score([7, 12, 12], 12))</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints 1, the index of the first match.</p></details>
 <h2>Guided task · Find the target</h2>
 <p>Change the target so the call finds the score at index 1.</p>
@@ -87,6 +87,6 @@ func _ready():
 <p>Why should a linear search wait until the loop ends before returning -1?</p>
 <p><a href="independent-game-feature.html">Next lesson · Independent PBL game feature</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

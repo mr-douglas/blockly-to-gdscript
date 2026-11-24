@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lesson 1 · From blocks to GDScript</title>
-<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../assets/course.css?v=editable-1">
 </head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
@@ -21,9 +21,9 @@
 </figure>
 <section class="panel">
 <h3>GDScript</h3>
-<pre><code>print("Ready")
+<div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>print("Ready")
 # Start the round
-print("Go!")</code></pre>
+print("Go!")</code></pre></div>
 </section>
 </div>
 <ul>
@@ -42,10 +42,10 @@ Go!</pre>
 <p>Which GDScript example matches this screenshot? Use the order of the statements to explain your choice.</p>
 <img src="../assets/blocks-to-gdscript-match.png" alt="A print Checkpoint block followed by a print Saved block.">
 <div class="comparison">
-<section class="panel"><h3>Example A</h3><pre><code>print("Saved")
-print("Checkpoint")</code></pre></section>
-<section class="panel"><h3>Example B</h3><pre><code>print("Checkpoint")
-print("Saved")</code></pre></section>
+<section class="panel"><h3>Example A</h3><div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>print("Saved")
+print("Checkpoint")</code></pre></div></section>
+<section class="panel"><h3>Example B</h3><div data-practice="snippet" data-reference data-editor-label="Example 3 code"><pre><code>print("Checkpoint")
+print("Saved")</code></pre></div></section>
 </div>
 <details><summary>Check the match</summary>
 <p><strong>B.</strong> The first statement prints <code>Checkpoint</code> and the second prints <code>Saved</code>.</p>
@@ -78,11 +78,11 @@ print("Door open")</code></pre>
 <p>Choose a scene in your own Godot game. In its <code>_ready()</code> function, add a short comment and a <code>print()</code> message that names the scene. Run the scene and check that your message appears in Godot’s Output panel. <a href="../index.html#godot-setup">Godot editor setup</a></p>
 <details><summary>See an example Godot script</summary>
 <p>For a new script attached to a plain <code>Node</code>, this prints <code>Training room loaded</code> when the scene starts. If your scene already has a script, add just the indented lines to its <code>_ready()</code> function, or create that function if it is missing.</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 4 code"><pre><code>extends Node
 
 func _ready():
     # Confirm that this scene has loaded.
-    print("Training room loaded")</code></pre>
+    print("Training room loaded")</code></pre></div>
 </details>
 
 <h2>Optional extension</h2>
@@ -92,6 +92,6 @@ func _ready():
 <p>How would you explain to a classmate why changing the order of <code>print()</code> statements changes the output, while moving a comment does not?</p>
 <p><a href="../index.html">Back to the course</a> · <a href="variables.html">Next lesson · Variables and game state</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

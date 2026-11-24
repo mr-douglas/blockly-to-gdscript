@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 21 · Signals</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 21 · Signals</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Signals</h1>
 <p><strong>Learning objective.</strong> Connect a signal to a function and explain when it runs.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 signal key_found(key_name: String)
 
@@ -20,7 +20,7 @@ func show_pickup(key_name: String) -&gt; void:
 
 func _ready():
     key_found.connect(show_pickup)
-    key_found.emit(&quot;silver key&quot;)</code></pre></section>
+    key_found.emit(&quot;silver key&quot;)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A signal is a notification. A sender announces an event and a connected listener handles it.</li>
 <li><strong>GDScript.</strong> Use <code>signal</code> to declare a signal. <code>connect()</code> takes the function itself, without parentheses. <code>emit()</code> sends the notification and any values.</li>
@@ -28,7 +28,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>Which messages appear, and when does show_pickup() run?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 signal key_found(key_name: String)
 
@@ -38,7 +38,7 @@ func show_pickup(key_name: String) -&gt; void:
 func _ready():
     key_found.connect(show_pickup)
     key_found.emit(&quot;red key&quot;)
-    key_found.emit(&quot;blue key&quot;)</code></pre>
+    key_found.emit(&quot;blue key&quot;)</code></pre></div>
 <details><summary>Check the prediction</summary><p>Each emit calls the connected function once. It prints Found red key, then Found blue key.</p></details>
 <h2>Guided task · Connect the listener</h2>
 <p>Add the connection before emitting. Check that the listener prints Found silver key.</p>
@@ -84,6 +84,6 @@ func _ready():
 <p>What does the sender need to know about the functions that listen to a signal?</p>
 <p><a href="state-machines.html">Next lesson · State machines</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

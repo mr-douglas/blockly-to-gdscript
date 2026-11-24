@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 25 · Decomposition and pseudocode</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 25 · Decomposition and pseudocode</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,7 +11,7 @@
 <h1>Decomposition and pseudocode</h1>
 <p><strong>Learning objective.</strong> Turn a short plan into state, inputs, outputs and reusable functions.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+<section class="panel"><h3>GDScript</h3><div data-practice="full" data-reference data-editor-label="Example 1 code"><pre><code>extends Node
 
 const GOAL = 3
 var collected = 0
@@ -25,7 +25,7 @@ func goal_met() -&gt; bool:
 func _ready():
     for coin in range(3):
         collect_coin()
-    print(goal_met())</code></pre></section>
+    print(goal_met())</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> Decomposition breaks a feature into small jobs. Pseudocode describes the steps in plain language before you write them in GDScript.</li>
 <li><strong>GDScript.</strong> A comment can record the plan. A named function can implement each job. In the example, store the count, repeat collection, test the goal and print the result.</li>
@@ -33,7 +33,7 @@ func _ready():
 </ul>
 <h2>Predict the output</h2>
 <p>Predict the result if the loop runs only twice. Which function makes the decision?</p>
-<pre><code>extends Node
+<div data-practice="full" data-reference data-editor-label="Example 2 code"><pre><code>extends Node
 
 const GOAL = 3
 var collected = 0
@@ -47,7 +47,7 @@ func goal_met() -&gt; bool:
 func _ready():
     for coin in range(2):
         collect_coin()
-    print(goal_met())</code></pre>
+    print(goal_met())</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints false because goal_met() compares 2 with the goal of 3.</p></details>
 <h2>Guided task · Finish a job in the plan</h2>
 <p>Complete goal_met() so it checks the current count against the goal.</p>
@@ -104,6 +104,6 @@ func _ready():
 <p>Which part of your reward system can be reused if you change how messages are shown?</p>
 <p><a href="refactoring.html">Next lesson · Refactoring and readable code</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

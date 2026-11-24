@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 6 · Boolean logic</title><link rel="stylesheet" href="../assets/course.css"></head>
+<title>Lesson 6 · Boolean logic</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -13,7 +13,7 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/boolean-logic.png" alt="A print block contains the Blockly expression true and false."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>print(true and false)</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>print(true and false)</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> A boolean expression produces true or false. A game can combine smaller tests to decide whether an action is allowed.</li>
@@ -22,11 +22,11 @@
 </ul>
 <h2>Predict the output</h2>
 <p>Read the three expressions. Which lines will print true?</p>
-<pre><code>var has_key = true
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var has_key = true
 var has_pass = false
 print(has_key and has_pass)
 print(has_key or has_pass)
-print(not has_pass)</code></pre>
+print(not has_pass)</code></pre></div>
 <details><summary>Check the prediction</summary><p>The results are <code>false</code>, <code>true</code>, and <code>true</code> in that order.</p></details>
 <h2>Guided task · Allow either item</h2>
 <p>Change the operator so a player who has just the pass can enter. The program should print <code>true</code>.</p>
@@ -60,6 +60,6 @@ var paused = false
 <p>Why does <code>(has_key or has_pass) and not paused</code> put the item checks inside parentheses?</p>
 <p><a href="count-controlled-loops.html">Next lesson · Count-controlled loops</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

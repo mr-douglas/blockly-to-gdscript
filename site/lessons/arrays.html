@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 11 · Arrays and inventories</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 11 · Arrays and inventories</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -13,8 +13,8 @@
 <h2>Read the same program in two forms</h2>
 <div class="comparison">
 <figure class="panel"><h3>Blockly</h3><img src="../assets/lists.png" alt="Blockly stores coin, key, and potion in inventory, then prints inventory."></figure>
-<section class="panel"><h3>GDScript</h3><pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;, &quot;potion&quot;]
-print(inventory)</code></pre></section>
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;, &quot;potion&quot;]
+print(inventory)</code></pre></div></section>
 </div>
 <ul>
 <li><strong>Computer science.</strong> An array stores several values in order. An index tells you an item’s position.</li>
@@ -23,9 +23,9 @@ print(inventory)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>Which item moves to index 0 after the removal?</p>
-<pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;]
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var inventory = [&quot;coin&quot;, &quot;key&quot;]
 inventory.remove_at(0)
-print(inventory[0])</code></pre>
+print(inventory[0])</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints <code>key</code>. After the coin is removed, the key moves to index 0.</p></details>
 <h2>Guided task · Pick up a map</h2>
 <p>Add <code>map</code> to inventory and print whether it is present.</p>
@@ -55,6 +55,6 @@ print(inventory[3])</code></pre>
 <p>What changes about the indexes after you remove the first item?</p>
 <p><a href="iterate-arrays.html">Next lesson · Iterating through arrays</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>

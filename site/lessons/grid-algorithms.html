@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 28 · Grid-based algorithms</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<title>Lesson 28 · Grid-based algorithms</title><link rel="stylesheet" href="../assets/course.css?v=editable-1"></head>
 <body>
 <header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
 <main class="wrap">
@@ -11,13 +11,13 @@
 <h1>Grid-based algorithms</h1>
 <p><strong>Learning objective.</strong> Index cells in a nested array and visit every cell in a grid.</p>
 <h2>Read the example</h2>
-<section class="panel"><h3>GDScript</h3><pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+<section class="panel"><h3>GDScript</h3><div data-practice="snippet" data-reference data-editor-label="Example 1 code"><pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
 var walls = 0
 for row in grid:
     for tile in row:
         if tile == 1:
             walls += 1
-print(walls)</code></pre></section>
+print(walls)</code></pre></div></section>
 <ul>
 <li><strong>Computer science.</strong> A grid stores rows of cells. Use a row and a column to find a cell. The outer loop visits rows, and the inner loop visits cells in each row.</li>
 <li><strong>GDScript.</strong> Use <code>grid[row][column]</code>. Both indexes start at zero. In this model 0 means floor and 1 means wall.</li>
@@ -25,8 +25,8 @@ print(walls)</code></pre></section>
 </ul>
 <h2>Predict the output</h2>
 <p>What is at row 1, column 2? Remember to start counting at zero.</p>
-<pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
-print(grid[1][2])</code></pre>
+<div data-practice="snippet" data-reference data-editor-label="Example 2 code"><pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+print(grid[1][2])</code></pre></div>
 <details><summary>Check the prediction</summary><p>It prints 0. The second row is [1, 1, 0].</p></details>
 <h2>Guided task · Read a wall cell</h2>
 <p>Change the lookup to read row 0, column 1. It should print 1.</p>
@@ -60,6 +60,6 @@ print(walls)</code></pre>
 <p>How can you tell which index is a row and which is a column from the order of the brackets?</p>
 <p><a href="high-scores.html">Next lesson · Searching, sorting and high scores</a></p>
 </main>
-<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+<script type="module" src="../assets/practice.js?v=editable-1"></script>
 </body>
 </html>
