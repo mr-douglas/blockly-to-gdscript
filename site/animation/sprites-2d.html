@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Import and play a 2D sprite sheet | Import Art and Animations</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Animation course</a> · Lesson 1</p>
+<h1>Import and play a 2D sprite sheet</h1>
+<p><strong>Objective.</strong> Import a PNG strip, slice it into equal frames, and switch an AnimatedSprite2D between idle and run.</p>
+<h2>Turn each PNG strip into a SpriteFrames animation</h2>
+<p>Download the two Ninja Frog strips below and put them in your Godot project folder. Add an <code>AnimatedSprite2D</code> and create a <code>SpriteFrames</code> resource. In the SpriteFrames panel, add <code>idle</code> and <code>run</code>. For each animation choose <strong>Add frames from a sprite sheet</strong>, select its PNG and use one row with 11 columns for idle or 12 for run. Select the frames in order. Set looping on and set 10 FPS for idle and 14 FPS for run. For crisp pixel art set the sprite’s texture filter to Nearest. The browser starter slices the same sheets in GDScript with <code>AtlasTexture.region</code>.</p>
+<pre><code>var direction := Input.get_axis(&quot;left&quot;, &quot;right&quot;)
+if direction != 0.0:
+    frog.flip_h = direction &lt; 0.0
+play_clip(&amp;&quot;run&quot; if direction != 0.0 else &amp;&quot;idle&quot;)</code></pre>
+<p><a href="assets/frog-idle.png" download>Download idle strip</a> · <a href="assets/frog-run.png" download>Download run strip</a></p>
+<p>Ninja Frog from Pixel Adventure 1 by Pixel Frog is licensed CC0. <a href="https://pixelfrog-assets.itch.io/pixel-adventure-1">Original pack and license</a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable animation" src="../play/?demo=animation&amp;lesson=sprites-2d&amp;embed=1"></iframe>
+<p><a href="../play/?demo=animation&amp;lesson=sprites-2d">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Press Left, then Right, then release both. Predict the animation and which way the frog will face.</li>
+<li>Change RUN_FPS from 14 to 6. Compare how fast the feet move and how far the frog travels in one second.</li>
+<li>Temporarily turn off looping in add_strip(). Check what happens when you hold Right. Restore looping.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The frog runs while moving and returns to idle when the key is released. Left flips the art. FPS changes the animation pace; MOVE_SPEED controls travel distance. The current play_clip helper restarts a finished clip when input still asks for it.</p></details>
+<p><strong>Success criteria.</strong> Both PNG strips are sliced into 32×32 frames. The correct clip plays for each input and the picture stays sharp when enlarged.</p>
+<p><strong>Apply it to your project.</strong> Build the same SpriteFrames resource in Godot. Attach code that uses the player’s input or velocity to select the clip, then try the sprite in a 2D scene.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

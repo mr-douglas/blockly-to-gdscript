@@ -1,0 +1,6 @@
+frog-idle.png and frog-run.png
+Ninja Frog from Pixel Adventure 1 by Pixel Frog, CC0 1.0.
+Author's pack: https://pixelfrog-assets.itch.io/pixel-adventure-1
+Source ZIP: https://opengameart.org/content/pixel-adventure-1
+License: https://creativecommons.org/publicdomain/zero/1.0/
+The original PNG sheets were renamed for this course.

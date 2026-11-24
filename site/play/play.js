@@ -184,10 +184,20 @@ const racingLessons = {
     "file": "racing_laps.gd"
   },
 };
+const artLessons = {
+  "sprites-2d": {
+    "title": "Animation lesson 1 · Import and play a 2D sprite sheet",
+    "goal": "Watch the Ninja Frog switch from idle to run and face the direction of travel.",
+    "controls": "Left and Right to run. Release to idle. R to restart.",
+    "task": "Change RUN_FPS, then compare animation speed and travel speed.",
+    "file": "art_sprite_2d.gd"
+  },
+};
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},
   "movement-3d": {path: "platformer-3d", lessons: platformer3DLessons},
   racing: {path: "racing", lessons: racingLessons},
+  animation: {path: "animation", lessons: artLessons},
 };
 const course = Object.hasOwn(lessonCourses, requested) ? lessonCourses[requested] : null;
 const lesson = course && Object.hasOwn(course.lessons, params.get("lesson"))
