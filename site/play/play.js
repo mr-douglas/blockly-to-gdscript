@@ -146,6 +146,13 @@ const platformer3DLessons = {
     "task": "Try JUMP_SPEED at 3 and 5.9 and compare the result at the same obstacle.",
     "file": "platform3d_jump.gd"
   },
+  "cameras-3d": {
+    "title": "Platformer lesson 4 · Switch between first and third person",
+    "goal": "Press C to switch views, then jump and turn in both.",
+    "controls": "Left and Right to turn, Up and Down to move, Space to jump, C to switch camera, R to restart.",
+    "task": "Make the scene start in first person, then use C to switch back.",
+    "file": "platform3d_cameras.gd"
+  },
 };
 const course = requested === "movement-3d" ? "platformer-3d" : "platformer";
 const lessons = requested === "movement-3d" ? platformer3DLessons : platformerLessons;
