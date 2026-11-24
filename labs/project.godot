@@ -1,0 +1,15 @@
+config_version=5
+
+[application]
+config/name="GDScript playgrounds"
+run/main_scene="res://playground.tscn"
+
+[display]
+window/size/viewport_width=768
+window/size/viewport_height=432
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+environment/defaults/default_clear_color=Color(0.055, 0.09, 0.15, 1)

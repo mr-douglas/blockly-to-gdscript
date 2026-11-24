@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Movement and physics playgrounds | Blockly to GDScript</title>
+<link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="play.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a></p>
+<h1>Movement and physics playgrounds</h1>
+<nav aria-label="Choose a playground">
+  <a href="?demo=top-down">Top-down explorer</a>
+  <a href="?demo=platformer">2D platformer</a>
+  <a href="?demo=movement-3d">3D movement</a>
+  <a href="?demo=physics-3d">3D physics</a>
+</nav>
+<section aria-labelledby="demo-title">
+<h2 id="demo-title"></h2>
+<p id="goal"></p>
+<p id="controls"></p>
+<div class="play-stage">
+  <canvas id="game" tabindex="0" aria-labelledby="demo-title" aria-describedby="controls" hidden></canvas>
+  <button id="start" type="button">Play in browser</button>
+</div>
+<p id="load-status" role="status"></p>
+</section>
+<section aria-labelledby="code-title">
+<h2 id="code-title">Read and change the GDScript</h2>
+<p id="task"></p>
+<pre><code id="snippet"></code></pre>
+<details><summary>Show the full script</summary><pre><code id="source"></code></pre></details>
+<p><a href="playgrounds-godot.zip" download>Download the Godot project</a>. Extract it, import <code>project.godot</code> in Godot 4, and press <kbd>F6</kbd> from the playground scene or <kbd>F5</kbd> from any tab. In the project, keys <kbd>1</kbd>–<kbd>4</kbd> switch between the demos in the order shown above.</p>
+</section>
+</main>
+<script src="godot.js"></script>
+<script type="module" src="play.js"></script>
+</body>
+</html>

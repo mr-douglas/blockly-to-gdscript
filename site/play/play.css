@@ -1,0 +1,27 @@
+nav[aria-label="Choose a playground"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+nav[aria-label="Choose a playground"] a, #start {
+  border: 1px solid #a9bbd1;
+  border-radius: .5rem;
+  padding: .55rem .85rem;
+  background: #fff;
+  font: inherit;
+}
+nav a[aria-current="page"], #start { background: #194da2; color: #fff; border-color: #194da2; }
+#start { cursor: pointer; }
+#start:disabled { cursor: wait; }
+.play-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 54rem);
+  aspect-ratio: 16 / 9;
+  background: #142842;
+  border-radius: .75rem;
+}
+.play-stage canvas { width: 100%; height: 100%; border-radius: inherit; }
+.play-stage canvas:focus-visible { outline: 3px solid #537cf6; outline-offset: 3px; }
+.play-stage [hidden] { display: none; }

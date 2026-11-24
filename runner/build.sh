@@ -28,3 +28,26 @@ unzip -p "$web_template" godot.wasm > "$output/engine.wasm"
 XDG_CACHE_HOME="$scratch/cache" XDG_CONFIG_HOME="$scratch/config" XDG_DATA_HOME="$scratch/data" \
   "$scratch/godot.linuxbsd.editor.x86_64" --headless --path "$project" \
   --export-pack Web "$output/engine.pck"
+
+labs="$project/../labs"
+play="$project/../site/play"
+template_cache="$project/../.cache/godot"
+play_template="$template_cache/web-4.6.3.zip"
+if [[ ! -f "$play_template" ]]; then
+  mkdir -p "$template_cache"
+  curl --fail --silent --show-error --location --retry 3 \
+    "https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz" \
+    -o "$scratch/official.tpz"
+  unzip -p "$scratch/official.tpz" templates/web_nothreads_release.zip > "$play_template"
+fi
+printf '%s  %s\n' '1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9' "$play_template" | sha256sum --check
+unzip -qjo "$play_template" godot.js godot.wasm godot.audio.worklet.js godot.audio.position.worklet.js -d "$play"
+XDG_CACHE_HOME="$scratch/cache" XDG_CONFIG_HOME="$scratch/config" XDG_DATA_HOME="$scratch/data" \
+  "$scratch/godot.linuxbsd.editor.x86_64" --headless --path "$labs" \
+  --export-pack Web "$play/playgrounds.pck"
+mkdir -p "$play/source"
+cp "$labs/"*.gd "$play/source/"
+(
+  cd "$labs"
+  zip -q "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd
+)

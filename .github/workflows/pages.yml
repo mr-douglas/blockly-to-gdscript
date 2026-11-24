@@ -16,7 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - name: Build browser GDScript runner
+      - uses: actions/cache@v4
+        with:
+          path: .cache/godot/web-4.6.3.zip
+          key: godot-web-nothreads-release-4.6.3
+      - name: Build browser GDScript runner and playgrounds
         run: bash runner/build.sh
       - uses: actions/upload-pages-artifact@v3
         with:
