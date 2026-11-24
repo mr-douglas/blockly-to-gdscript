@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 28 · Grid-based algorithms</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="testing-game-systems.html">Lesson 27</a> · Lesson 28</p>
+<h1>Grid-based algorithms</h1>
+<p><strong>Learning objective.</strong> Index cells in a nested array and visit every cell in a grid.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+var walls = 0
+for row in grid:
+    for tile in row:
+        if tile == 1:
+            walls += 1
+print(walls)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A grid stores rows of cells. Use a row and a column to find a cell. The outer loop visits rows, and the inner loop visits cells in each row.</li>
+<li><strong>GDScript.</strong> Use <code>grid[row][column]</code>. Both indexes start at zero. In this model 0 means floor and 1 means wall.</li>
+<li><strong>Godot.</strong> Test a maze as data before deciding how to draw its tiles.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>What is at row 1, column 2? Remember to start counting at zero.</p>
+<pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+print(grid[1][2])</code></pre>
+<details><summary>Check the prediction</summary><p>It prints 0. The second row is [1, 1, 0].</p></details>
+<h2>Guided task · Read a wall cell</h2>
+<p>Change the lookup to read row 0, column 1. It should print 1.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="1">
+<pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+print(grid[0][0])</code></pre>
+</section>
+<h2>Debugging task · Fix swapped coordinates</h2>
+<p>The goal is row 0, column 2. Run the swapped lookup and fix the index order.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="0">
+<pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+print(grid[2][0])</code></pre>
+</section>
+<h2>Independent task · Count floor cells</h2>
+<p>Adapt the nested loop to count zeros. Try the starter grid and a grid made entirely of walls.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var grid = [[0, 1, 0], [1, 1, 0]]
+var walls = 0
+for row in grid:
+    for tile in row:
+        if tile == 1:
+            walls += 1
+print(walls)</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The starter grid has 3 floor cells, and the all-wall grid has 0.</p>
+<h2>Apply it to your project</h2>
+<p>Sketch two rows of a level and write them as a nested GDScript array. Use nested loops to count a tile type before placing tiles in Godot. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change the test to count treasure tiles represented by 2.</p>
+<h2>Reflection</h2>
+<p>How can you tell which index is a row and which is a column from the order of the brackets?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
