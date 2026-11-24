@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 · Data types</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="variables.html">Lesson 2</a> · Lesson 3</p>
+<h1>Data types</h1>
+<p><strong>Learning objective.</strong> Choose integers, floats, strings and booleans for game values.</p>
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/data-types.png" alt="Four Blockly print blocks contain the number 3, the number 1.5, the text Ready, and the boolean true."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>print(3)
+print(1.5)
+print(&quot;Ready&quot;)
+print(true)</code></pre></section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> A type tells you what kind of value you are using. Integers are whole numbers, floats can have a decimal part, strings are text, and booleans are true or false.</li>
+<li><strong>GDScript.</strong> Use <code>3</code> for an integer, <code>1.5</code> for a float, <code>"Ready"</code> for a string, and <code>true</code> or <code>false</code> for a boolean. Write <code>var lives: int = 3</code> to say that lives must hold an integer.</li>
+<li><strong>Godot.</strong> An integer suits a count of lives, a float suits a speed, a string suits a label, and a boolean suits whether a door is open.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Which line does addition, and which joins text? Predict both outputs.</p>
+<pre><code>print(2 + 3)
+print(&quot;2&quot; + &quot;3&quot;)</code></pre>
+<details><summary>Check the prediction</summary><p>The first prints <code>5</code>. The second prints <code>23</code> because <code>+</code> joins the two strings.</p></details>
+<h2>Guided task · Set up a player</h2>
+<p>Set lives to 4 and speed to 2.5. Keep their types and print them in the order shown.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="4&#10;2.5">
+<pre><code>var lives: int = 1
+var speed: float = 1.0
+print(lives)
+print(speed)</code></pre>
+</section>
+<h2>Debugging task · Repair the door state</h2>
+<p>Run the code. Change the value on line 1 to a boolean so the program prints <code>true</code>.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="true">
+<pre><code>var door_open: bool = &quot;true&quot;
+print(door_open)</code></pre>
+</section>
+<details><summary>Show a hint</summary><p>Quotes make <code>"true"</code> a string. The boolean is <code>true</code> without quotes.</p></details>
+<h2>Independent task · Write a player profile</h2>
+<p>Create values for a player name, lives, speed and whether they have a shield. Give each variable a type and print all four. Then change the shield value and run again.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code># Create and print four typed variables.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Your program runs and prints a name, a whole number, a decimal speed and a true-or-false value. Only the last line changes after you switch the shield.</p>
+<h2>Apply it to your project</h2>
+<p>Find one value from your game, such as the number of keys. In a scene’s <code>_ready()</code>, give it a type and a starting value. Print it and check that the result makes sense for the game. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>In your browser program, try assigning a name in quotes to the lives variable. Read the error and restore an integer.</p>
+<h2>Reflection</h2>
+<p>Why might <code>3</code> and <code>"3"</code> look the same in Output but behave differently in an expression?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
