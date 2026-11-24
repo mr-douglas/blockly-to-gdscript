@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 16 · Scope and constants</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="parameters.html">Lesson 15</a> · Lesson 16</p>
+<h1>Scope and constants</h1>
+<p><strong>Learning objective.</strong> Distinguish local variables, member variables and constants.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+const POINTS_PER_COIN = 5
+var score = 0
+
+func collect_coin():
+    var bonus = 2
+    score += POINTS_PER_COIN + bonus
+
+func _ready():
+    collect_coin()
+    collect_coin()
+    print(score)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> Scope means where a name can be used. A constant names a value that stays fixed.</li>
+<li><strong>GDScript.</strong> A <code>var</code> inside a function is local to that function or block. A <code>var</code> outside the functions belongs to the node. Set a fixed rule with <code>const</code>.</li>
+<li><strong>Godot.</strong> A player node can keep score between function calls. A bonus calculated inside one call can stay local.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>After one call, what can _ready() read, and what will it print?</p>
+<pre><code>extends Node
+
+const POINTS_PER_COIN = 5
+var score = 0
+
+func collect_coin():
+    var bonus = 2
+    score += POINTS_PER_COIN + bonus
+
+func _ready():
+    collect_coin()
+    print(score)</code></pre>
+<details><summary>Check the prediction</summary><p>It reads the member variable score and prints 7. The local bonus stays inside collect_coin().</p></details>
+<h2>Guided task · Change the rule in one place</h2>
+<p>Set the constant to 3. Two coins with a bonus of 2 each should give 10.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="10">
+<pre><code>extends Node
+
+const POINTS_PER_COIN = 5
+var score = 0
+
+func collect_coin():
+    var bonus = 2
+    score += POINTS_PER_COIN + bonus
+
+func _ready():
+    collect_coin()
+    collect_coin()
+    print(score)</code></pre>
+</section>
+<h2>Debugging task · Read a value in scope</h2>
+<p>Run the script, then change the last line so it prints the updated score.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="7">
+<pre><code>extends Node
+
+const POINTS_PER_COIN = 5
+var score = 0
+
+func collect_coin():
+    var bonus = 2
+    score += POINTS_PER_COIN + bonus
+
+func _ready():
+    collect_coin()
+    print(bonus)</code></pre>
+</section>
+<h2>Independent task · Track damage across calls</h2>
+<p>Write a member variable health starting at 10 and a constant damage of 3. Call a damage function twice and print health after each call.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    pass</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The output is 7 then 4. Both calls update one shared member variable.</p>
+<h2>Apply it to your project</h2>
+<p>Choose a rule in your own game that should stay fixed during play, such as points per coin. Give it a constant name and replace its repeated uses. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change the damage constant and predict the two new health values before running.</p>
+<h2>Reflection</h2>
+<p>What would happen to repeated hits if health were created inside hit() every time?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
