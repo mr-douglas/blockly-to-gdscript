@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 29 · Searching, sorting and high scores</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="grid-algorithms.html">Lesson 28</a> · Lesson 29</p>
+<h1>Searching, sorting and high scores</h1>
+<p><strong>Learning objective.</strong> Use linear search and sort scores into leaderboard order.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+func find_score(scores: Array, target: int) -&gt; int:
+    for index in range(scores.size()):
+        if scores[index] == target:
+            return index
+    return -1
+
+func _ready():
+    print(find_score([12, 7, 12], 12))
+    print(find_score([12, 7, 12], 2))</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> Linear search checks entries in order, one at a time. Sorting puts all entries into a chosen order.</li>
+<li><strong>GDScript.</strong> Return the index as soon as the target matches. Use -1 to signal a missing score. <code>sort()</code> orders an array from low to high; <code>reverse()</code> reverses that order.</li>
+<li><strong>Godot.</strong> Search for a score or rank, and sort a score list before displaying it.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>There are two scores of 12. Which index will the function return?</p>
+<pre><code>extends Node
+
+func find_score(scores: Array, target: int) -&gt; int:
+    for index in range(scores.size()):
+        if scores[index] == target:
+            return index
+    return -1
+
+func _ready():
+    print(find_score([7, 12, 12], 12))</code></pre>
+<details><summary>Check the prediction</summary><p>It prints 1, the index of the first match.</p></details>
+<h2>Guided task · Find the target</h2>
+<p>Change the target so the call finds the score at index 1.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="1">
+<pre><code>extends Node
+
+func find_score(scores: Array, target: int) -&gt; int:
+    for index in range(scores.size()):
+        if scores[index] == target:
+            return index
+    return -1
+
+func _ready():
+    print(find_score([12, 7, 12], 12))</code></pre>
+</section>
+<h2>Debugging task · Check more than the first entry</h2>
+<p>The missing result is returned too soon. Remove the return inside the loop. Keep the final return for a missing score.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="1">
+<pre><code>extends Node
+
+func find_score(scores: Array, target: int) -&gt; int:
+    for index in range(scores.size()):
+        if scores[index] == target:
+            return index
+        return -1
+    return -1
+
+func _ready():
+    print(find_score([12, 7, 12], 7))</code></pre>
+</section>
+<h2>Independent task · Put the highest scores first</h2>
+<p>Sort the array from highest to lowest. Keep tied scores. Test the starter list and an empty list.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    var scores = [4, 10, 4, 7]
+    print(scores)</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The first array becomes [10, 7, 4, 4]. The empty array stays empty.</p>
+<h2>Apply it to your project</h2>
+<p>Prototype a high score list in GDScript. Decide how ties should appear and test one game with a tie and one with no scores. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Loop over up to the first three entries after sorting. Use <code>min(3, scores.size())</code> to keep the index valid.</p>
+<h2>Reflection</h2>
+<p>Why should a linear search wait until the loop ends before returning -1?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
