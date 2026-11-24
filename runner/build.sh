@@ -42,12 +42,21 @@ if [[ ! -f "$play_template" ]]; then
 fi
 printf '%s  %s\n' '1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9' "$play_template" | sha256sum --check
 unzip -qjo "$play_template" godot.js godot.wasm godot.audio.worklet.js godot.audio.position.worklet.js -d "$play"
+# Use the standard editor for the playgrounds' glTF importer.
+editor_name=Godot_v4.6.3-stable_linux.x86_64
+curl --fail --silent --show-error --location --retry 3 \
+  "https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/$editor_name.zip" \
+  -o "$scratch/$editor_name.zip"
+printf '%s  %s\n' 'd0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3' "$scratch/$editor_name.zip" | sha256sum --check
+unzip -qjo "$scratch/$editor_name.zip" "$editor_name" -d "$scratch"
 XDG_CACHE_HOME="$scratch/cache" XDG_CONFIG_HOME="$scratch/config" XDG_DATA_HOME="$scratch/data" \
-  "$scratch/godot.linuxbsd.editor.x86_64" --headless --path "$labs" \
+  "$scratch/$editor_name" --headless --path "$labs" \
   --export-pack Web "$play/playgrounds.pck"
 mkdir -p "$play/source"
 cp "$labs/"*.gd "$play/source/"
+mkdir -p "$project/../site/animation/assets"
+find "$labs/art" -maxdepth 1 -type f ! -name '*.import' -exec cp {} "$project/../site/animation/assets/" \;
 (
   cd "$labs"
-  zip -q "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd
+  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art -x "art/*.import"
 )

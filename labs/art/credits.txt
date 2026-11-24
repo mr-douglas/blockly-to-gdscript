@@ -4,3 +4,10 @@ Author's pack: https://pixelfrog-assets.itch.io/pixel-adventure-1
 Source ZIP: https://opengameart.org/content/pixel-adventure-1
 License: https://creativecommons.org/publicdomain/zero/1.0/
 The original PNG sheets were renamed for this course.
+
+knight.glb
+KnightCharacter from Animated Knight Pack by Quaternius, CC0 1.0.
+Author's pack and license: https://quaternius.com/packs/knightcharacter.html
+GLB distribution: https://github.com/trebeljahr/quaternius-showcase/tree/main/public/glb/single_knight_pack
+License: https://creativecommons.org/publicdomain/zero/1.0/
+The GLB was renamed for this course.

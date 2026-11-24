@@ -192,6 +192,13 @@ const artLessons = {
     "task": "Change RUN_FPS, then compare animation speed and travel speed.",
     "file": "art_sprite_2d.gd"
   },
+  "characters-3d": {
+    "title": "Animation lesson 2 · Import and animate a 3D character",
+    "goal": "Make the knight walk and return to idle. Watch the pose blend when you release a key.",
+    "controls": "Left and Right to walk. Release to idle. R to restart.",
+    "task": "Change the playback rate, then swap the Walking clip for Run.",
+    "file": "art_character_3d.gd"
+  },
 };
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},

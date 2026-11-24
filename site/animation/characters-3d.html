@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Import and animate a 3D character | Import Art and Animations</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Animation course</a> · <a href="sprites-2d.html">Previous lesson</a> · Lesson 2</p>
+<h1>Import and animate a 3D character</h1>
+<p><strong>Objective.</strong> Import a rigged GLB scene and switch named clips using its AnimationPlayer.</p>
+<h2>Import the model and inspect its clips</h2>
+<p>Copy the knight GLB into your Godot project. Double-click it in the FileSystem to open Advanced Import Settings. Preview the idle and walking animations and check their names. Drag the GLB into your own Node3D scene to create an instance. Expand it with Editable Children if you need to inspect the hierarchy. In this file the imported root contains <code>AnimationPlayer</code>, and deeper inside is <code>Skeleton3D</code>. The mesh is attached to that skeleton. The clips move its bones rather than replacing the image frame.</p>
+<pre><code>var direction := Input.get_axis(&quot;left&quot;, &quot;right&quot;)
+play_clip(WALK if direction != 0 else IDLE)
+
+func play_clip(wanted: StringName) -&gt; void:
+    if animator.current_animation != wanted:
+        animator.play(wanted, 0.18, PLAYBACK_RATE)</code></pre>
+<p><a href="assets/knight.glb" download>Download the animated knight GLB</a></p>
+<p>Animated Knight Pack by Quaternius, CC0. <a href="https://quaternius.com/packs/knightcharacter.html">Original pack and license</a> · <a href="assets/credits.txt">Asset credits</a></p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable animation" src="../play/?demo=animation&amp;lesson=characters-3d&amp;embed=1"></iframe>
+<p><a href="../play/?demo=animation&amp;lesson=characters-3d">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Run the starter, press Right, then release it. Predict which clip will play at each stage.</li>
+<li>Change PLAYBACK_RATE to 0.5. Compare how fast the legs move with how far the character travels.</li>
+<li>Change WALK to HumanArmature|Run. Use the exact spelling shown in the imported clip list. Run the edit and compare the gait.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The knight starts in Idle, plays Walking while you hold a direction, and returns to Idle when you release it. Playback rate changes clip speed. MOVE_SPEED controls travel. The second argument to play() blends the outgoing and incoming clips for 0.18 seconds.</p></details>
+<p><strong>Success criteria.</strong> Godot imports the rig and clips. The scripted transition plays the correct clip, and you can change the clip or its rate without changing travel speed.</p>
+<p><strong>Apply it to your project.</strong> Instance the GLB in your own scene. Use get_animation_list() to check the names, enable looping on your locomotion clips in the import settings or through code, and call play() from a script on the parent scene. Test idle, movement and stopping.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

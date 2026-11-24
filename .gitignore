@@ -11,3 +11,5 @@
 /site/play/godot.wasm
 /site/play/godot.audio.worklet.js
 /site/play/godot.audio.position.worklet.js
+
+/site/animation/assets/
