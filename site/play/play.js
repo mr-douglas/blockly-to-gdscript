@@ -74,6 +74,13 @@ const platformerLessons = {
     "task": "Try an elevated spawn to see the effect of preserving or resetting velocity.",
     "file": "platformer_respawn.gd"
   },
+  "goal": {
+    "title": "Platformer lesson 6 · Finish the level with a signal",
+    "goal": "Jump the gap and trigger the green finish marker.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Disconnect and reconnect the goal signal, then test the difference by reaching the finish.",
+    "file": "platformer_goal.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;

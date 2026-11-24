@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6. Finish the level with a signal | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="respawn.html">Previous lesson</a> · Lesson 6</p>
+<h1>Finish the level with a signal</h1>
+<p><strong>Objective.</strong> Use an Area2D signal to mark the level complete when the player reaches its goal.</p>
+<h2>Detect overlap at the finish</h2>
+<p>An <code>Area2D</code> with a <code>CollisionShape2D</code> can detect a body that enters its space. It does not act as a solid wall. Connect <code>body_entered</code> to a function. That function receives the body that entered and can check whether it is the player.</p>
+<pre><code>goal.body_entered.connect(_on_goal_entered)
+
+func _on_goal_entered(body: Node2D) -&gt; void:
+    if body != player or completed:
+        return
+    completed = true
+    status.text = &quot;Level complete! Press R to play again.&quot;</code></pre>
+<p><a href="../play/?demo=platformer&amp;lesson=goal"><strong>Open the editable goal starter</strong></a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Jump the gap and walk through the green goal. Predict whether it will stop the player or change the message.</li>
+<li>Comment out the <code>connect()</code> line and reach the marker again. Reconnect the signal and retest.</li>
+<li>Move the goal left and change its completion message. Test a fall, a successful run, and a restart. Check that only a successful run shows your message.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The area lets the player through and sends a notification. The connected function updates the message once. Without the connection, entering the area never calls your function.</p></details>
+<p><strong>Success criteria.</strong> Falling respawns the player. Reaching the goal after a successful jump shows the completion message. Pressing R starts a fresh run.</p>
+<p><strong>Apply it to your project.</strong> Add an Area2D with a rectangle collision shape to your own level. Connect its <code>body_entered</code> signal. Keep the player check and test the whole level from spawn to finish.</p>
+</main>
+</body>
+</html>
