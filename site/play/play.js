@@ -88,6 +88,13 @@ const platformerLessons = {
     "task": "Set COIN_VALUE to 5 and add a fourth position to the coin list.",
     "file": "platformer_coins.gd"
   },
+  "hazards": {
+    "title": "Platformer lesson 8 · Add hazards that reset the player",
+    "goal": "Jump the gap, then jump over the red strip on the far side.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Add a second hazard and predict whether your return path is still playable.",
+    "file": "platformer_hazards.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;

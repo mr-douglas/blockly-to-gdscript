@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8. Add hazards that reset the player | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="coins.html">Previous lesson</a> · Lesson 8</p>
+<h1>Add hazards that reset the player</h1>
+<p><strong>Objective.</strong> Use an overlap signal to trigger a respawn while keeping the score.</p>
+<h2>Reuse the respawn function</h2>
+<p>The red strip is an <code>Area2D</code>. The player can enter it, and the signal calls the same <code>respawn()</code> used for falls. <code>call_deferred()</code> waits until the collision query has finished before moving the player.</p>
+<pre><code>func on_hazard(body: Node2D) -&gt; void:
+    if body == player and not completed:
+        respawn.call_deferred()</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=hazards&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=hazards">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Cross the gap and walk into the red strip. Predict what happens to the coins you collected.</li>
+<li>Add a second hazard by calling <code>add_hazard()</code> again. Place it before the gap and check that you can still jump over it.</li>
+<li>Comment out <code>respawn.call_deferred()</code> and replace it with <code>pass</code>. Test the same strip, then restore the original line.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The player returns to the start and keeps the coins. The respawn changes position and velocity, and the score is stored separately.</p></details>
+<p><strong>Success criteria.</strong> Touching either hazard respawns the player. A successful jump clears it, and the coin total stays the same after a hit.</p>
+<p><strong>Apply it to your project.</strong> Add a hazard Area2D with a collision shape to your own scene. Connect its signal to your existing respawn handler and test the level with it in two places.</p>
+</main>
+<script type="module" src="lesson-editor.js"></script>
+</body>
+</html>
