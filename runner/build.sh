@@ -55,16 +55,24 @@ labs_godot() {
     "$scratch/$editor_name" --headless --path "$labs" "$@"
 }
 
-# The racing lessons use CC0 models from Kenney's Racing Kit.
+# Download the CC0 art that is not stored in the repository: Kenney's Racing
+# Kit for the racing lessons and Pixel Adventure 1 for the 2D platformers.
 bash "$labs/art/racing/fetch.sh"
+bash "$labs/art/pixel/fetch.sh"
 labs_godot --import
-# Smoke-test the racing lessons before packaging them.
-labs_godot --script res://ci/smoke_racing.gd 2>&1 | tee "$scratch/smoke.log"
-if grep -qE 'SCRIPT ERROR|Parse Error|SMOKE FAIL' "$scratch/smoke.log" \
-  || ! grep -q 'SMOKE PASSED' "$scratch/smoke.log"; then
-  echo "The racing smoke test failed." >&2
-  exit 1
-fi
+
+# Smoke-test the lessons before packaging them.
+smoke() {
+  local script=$1 passed=$2
+  labs_godot --script "$script" 2>&1 | tee "$scratch/smoke.log"
+  if grep -qE 'SCRIPT ERROR|Parse Error|SMOKE FAIL|TOUR FAIL' "$scratch/smoke.log" \
+    || ! grep -q "$passed" "$scratch/smoke.log"; then
+    echo "The smoke test $script failed." >&2
+    exit 1
+  fi
+}
+smoke res://ci/smoke_racing.gd 'SMOKE PASSED'
+smoke res://ci/tour.gd 'TOUR PASSED'
 
 labs_godot --export-pack Web "$play/playgrounds.pck"
 mkdir -p "$play/source"
@@ -73,5 +81,6 @@ mkdir -p "$project/../site/animation/assets"
 find "$labs/art" -maxdepth 1 -type f ! -name '*.import' -exec cp {} "$project/../site/animation/assets/" \;
 (
   cd "$labs"
-  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art -x "art/*.import" "art/racing/*.import"
+  zip -qr "$play/playgrounds-godot.zip" project.godot playground.tscn ./*.gd art \
+    -x "art/*.import" "art/racing/*.import" "art/pixel/*.import"
 )

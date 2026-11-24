@@ -7,8 +7,8 @@ func _ready() -> void:
 	respawn()
 
 func build_level() -> void:
-	wall(Vector2(130, 371), Vector2(260, 40), Color("#538097"))
-	wall(Vector2(559, 371), Vector2(418, 40), Color("#79b2ab"))
+	block(Vector2(130, 371), Vector2(260, 40))
+	block(Vector2(559, 371), Vector2(418, 40))
 
 func respawn() -> void:
 	player.position = START

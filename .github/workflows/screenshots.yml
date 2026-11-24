@@ -1,0 +1,69 @@
+name: Screenshots
+# Renders every playground and lesson in a virtual display and pushes the PNGs
+# to the ci-screenshots branch, so art changes can be checked before merging.
+on:
+  pull_request:
+    paths: ["labs/**", ".github/workflows/screenshots.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: screenshots
+  cancel-in-progress: true
+jobs:
+  render:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install a virtual display and software OpenGL
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq xvfb libgl1-mesa-dri libglx-mesa0 libxcursor1 libxinerama1 libxrandr2 libxi6 libxkbcommon0 imagemagick
+      - name: Download Godot 4.6.3
+        run: |
+          editor=Godot_v4.6.3-stable_linux.x86_64
+          curl --fail --silent --show-error --location --retry 3 \
+            "https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/$editor.zip" -o "$RUNNER_TEMP/godot.zip"
+          echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/godot.zip" | sha256sum --check
+          unzip -qjo "$RUNNER_TEMP/godot.zip" "$editor" -d "$RUNNER_TEMP"
+          mv "$RUNNER_TEMP/$editor" "$RUNNER_TEMP/godot"
+      - name: Fetch art
+        run: |
+          for fetch in labs/art/*/fetch.sh; do bash "$fetch"; done
+      - name: Import and render
+        run: |
+          "$RUNNER_TEMP/godot" --headless --path labs --import
+          xvfb-run -a -s "-screen 0 1280x720x24" "$RUNNER_TEMP/godot" --path labs \
+            --rendering-driver opengl3 --audio-driver Dummy --resolution 768x432 \
+            --script res://ci/tour.gd -- --shots="$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/tour.log"
+          grep -q 'TOUR PASSED' "$RUNNER_TEMP/tour.log"
+      - name: Make contact sheets
+        if: always()
+        run: |
+          cd "$RUNNER_TEMP/shots" || exit 0
+          sheet() {
+            local out=$1; shift
+            local files=()
+            for f in "$@"; do [[ -f "$f" ]] && files+=("$f"); done
+            (( ${#files[@]} )) && montage "${files[@]}" -tile 3x -geometry +4+4 -background '#222' "sheets/$out.png"
+          }
+          mkdir -p sheets
+          sheet platformer-basics platformer_move-[12].png platformer_collision-[12].png platformer_gravity-[12].png \
+            platformer_jump-[12].png platformer_respawn-[12].png platformer_goal-[12].png
+          sheet platformer-items platformer_coins-*.png platformer_hazards-*.png platformer_checkpoint-*.png
+          sheet platformer-enemies platformer_patrol-*.png platformer_moving-*.png platformer_coin_gate-*.png platformer-*.png
+          sheet playgrounds-3d movement_3d-*.png landing_pad_follow-*.png physics_3d-*.png top_down-*.png art_sprite_2d-*.png art_character_3d-*.png
+          sheet platformer-3d platform3d_*.png
+      - name: Publish to the ci-screenshots branch
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/shots"
+          cp "$RUNNER_TEMP/tour.log" "$RUNNER_TEMP/shots/" || true
+          cd "$RUNNER_TEMP/shots"
+          git init -q -b ci-screenshots
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "Screenshots for ${GITHUB_SHA}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-screenshots

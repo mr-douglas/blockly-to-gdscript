@@ -12,7 +12,7 @@
 <h1>Make an enemy patrol</h1>
 <p><strong>Objective.</strong> Move an enemy between two endpoints and change its target on arrival.</p>
 <h2>Keep track of the current target</h2>
-<p>A patrol has a position, a speed and a target. <code>move_toward()</code> approaches the target without overshooting. When the enemy arrives, set the target to the other endpoint. The moving Area2D uses the same contact behaviour as the red strip.</p>
+<p>A patrol has a position, a speed and a target. <code>move_toward()</code> approaches the target without overshooting. When the enemy arrives, set the target to the other endpoint. The spinning saw is a moving Area2D with the same contact behaviour as the spikes.</p>
 <pre><code>enemy.position.x = move_toward(enemy.position.x, target_x, PATROL_SPEED * delta)
 if is_equal_approx(enemy.position.x, target_x):
     target_x = PATROL_LEFT if target_x == PATROL_RIGHT else PATROL_RIGHT</code></pre>
@@ -21,11 +21,11 @@ if is_equal_approx(enemy.position.x, target_x):
 <p><a href="../play/?demo=platformer&amp;lesson=patrol">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
-<li>Watch the enemy. Predict where it will turn around and what happens if it touches the player.</li>
-<li>Double <code>PATROL_SPEED</code>, then time a jump past the enemy. Compare the two speeds.</li>
+<li>Watch the saw. Predict where it will turn around and what happens if it touches the player.</li>
+<li>Double <code>PATROL_SPEED</code>, then time a jump past the saw. Compare the two speeds.</li>
 <li>Change the endpoint spacing and test whether the level is still possible to finish.</li>
 </ol>
-<details><summary>Check the prediction</summary><p>The enemy reverses at the endpoints. Touching it triggers the same respawn as a stationary hazard. Doubling speed reduces the time between turns.</p></details>
+<details><summary>Check the prediction</summary><p>The saw reverses at the endpoints. Touching it triggers the same respawn as the spikes. Doubling speed reduces the time between turns.</p></details>
 <p><strong>Success criteria.</strong> The enemy reaches both endpoints repeatedly, and touching it sends the player to the active checkpoint.</p>
 <p><strong>Apply it to your project.</strong> Choose two safe endpoints for a patrol in your own level. Mark them in the editor and test the path at different speeds.</p>
 <p><a href="moving-platforms.html">Next lesson · Ride a moving platform</a></p>
