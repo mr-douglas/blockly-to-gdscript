@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 21 · Signals</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="input-events.html">Lesson 20</a> · Lesson 21</p>
+<h1>Signals</h1>
+<p><strong>Learning objective.</strong> Connect a signal to a function and explain when it runs.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+signal key_found(key_name: String)
+
+func show_pickup(key_name: String) -&gt; void:
+    print(&quot;Found &quot; + key_name)
+
+func _ready():
+    key_found.connect(show_pickup)
+    key_found.emit(&quot;silver key&quot;)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A signal is a notification. A sender announces an event and a connected listener handles it.</li>
+<li><strong>GDScript.</strong> Use <code>signal</code> to declare a signal. <code>connect()</code> takes the function itself, without parentheses. <code>emit()</code> sends the notification and any values.</li>
+<li><strong>Godot.</strong> Buttons already have a <code>pressed</code> signal. Collision areas can signal when bodies enter. This lesson emits signals in code so you can test the handlers in the browser.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Which messages appear, and when does show_pickup() run?</p>
+<pre><code>extends Node
+
+signal key_found(key_name: String)
+
+func show_pickup(key_name: String) -&gt; void:
+    print(&quot;Found &quot; + key_name)
+
+func _ready():
+    key_found.connect(show_pickup)
+    key_found.emit(&quot;red key&quot;)
+    key_found.emit(&quot;blue key&quot;)</code></pre>
+<details><summary>Check the prediction</summary><p>Each emit calls the connected function once. It prints Found red key, then Found blue key.</p></details>
+<h2>Guided task · Connect the listener</h2>
+<p>Add the connection before emitting. Check that the listener prints Found silver key.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="Found silver key">
+<pre><code>extends Node
+
+signal key_found(key_name: String)
+
+func show_pickup(key_name: String) -&gt; void:
+    print(&quot;Found &quot; + key_name)
+
+func _ready():
+    key_found.emit(&quot;silver key&quot;)</code></pre>
+</section>
+<h2>Debugging task · Pass the function</h2>
+<p>Run the broken code. Fix the connect call so it receives the function and passes the key name when the signal is emitted.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="Found silver key">
+<pre><code>extends Node
+
+signal key_found(key_name: String)
+
+func show_pickup(key_name: String) -&gt; void:
+    print(&quot;Found &quot; + key_name)
+
+func _ready():
+    key_found.connect(show_pickup())
+    key_found.emit(&quot;silver key&quot;)</code></pre>
+</section>
+<h2>Independent task · Connect a button</h2>
+<p>Create a Button, connect pressed to a handler that prints Paused, and emit pressed to test it. Free the temporary Button when you finish.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    pass</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The handler prints Paused once when the signal is emitted. You can point to the connection and the emission.</p>
+<h2>Apply it to your project</h2>
+<p>Connect a real Button’s pressed signal to one function in your game. Click it in Godot and check that the function runs once per click. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Connect a second handler to your custom key signal. Print a different message there and check that both handlers run.</p>
+<h2>Reflection</h2>
+<p>What does the sender need to know about the functions that listen to a signal?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
