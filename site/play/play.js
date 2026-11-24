@@ -95,6 +95,13 @@ const platformerLessons = {
     "task": "Add a second hazard and predict whether your return path is still playable.",
     "file": "platformer_hazards.gd"
   },
+  "checkpoint": {
+    "title": "Platformer lesson 9 · Save a checkpoint",
+    "goal": "Activate the blue flag, then deliberately hit the next hazard to test where you return.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Move CHECKPOINT and check that the flag and the saved spawn position both move.",
+    "file": "platformer_checkpoint.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;

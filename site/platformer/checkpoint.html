@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9. Save a checkpoint | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="hazards.html">Previous lesson</a> · Lesson 9</p>
+<h1>Save a checkpoint</h1>
+<p><strong>Objective.</strong> Store a new spawn position when the player touches a checkpoint.</p>
+<h2>Change the position used by respawn</h2>
+<p>The variable <code>spawn_point</code> starts at <code>START</code>. Touching the flag stores a new <code>Vector2</code>. The existing fall and hazard code both call <code>respawn()</code>, so both use the new position after the flag is activated.</p>
+<pre><code>func respawn() -&gt; void:
+    player.position = spawn_point
+    player.velocity = Vector2.ZERO</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=checkpoint&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=checkpoint">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Walk into the gap before touching the flag. Predict where you return.</li>
+<li>Jump the gap, touch the blue flag, then walk into the red strip. Compare where you return.</li>
+<li>Move <code>CHECKPOINT</code> 20 pixels left. Predict how this affects the flag position and the respawn position, then test.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The first fall returns you to the start. Once the flag is active, a hazard returns you to the flag. Changing CHECKPOINT moves both the flag and the saved position.</p></details>
+<p><strong>Success criteria.</strong> A fall before the flag uses the start. A hit after the flag uses the checkpoint. R resets the run to the start.</p>
+<p><strong>Apply it to your project.</strong> Place your checkpoint on a safe platform. Store its position separately from the player’s current position. Test a fall before and after it.</p>
+</main>
+<script type="module" src="lesson-editor.js"></script>
+</body>
+</html>
