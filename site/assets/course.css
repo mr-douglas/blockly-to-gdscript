@@ -57,3 +57,7 @@ footer { padding-block: 1rem; border-top: 1px solid #cfdae8; }
 .practice-actions button:disabled { opacity: .6; cursor: default; }
 .practice-controls p { margin: .65rem 0; }
 .practice-controls pre { margin: .35rem 0 0; min-height: 3rem; max-height: 16rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+.rover-lesson .panel h2 { margin-top: 0; }
+.route-panel canvas { display: block; width: 100%; height: auto; border-radius: .5rem; }
+.route-panel [data-route-summary] { margin: .75rem 0 0; font-weight: 650; }

@@ -36,6 +36,9 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
   const example = practice.querySelector("pre");
   const starter = example.textContent;
   const fullScript = practice.dataset.practice === "full";
+  const turtle = practice.dataset.practice === "turtle"
+    ? (await import("./turtle-preview.js")).createTurtlePreview(document.querySelector("[data-route-stage]"))
+    : null;
   const controls = controlsTemplate.content.cloneNode(true);
   const editor = controls.querySelector("textarea");
   const run = controls.querySelector('[data-action="run"]');
@@ -72,6 +75,7 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
       return;
     }
 
+    turtle?.reset();
     const session = {};
     activeRun = session;
     run.disabled = true;
@@ -95,7 +99,7 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
             session.timeout = setTimeout(() => complete(session, "Stopped after 3 seconds. Check for a loop that never ends."), 3000);
             break;
           case "output":
-            append(data.text);
+            if (!turtle?.capture(data.text)) append(data.text);
             break;
           case "error":
             session.hasError = true;
@@ -107,11 +111,12 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
             break;
           case "done":
             complete(session, session.hasError || data.code !== 0 ? "Run ended with errors." : "Run finished.");
-            if (!consoleOutput.textContent) append("No output.");
+            if (turtle && !session.hasError && data.code === 0) turtle.play();
+            if (!turtle && !consoleOutput.textContent) append("No output.");
             break;
         }
       };
-      const script = fullScript ? source : `extends Node\n\nfunc _ready():\n${source.split("\n").map((line) => `    ${line}`).join("\n")}`;
+      const script = turtle ? turtle.wrap(source) : fullScript ? source : `extends Node\n\nfunc _ready():\n${source.split("\n").map((line) => `    ${line}`).join("\n")}`;
       worker.postMessage({source: script, base: runnerBase.href});
     } catch (error) {
       complete(session, error.message);
@@ -124,6 +129,7 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
   });
   reset.addEventListener("click", () => {
     if (activeRun) complete(activeRun, "");
+    turtle?.reset();
     editor.value = starter;
     consoleOutput.textContent = "";
     status.textContent = "Starter code restored.";

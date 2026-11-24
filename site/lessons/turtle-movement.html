@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turtle movement | Blockly to GDScript</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap rover-lesson">
+<p><a href="../index.html">All lessons</a></p>
+<h1>Pilot a rover with turtle commands</h1>
+<p>Guide a rover around a 2D map. Stop on all three beacons, then bring it back to the landing pad.</p>
+<section class="panel" aria-labelledby="blockly-heading">
+<h2 id="blockly-heading">Start with the turtle blocks</h2>
+<img src="../assets/turtle-movement.png" alt="Move turtle forward 120 pixels, turn turtle right 90 degrees, then move turtle forward 100 pixels.">
+<p><strong>Predict the route.</strong> The rover starts at <code>(0, 0)</code> facing right. Where will it be after the first move? What will the turn change?</p>
+</section>
+
+<h2>Run the route</h2>
+<div class="comparison">
+<section class="panel" data-practice="turtle">
+<h3>GDScript</h3>
+<pre><code>forward(120)
+turn_right(90)
+forward(100)</code></pre>
+</section>
+<section class="panel route-panel" data-route-stage aria-labelledby="route-heading">
+<h3 id="route-heading">Rover map</h3>
+<canvas width="480" height="320" aria-label="Rover map with the landing pad at (0, 0) and beacons at (120, 0), (120, 100), and (0, 100)."></canvas>
+<p>Beacons turn green when you stop on them.</p>
+<p data-route-summary role="status">At the landing pad. Facing right. 0 of 3 beacons reached.</p>
+</section>
+</div>
+
+<h2>How the movement works</h2>
+<p>A Godot <code>Node2D</code> has a <code>position</code> and a <code>rotation_degrees</code>. Position is a <code>Vector2(x, y)</code>. Positive <code>x</code> goes right and positive <code>y</code> goes down. A right turn changes which way the rover faces while it stays in the same spot.</p>
+<p>The turtle-style commands in the editor are functions. <code>move_local_x()</code> moves along the node’s own horizontal axis. Once the rover turns right by 90 degrees, that axis points down on the map.</p>
+<pre><code>func forward(pixels: float) -&gt; void:
+    move_local_x(pixels)
+
+func turn_right(degrees: float) -&gt; void:
+    rotation_degrees += degrees</code></pre>
+<p>After the first move the rover is at <code>(120, 0)</code>. After the turn and second move it is at <code>(120, 100)</code>, facing down.</p>
+
+<h2>Complete the mission</h2>
+<ol>
+<li>Add a right turn and a forward move to reach the third beacon at <code>(0, 100)</code>.</li>
+<li>Turn again to face the landing pad and move back to <code>(0, 0)</code>.</li>
+<li>Change one turn to <code>45</code> degrees. Predict which way the rover will go, then run it again and compare.</li>
+</ol>
+<details><summary>Check the route</summary>
+<p>Add these four lines after the starter code. The third move goes left 120 pixels and the fourth goes up 100 pixels.</p>
+<pre><code>turn_right(90)
+forward(120)
+turn_right(90)
+forward(100)</code></pre>
+</details>
+
+<h2>Use it in your own Godot project</h2>
+<p>Add a <code>Node2D</code> for your character and give it a <code>Sprite2D</code> child with an image facing right. Place the character somewhere visible and attach a script that starts with <code>extends Node2D</code>. Copy the two function definitions into that script, then put your route commands inside <code>_ready()</code>. This runs the whole route immediately in Godot. The browser preview animates each step so you can see it.</p>
+</main>
+<footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
+<script type="module" src="../assets/practice.js"></script>
+</body>
+</html>
