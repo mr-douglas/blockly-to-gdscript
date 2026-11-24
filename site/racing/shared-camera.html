@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Pan and zoom to keep both cars visible | Build a Two-Player Racer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Racing course</a> · <a href="fixed-track.html">Previous lesson</a> · Lesson 2</p>
+<h1>Pan and zoom to keep both cars visible</h1>
+<p><strong>Objective.</strong> Centre a fixed-angle camera between two players and choose a zoom that fits both.</p>
+<h2>Calculate the midpoint and the required view</h2>
+<p>The camera still looks straight down. Move its X and Z to the midpoint between the cars. With <code>KEEP_HEIGHT</code>, orthographic <code>size</code> is the height of the view, and the width is height times the viewport aspect ratio. Convert the needed width into a height before choosing the larger requirement.</p>
+<pre><code>var height_for_depth := span.z + 2.0 * FRAME_MARGIN
+var height_for_width := (span.x + 2.0 * FRAME_MARGIN) / maxf(0.01, aspect)
+race_camera.size = maxf(MIN_VIEW, maxf(height_for_depth, height_for_width))</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable racing" src="../play/?demo=racing&amp;lesson=shared-camera&amp;embed=1"></iframe>
+<p><a href="../play/?demo=racing&amp;lesson=shared-camera">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Let the cars get close, then drive one away. Predict which way the centre moves and when the camera zooms out.</li>
+<li>Set FRAME_MARGIN to 3.0. Compare how much road is visible without changing either car’s position.</li>
+<li>Temporarily use only height_for_depth in the size calculation. Spread the cars across the track in X. Explain why a car can be clipped, then restore the width check.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>The centre moves halfway towards the moving car. The camera zooms out when either separation needs a larger view. A larger margin gives more room around both cars. Ignoring the width can lose a car that is far to the left or right.</p></details>
+<p><strong>Success criteria.</strong> Both cars stay in view when close, far apart, side by side, or at opposite ends of the track. The angle stays fixed.</p>
+<p><strong>Apply it to your project.</strong> Use the same calculation for two objects in another shared-screen game. Test wide and tall windows, and include room for the objects’ actual size.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

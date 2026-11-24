@@ -169,6 +169,13 @@ const racingLessons = {
     "task": "Swap the two bodies in the drive calls, then test which keys control which car.",
     "file": "racing_fixed.gd"
   },
+  "shared-camera": {
+    "title": "Racing lesson 2 · Pan and zoom to keep both cars visible",
+    "goal": "Separate the cars to make the camera zoom out, then bring them together again.",
+    "controls": "Gold uses arrows and blue uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
+    "task": "Change FRAME_MARGIN and test cars separated across the width and along the depth of the track.",
+    "file": "racing_shared_camera.gd"
+  },
 };
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},
