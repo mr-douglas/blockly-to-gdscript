@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two particles collide on a rough slope · 9709 Mechanics</title>
+<link rel="stylesheet" href="../assets/course.css"><link rel="stylesheet" href="lab.css">
+<style>
+[data-demo] canvas { display:block; width:100%; height:auto; border-radius:.55rem; }
+[data-stage][aria-pressed="true"] { background:#d8e8ff; border-color:#194da2; }
+.motion-table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+.motion-table th,.motion-table td { padding:.4rem; text-align:left; border-bottom:1px solid #cfdae8; }
+@media (max-width: 30rem) { .motion-table { table-layout:fixed; } .motion-table th,.motion-table td { overflow-wrap:anywhere; padding:.35rem .2rem; font-size:.875rem; } }
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="pulleys.html">9709 Mechanics labs</a> · <a href="momentum.html">Momentum</a></p>
+<h1>Two particles collide on a rough slope</h1>
+<p>Cambridge 9709/45, Summer 2026, Question 6. Take <var>g</var> = 10 m/s² and choose <strong>down the plane as positive</strong>.</p>
+<p>P (0.3 kg) starts 2.75 m uphill of Q (0.6 kg). For the plane, sin α = 0.28 and μ = 0.5. After the initial release, P is projected towards Q at 6 m/s. It rebounds at 1 m/s immediately after contact.</p>
+<section class="panel" data-demo aria-label="Rough slope collision demonstration">
+<div class="lab-actions" aria-label="Jump to a stage">
+<button type="button" data-stage="release">Release from rest</button>
+<button type="button" data-stage="before">Just before impact</button>
+<button type="button" data-stage="after">Just after impact</button>
+<button type="button" data-stage="rest">Final rest</button>
+</div>
+<canvas width="720" height="350" role="img" aria-label="Slope diagram showing P and Q, the directions of their velocities, and their separation along the slope."></canvas>
+<div class="lab-actions"><button type="button" id="play" data-play>Play motion</button></div>
+<label class="lab-time" for="time">Time since projection <span id="readout"></span></label>
+<input id="time" type="range" min="0" max="2" step="0.01" value="0" style="width:100%;accent-color:#194da2">
+<p><strong id="phase"></strong> · Separation <strong id="gap"></strong></p>
+<table class="motion-table">
+<thead><tr><th scope="col">Particle</th><th scope="col">Velocity (m/s)</th><th scope="col">Acceleration (m/s²)</th><th scope="col">Friction (N)</th></tr></thead>
+<tbody>
+<tr data-particle="p"><th scope="row">P</th><td data-value></td><td data-value></td><td data-value></td></tr>
+<tr data-particle="q"><th scope="row">Q</th><td data-value></td><td data-value></td><td data-value></td></tr>
+</tbody>
+</table>
+<p>Arrows show velocity. Signs in the table give directions along the slope. Near contact, the markers are staggered so both are visible. Playback is slowed.</p>
+</section>
+<h2>Work through the question</h2>
+<h3>(a) Why do both stay at rest?</h3>
+<p>Choose <strong>Release from rest</strong>. For each mass, compare the downhill component of weight with the maximum static friction. Predict the actual friction.</p>
+<details><summary>Show part (a)</summary>
+<p>cos α = 0.96. For either mass <var>m</var>, the downhill weight component is 2.8<var>m</var> N and <var>R</var> = 9.6<var>m</var> N. The limit μ<var>R</var> is 4.8<var>m</var> N, greater than the force needed to hold either particle. Actual friction acts uphill with magnitude 0.84 N on P and 1.68 N on Q.</p>
+</details>
+<h3>(b) How fast is P before contact?</h3>
+<p>Predict P’s acceleration while sliding downhill. Use its starting speed and the 2.75 m displacement, then check <strong>Just before impact</strong>.</p>
+<details><summary>Show part (b)</summary>
+<p>While sliding down, friction is 4.8<var>m</var> N up the plane. Resolving down gives <var>a</var> = 2.8 − 4.8 = −2 m/s². From <var>v</var>² = 6² + 2(−2)(2.75) = 25, P’s impact speed is <strong>5 m/s</strong>. Q is still at rest.</p>
+</details>
+<h3>(c) How far apart do they stop?</h3>
+<p>Compare <strong>Just before impact</strong> and <strong>Just after impact</strong>. Why does P’s friction change sign? Find Q’s outgoing velocity, then calculate the stopping distance of each particle.</p>
+<details><summary>Show part (c)</summary>
+<p>Conserve momentum along the plane during the brief impact. Taking P’s rebound as −1 m/s, 0.3(5) + 0.6(0) = 0.3(−1) + 0.6<var>v</var><sub>Q</sub>. So Q moves down at <strong>3 m/s</strong>.</p>
+<p>P moves uphill, so both gravity’s parallel component and friction act downhill. Its signed acceleration is +7.6 m/s² and it travels 1²/(2 × 7.6) = 5/76 m uphill. Q moves downhill with acceleration −2 m/s² and travels 3²/(2 × 2) = 2.25 m downhill. The particles move in opposite directions from the contact point, so add the distances. Their separation is <strong>44/19 m ≈ 2.32 m</strong>.</p>
+</details>
+</main>
+<script type="module" src="slope-collision.js"></script>
+</body>
+</html>
