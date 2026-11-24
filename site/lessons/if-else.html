@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>If and else | Blockly to GDScript</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap"><p><a href="../index.html">All lessons and Godot setup</a></p>
+<h1>If and else</h1><p>Show a win message when the player reaches ten points.</p>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/if-else.png" alt="Blockly checks if score is at least ten, then prints a win message or a prompt to keep collecting."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>var score = 10
+if score &gt;= 10:
+    print(&quot;You win!&quot;)
+else:
+    print(&quot;Keep collecting!&quot;)</code></pre></section>
+</div>
+<p>The Blockly test becomes the expression after <code>if</code>. A colon starts each branch, and indentation puts a statement inside it. The <code>else</code> branch runs when the test is false.</p>
+<h2>Try it in Godot</h2><p>Run the scene with scores of <code>9</code>, <code>10</code>, and <code>11</code>. Then change <code>&gt;=</code> to <code>&gt;</code> and predict which result changes.</p>
+<details><summary>Check your result</summary><p>With <code>&gt;=</code>, the player wins at 10 and 11. With <code>&gt;</code>, only 11 wins. Testing 10 catches the difference between the two rules.</p></details></main>
+<footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
+</body></html>
