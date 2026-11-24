@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 22 · State machines</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="signals.html">Lesson 21</a> · Lesson 22</p>
+<h1>State machines</h1>
+<p><strong>Learning objective.</strong> Represent named states and test transitions between them.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+enum State { IDLE, MOVING, PAUSED }
+var state = State.IDLE
+
+func handle(action: String) -&gt; void:
+    match state:
+        State.IDLE:
+            if action == &quot;walk&quot;:
+                state = State.MOVING
+        State.MOVING:
+            if action == &quot;pause&quot;:
+                state = State.PAUSED
+        State.PAUSED:
+            if action == &quot;resume&quot;:
+                state = State.MOVING
+
+func _ready():
+    handle(&quot;walk&quot;)
+    print(state == State.MOVING)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A state machine has a current state and rules for changing it in response to an action.</li>
+<li><strong>GDScript.</strong> <code>enum</code> names the possible states. <code>match state:</code> picks the branch for the current state. An assignment such as <code>state = State.MOVING</code> changes it.</li>
+<li><strong>Godot.</strong> Movement, combat, and menus can use states such as idle, moving, paused or game over.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Trace walk, pause, and resume. Which states are checked by the print statements?</p>
+<pre><code>extends Node
+
+enum State { IDLE, MOVING, PAUSED }
+var state = State.IDLE
+
+func handle(action: String) -&gt; void:
+    match state:
+        State.IDLE:
+            if action == &quot;walk&quot;:
+                state = State.MOVING
+        State.MOVING:
+            if action == &quot;pause&quot;:
+                state = State.PAUSED
+        State.PAUSED:
+            if action == &quot;resume&quot;:
+                state = State.MOVING
+
+func _ready():
+    handle(&quot;walk&quot;)
+    handle(&quot;pause&quot;)
+    print(state == State.PAUSED)
+    handle(&quot;resume&quot;)
+    print(state == State.MOVING)</code></pre>
+<details><summary>Check the prediction</summary><p>After pause it is PAUSED, and after resume it is MOVING. Both lines print true.</p></details>
+<h2>Guided task · Add a pause action</h2>
+<p>Insert a pause before the last line. The final check should say true.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="true">
+<pre><code>extends Node
+
+enum State { IDLE, MOVING, PAUSED }
+var state = State.IDLE
+
+func handle(action: String) -&gt; void:
+    match state:
+        State.IDLE:
+            if action == &quot;walk&quot;:
+                state = State.MOVING
+        State.MOVING:
+            if action == &quot;pause&quot;:
+                state = State.PAUSED
+        State.PAUSED:
+            if action == &quot;resume&quot;:
+                state = State.MOVING
+
+func _ready():
+    handle(&quot;walk&quot;)
+    print(state == State.PAUSED)</code></pre>
+</section>
+<h2>Debugging task · Fix a transition</h2>
+<p>The game sends the action walk. Fix the matching text so the state changes.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="true">
+<pre><code>extends Node
+
+enum State { IDLE, MOVING, PAUSED }
+var state = State.IDLE
+
+func handle(action: String) -&gt; void:
+    match state:
+        State.IDLE:
+            if action == &quot;move&quot;:
+                state = State.MOVING
+        State.MOVING:
+            if action == &quot;pause&quot;:
+                state = State.PAUSED
+        State.PAUSED:
+            if action == &quot;resume&quot;:
+                state = State.MOVING
+
+func _ready():
+    handle(&quot;walk&quot;)
+    print(state == State.MOVING)</code></pre>
+</section>
+<h2>Independent task · Allow the player to stop</h2>
+<p>Add a stop action in the moving branch that returns to IDLE. Test walk, stop, and then pause while idle. Print whether you are idle after the stop and after the pause.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+enum State { IDLE, MOVING, PAUSED }
+var state = State.IDLE
+
+func handle(action: String) -&gt; void:
+    match state:
+        State.IDLE:
+            if action == &quot;walk&quot;:
+                state = State.MOVING
+        State.MOVING:
+            if action == &quot;pause&quot;:
+                state = State.PAUSED
+        State.PAUSED:
+            if action == &quot;resume&quot;:
+                state = State.MOVING
+
+func _ready():
+    handle(&quot;walk&quot;)
+    # Test the stop action.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Walking then stopping reaches IDLE. Pausing while idle leaves it there. Both checks print true.</p>
+<h2>Apply it to your project</h2>
+<p>Choose three states for a feature. Write their names and allowed transitions as GDScript, then test one allowed action and one action that should be ignored. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Add a GAME_OVER state that ignores movement commands.</p>
+<h2>Reflection</h2>
+<p>Why should the same action sometimes do different things in different states?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
