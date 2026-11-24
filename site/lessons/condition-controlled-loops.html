@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 8 · Condition-controlled loops</title><link rel="stylesheet" href="../assets/course.css"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="count-controlled-loops.html">Lesson 7</a> · Lesson 8</p>
+<h1>Condition-controlled loops</h1>
+<p><strong>Learning objective.</strong> Use while for a repeated action and explain why the loop stops.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>var charge = 3
+while charge &gt; 0:
+    print(charge)
+    charge -= 1
+print(&quot;Empty&quot;)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> A condition-controlled loop repeats while its test is true. If the test is false at the start, the body runs zero times.</li>
+<li><strong>GDScript.</strong> Write <code>while condition:</code> and indent the body. Update a value in the body so the test can eventually become false.</li>
+<li><strong>Godot.</strong> A game might spend energy while enough remains to pay for the next action. Keep this test in a small script so you can inspect its output.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>What prints? Can the loop run with energy exactly equal to the cost?</p>
+<pre><code>var energy = 4
+while energy &gt;= 2:
+    energy -= 2
+    print(energy)</code></pre>
+<details><summary>Check the prediction</summary><p>It prints <code>2</code> then <code>0</code>. With 2 energy, the condition is still true because the comparison includes equality.</p></details>
+<h2>Guided task · Complete a countdown</h2>
+<p>Add a line inside the loop that lowers <code>seconds</code> by one. Write the update before changing the starting value to 3. Your output should count down from 3 to 1.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="3&#10;2&#10;1">
+<pre><code>var seconds = 0
+while seconds &gt; 0:
+    print(seconds)
+    # Decrease seconds here.</code></pre>
+</section>
+<h2>Debugging task · Spend the last charge</h2>
+<p>Run the code. Fix the comparison so the rover moves when charge is exactly 2. It should spend both pairs of charge and print each balance.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="2&#10;0">
+<pre><code>var charge = 4
+while charge &gt; 2:
+    charge -= 2
+    print(charge)</code></pre>
+</section>
+<h2>Independent task · Refill a shield</h2>
+<p>Start at 0 shield. Use a while loop to add 2 points and print the shield after each refill until it reaches 6. Test again starting at 6.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code>var shield = 0
+# Refill and print until the shield reaches 6.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Starting at 0 prints 2, 4, and 6. Starting at 6 prints nothing. You can point to the line that makes the condition become false.</p>
+<h2>Apply it to your project</h2>
+<p>Pick a resource used up in steps in your game. Write a short <code>while</code> test in <code>_ready()</code> and print the balance after each step. Try with too little to pay for the first step. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Start the shield at 1. Use <code>min(shield + 2, 6)</code> to cap the final refill at 6.</p>
+<h2>Reflection</h2>
+<p>What would happen if you removed the line that changes the shield inside the loop? Explain using the condition.</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
