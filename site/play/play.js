@@ -161,15 +161,28 @@ const platformer3DLessons = {
     "file": "platform3d_goal.gd"
   },
 };
-const course = requested === "movement-3d" ? "platformer-3d" : "platformer";
-const lessons = requested === "movement-3d" ? platformer3DLessons : platformerLessons;
-const lesson = (requested === "platformer" || requested === "movement-3d") && Object.hasOwn(lessons, params.get("lesson"))
+const racingLessons = {
+  "fixed-track": {
+    "title": "Racing lesson 1 · Drive two cars on one track",
+    "goal": "Drive both cars around the track from a fixed overhead view.",
+    "controls": "Gold uses arrows. Blue uses WASD. Up or W drives forward. Down or S reverses. Left and Right or A and D steer. R restarts.",
+    "task": "Swap the two bodies in the drive calls, then test which keys control which car.",
+    "file": "racing_fixed.gd"
+  },
+};
+const lessonCourses = {
+  platformer: {path: "platformer", lessons: platformerLessons},
+  "movement-3d": {path: "platformer-3d", lessons: platformer3DLessons},
+  racing: {path: "racing", lessons: racingLessons},
+};
+const course = Object.hasOwn(lessonCourses, requested) ? lessonCourses[requested] : null;
+const lesson = course && Object.hasOwn(course.lessons, params.get("lesson"))
   ? params.get("lesson") : null;
 const key = Object.hasOwn(playgrounds, requested) ? requested : "top-down";
-const demo = lesson ? lessons[lesson] : playgrounds[key];
+const demo = lesson ? course.lessons[lesson] : playgrounds[key];
 if (lesson) {
   const link = document.querySelector("#lesson-back");
-  link.href = `../${course}/${lesson}.html`;
+  link.href = `../${course.path}/${lesson}.html`;
   link.hidden = false;
 }
 document.querySelector("#demo-title").textContent = demo.title;

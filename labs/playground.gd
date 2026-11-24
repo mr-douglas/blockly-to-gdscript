@@ -14,7 +14,8 @@ var edited_script: GDScript
 
 func _ready() -> void:
 	var keys := {&"left": KEY_LEFT, &"right": KEY_RIGHT, &"up": KEY_UP,
-		&"down": KEY_DOWN, &"action": KEY_SPACE, &"reset": KEY_R, &"view": KEY_C}
+		&"down": KEY_DOWN, &"action": KEY_SPACE, &"reset": KEY_R, &"view": KEY_C,
+		&"p2_left": KEY_A, &"p2_right": KEY_D, &"p2_up": KEY_W, &"p2_down": KEY_S}
 	for key in keys:
 		InputMap.add_action(key)
 		var event := InputEventKey.new()

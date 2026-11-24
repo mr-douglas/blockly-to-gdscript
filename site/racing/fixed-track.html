@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Drive two cars on one track | Build a Two-Player Racer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Racing course</a> · Lesson 1</p>
+<h1>Drive two cars on one track</h1>
+<p><strong>Objective.</strong> Use two sets of input actions to control two CharacterBody3D cars through one reusable function.</p>
+<h2>Share the movement code and separate the controls</h2>
+<p>Both cars use the same <code>drive()</code> function. Give each call its own body and input values. The camera is orthographic, so objects stay the same size with depth. Its position, rotation and size stay fixed, and the whole track stays visible.</p>
+<pre><code>func drive(car: CharacterBody3D, turn: float, throttle: float, delta: float) -&gt; void:
+    car.rotate_y(turn * TURN_SPEED * delta)
+    car.velocity = -car.transform.basis.z * throttle * SPEED
+    car.move_and_slide()</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable racing" src="../play/?demo=racing&amp;lesson=fixed-track&amp;embed=1"></iframe>
+<p><a href="../play/?demo=racing&amp;lesson=fixed-track">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Move the gold car with arrows and the blue car with WASD. Predict what happens when only one player presses forward.</li>
+<li>Swap the two bodies passed to drive(). Test the controls, then restore the original calls.</li>
+<li>Change TURN_SPEED and compare both cars on the same corner. Drive a practice lap with each car.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Only the car passed the active input moves. Swapping the bodies swaps the control sets. Changing TURN_SPEED affects both cars because both use drive().</p></details>
+<p><strong>Success criteria.</strong> Each player can drive independently, both can move at once, and the shared camera shows the whole track.</p>
+<p><strong>Apply it to your project.</strong> Create separate input actions for each player in Godot. Reuse one movement function by passing the correct body and input values into it.</p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
