@@ -124,13 +124,24 @@ const platformerLessons = {
     "file": "platformer_coin_gate.gd"
   },
 };
-const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
+const platformer3DLessons = {
+  "walk-3d": {
+    "title": "Platformer lesson 1 · Steer a 3D character",
+    "goal": "Steer around the pink barrier.",
+    "controls": "Left and Right to turn, Up and Down to move, R to restart.",
+    "task": "Change TURN_RATE and compare turning in place.",
+    "file": "platform3d_walk.gd"
+  },
+};
+const course = requested === "movement-3d" ? "platformer-3d" : "platformer";
+const lessons = requested === "movement-3d" ? platformer3DLessons : platformerLessons;
+const lesson = (requested === "platformer" || requested === "movement-3d") && Object.hasOwn(lessons, params.get("lesson"))
   ? params.get("lesson") : null;
 const key = Object.hasOwn(playgrounds, requested) ? requested : "top-down";
-const demo = lesson ? platformerLessons[lesson] : playgrounds[key];
+const demo = lesson ? lessons[lesson] : playgrounds[key];
 if (lesson) {
   const link = document.querySelector("#lesson-back");
-  link.href = `../platformer/${lesson}.html`;
+  link.href = `../${course}/${lesson}.html`;
   link.hidden = false;
 }
 document.querySelector("#demo-title").textContent = demo.title;
