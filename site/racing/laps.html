@@ -12,7 +12,7 @@
 <h1>Count laps and decide who wins</h1>
 <p><strong>Objective.</strong> Track checkpoint progress and laps separately for each player.</p>
 <h2>Give each racer its own progress</h2>
-<p>Three green strips and the finish line are Area3D triggers. Each signal passes the car and the gate number. <code>next_gate[racer]</code> says which gate that car needs next. Only after the last gate does its lap count increase. The first car to reach the target wins.</p>
+<p>Three green strips and the chequered finish line are Area3D triggers. Each one is placed by how far round the lap it is, so <code>add_gate(1, 0.5)</code> puts gate 1 halfway round. Each signal passes the car and the gate number. <code>next_gate[racer]</code> says which gate that car needs next. Only after the last gate does its lap count increase. The first car to reach the target wins.</p>
 <pre><code>if winner != -1 or racer == -1 or index != next_gate[racer]:
     return
 next_gate[racer] += 1
@@ -24,11 +24,12 @@ if next_gate[racer] == GATE_COUNT:
 <p><a href="../play/?demo=racing&amp;lesson=laps">Open the editor on its own page</a></p>
 <h2>Predict, change, and test</h2>
 <ol>
-<li>Cross the finish line immediately. Predict the lap count. Then drive clockwise through the three green strips and back across the line.</li>
-<li>Have Gold and Blue complete a lap at different times. Check that the counts are separate.</li>
+<li>Drive straight over the finish line from the start. Predict the lap count. Then drive clockwise through the three green strips and back across the line.</li>
+<li>Have Orange and Green complete a lap at different times. Check that the counts are separate.</li>
 <li>Change LAPS_TO_WIN to 1. Finish a race and press R. Test when the race stops and whether the counts start over.</li>
+<li>Move gate 1 to 0.4 and test that the green strip moves with it.</li>
 </ol>
-<details><summary>Check the prediction</summary><p>Crossing the line before the checkpoints leaves the count at zero. Each car advances only its own progress. With the target set to one lap, the first valid lap wins and R starts a fresh race.</p></details>
+<details><summary>Check the prediction</summary><p>Crossing the line before the checkpoints leaves the count at zero. Each car advances only its own progress. With the target set to one lap, the first valid lap wins and R starts a fresh race. Changing the lap fraction moves both the trigger and its green strip.</p></details>
 <p><strong>Success criteria.</strong> The finish line alone cannot score a lap. Each player can complete a valid lap independently, and the winner is announced.</p>
 <p><strong>Apply it to your project.</strong> Arrange trigger areas on your own track. Test an out-of-order crossing, a valid lap, a win and a restart.</p>
 </main>
