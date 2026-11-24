@@ -102,6 +102,13 @@ const platformerLessons = {
     "task": "Move CHECKPOINT and check that the flag and the saved spawn position both move.",
     "file": "platformer_checkpoint.gd"
   },
+  "patrol": {
+    "title": "Platformer lesson 10 · Make an enemy patrol",
+    "goal": "Time a jump over the moving enemy and reach the exit.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Change the patrol speed and test the timing at both endpoints.",
+    "file": "platformer_patrol.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;
