@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 18 · Coordinates and vectors</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="randomness.html">Lesson 17</a> · Lesson 18</p>
+<h1>Coordinates and vectors</h1>
+<p><strong>Learning objective.</strong> Use Vector2 to move a point and measure the distance to a target.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>var point = Vector2(10, 20)
+point += Vector2(5, -3)
+print(int(point.x))
+print(int(point.y))</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> Coordinates give a position. Adding a displacement changes the position by that amount in each direction.</li>
+<li><strong>GDScript.</strong> <code>Vector2(x, y)</code> stores two numbers. Read them with <code>.x</code> and <code>.y</code>. Use <code>start.distance_to(target)</code> for straight-line distance.</li>
+<li><strong>Godot.</strong> In Godot 2D, x increases to the right and y increases down. A node’s <code>position</code> is relative to its parent.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>Will this point move up or down? Predict its new y value.</p>
+<pre><code>var point = Vector2(20, 10)
+point += Vector2(0, -5)
+print(int(point.y))</code></pre>
+<details><summary>Check the prediction</summary><p>It moves up because y decreases. The new y value is 5.</p></details>
+<h2>Guided task · Move up</h2>
+<p>Change the displacement so the point moves 5 pixels up. The output should be 5.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Guided task code" data-expected-output="5">
+<pre><code>var point = Vector2(20, 10)
+point += Vector2(0, 5)
+print(int(point.y))</code></pre>
+</section>
+<h2>Debugging task · Keep the starting offset</h2>
+<p>The marker should move 4 pixels right from x = 10. Fix the assignment so x becomes 14.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Debugging task code" data-expected-output="14">
+<pre><code>var marker = Vector2(10, 20)
+marker = Vector2(4, 0)
+print(int(marker.x))</code></pre>
+</section>
+<h2>Independent task · Measure a route</h2>
+<p>Start at (0, 0) and move 3 pixels right and 4 pixels down. Print the distance from the start to the new position.</p>
+<section class="panel" data-practice="snippet" data-editor-label="Independent task code">
+<pre><code># Use two Vector2 positions.</code></pre>
+</section>
+<p><strong>Success criteria.</strong> The distance is 5 pixels. You can identify which values give the horizontal and vertical changes.</p>
+<h2>Apply it to your project</h2>
+<p>In a test scene, add a <code>Sprite2D</code> or another visible <code>Node2D</code>. In its <code>_ready()</code>, add a displacement to <code>position</code> and print the new position. <a href="turtle-movement.html">Revisit the rover map</a> if you need a visual example. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change the displacement to <code>Vector2(-3, -4)</code>. Predict what happens to the direction and the distance.</p>
+<h2>Reflection</h2>
+<p>What is the difference between setting position to Vector2(4, 0) and adding that vector to the current position?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
