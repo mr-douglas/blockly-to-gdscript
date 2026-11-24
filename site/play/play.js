@@ -36,9 +36,26 @@ const playgrounds = {
   },
 };
 
-const requested = new URL(location.href).searchParams.get("demo");
+const params = new URL(location.href).searchParams;
+const requested = params.get("demo");
+const platformerLessons = {
+  movement: {
+    title: "Platformer lesson 1 · Sideways movement",
+    goal: "Move the player left and right using the arrow keys.",
+    controls: "Left and Right to move. R to restart.",
+    task: "Predict what happens if you double SPEED. Change it, run the edited code, and compare with the original.",
+    file: "platformer_move.gd",
+  },
+};
+const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
+  ? params.get("lesson") : null;
 const key = Object.hasOwn(playgrounds, requested) ? requested : "top-down";
-const demo = playgrounds[key];
+const demo = lesson ? platformerLessons[lesson] : playgrounds[key];
+if (lesson) {
+  const link = document.querySelector("#lesson-back");
+  link.href = `../platformer/${lesson}.html`;
+  link.hidden = false;
+}
 document.querySelector("#demo-title").textContent = demo.title;
 document.querySelector("#goal").textContent = demo.goal;
 document.querySelector("#controls").textContent = demo.controls + " Click the game to give it keyboard focus.";
@@ -83,11 +100,11 @@ function run() {
   const preview = document.createElement("iframe");
   preview.title = `${demo.title} game preview`;
   preview.sandbox = "allow-scripts";
-  preview.src = "preview.html?v=editable-2";
+  preview.src = "preview.html?v=platformer-1";
   frame = preview;
   const code = source.value;
   preview.addEventListener("load", () => {
-    if (preview === frame) preview.contentWindow.postMessage({type: "run-playground", key, code}, "*");
+    if (preview === frame) preview.contentWindow.postMessage({type: "run-playground", key, code, lesson}, "*");
   }, {once: true});
   stage.append(preview);
   timer = setTimeout(() => {
@@ -116,7 +133,7 @@ window.addEventListener("message", ({source: sender, data}) => {
   }
 });
 
-fetch(`source/${demo.file}?v=editable-1`)
+fetch(`source/${demo.file}?v=${lesson ?? "editable-1"}`)
   .then((response) => {
     if (!response.ok) throw new Error("Could not load the script.");
     return response.text();

@@ -31,7 +31,7 @@ window.addEventListener("message", async ({source, data}) => {
     });
     await Promise.all([
       engine.init("godot"),
-      engine.preloadFile("playgrounds.pck?v=editable-1", "playgrounds.pck"),
+      engine.preloadFile(`playgrounds.pck?v=${encodeURIComponent(data.lesson ?? "editable-1")}`, "playgrounds.pck"),
     ]);
     engine.copyToFS("/student.gd", new TextEncoder().encode(data.code));
     await engine.start({args: ["--main-pack", "playgrounds.pck", "--", data.key]});
