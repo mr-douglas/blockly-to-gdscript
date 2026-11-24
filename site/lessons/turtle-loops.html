@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rover patrol with loops | Blockly to GDScript</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap rover-lesson">
+<p><a href="../index.html">All lessons</a> · <a href="turtle-movement.html">Turtle movement</a></p>
+<h1>Rover patrol with loops</h1>
+<p>Send the rover around a square. The rover starts at the landing pad facing right. Each side is 100 pixels long, and each corner needs a 90° turn.</p>
+<section class="panel" aria-labelledby="blockly-heading">
+<h2 id="blockly-heading">Put the move and turn inside a repeat block</h2>
+<img src="../assets/turtle-loops.png" alt="Repeat four times: move the turtle forward 100 pixels, then turn right 90 degrees.">
+<p>Each trip through the repeat block gives the rover one straight move and one right turn. How many trips will it take to get home?</p>
+</section>
+
+<h2>Run the patrol</h2>
+<div class="comparison">
+<section class="panel" data-practice="turtle">
+<h3>GDScript</h3>
+<pre><code>for side in range(4):
+    forward(100)
+    turn_right(90)</code></pre>
+</section>
+<section class="panel route-panel" data-route-stage data-beacons="[[100,0],[100,100],[0,100]]" aria-labelledby="route-heading">
+<h3 id="route-heading">Rover map</h3>
+<canvas width="480" height="320" aria-label="Square patrol map with the landing pad at (0, 0) and beacons at (100, 0), (100, 100), and (0, 100)."></canvas>
+<p>Beacons turn green when the rover stops on them.</p>
+<p data-route-summary role="status">At the landing pad. Facing right. 0 of 3 beacons reached.</p>
+</section>
+</div>
+
+<h2>Read the loop</h2>
+<p><code>range(4)</code> gives <code>side</code> the values 0, 1, 2, and 3 in that order. For each value, the rover runs both indented commands. The indentation does the same job as snapping both blocks inside the Blockly repeat block.</p>
+<p>After four moves the rover is back at <code>(0, 0)</code>. The last turn makes it face right again, ready to repeat the patrol.</p>
+
+<h2>Change the patrol</h2>
+<ol>
+<li>Change <code>range(4)</code> to <code>range(3)</code>. Predict where the rover will stop, then run it.</li>
+<li>Put the count back to four. Change <code>forward(100)</code> to <code>forward(60)</code>. Does the rover still get home? How does the trail change?</li>
+<li>Keep the 60-pixel moves. Try three repeats and a 120° turn to make a triangle.</li>
+</ol>
+<details><summary>Check your predictions</summary>
+<p>Three 100-pixel moves and 90° turns leave the rover at <code>(0, 100)</code>, facing up. Four 60-pixel moves trace a smaller square and return to <code>(0, 0)</code>. Three 120° turns add up to a full turn, and three equal moves trace a triangle that also returns to the pad.</p>
+</details>
+</main>
+<footer><div class="wrap"><a href="https://mr-douglas.github.io/blockly/">Open the Blockly editor</a></div></footer>
+<script type="module" src="../assets/practice.js?v=turtle-2"></script>
+</body>
+</html>

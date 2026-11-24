@@ -37,7 +37,7 @@ for (const practice of document.querySelectorAll("[data-practice]")) {
   const starter = example.textContent;
   const fullScript = practice.dataset.practice === "full";
   const turtle = practice.dataset.practice === "turtle"
-    ? (await import("./turtle-preview.js")).createTurtlePreview(document.querySelector("[data-route-stage]"))
+    ? (await import("./turtle-preview.js?v=beacons-1")).createTurtlePreview(document.querySelector("[data-route-stage]"))
     : null;
   const controls = controlsTemplate.content.cloneNode(true);
   const editor = controls.querySelector("textarea");

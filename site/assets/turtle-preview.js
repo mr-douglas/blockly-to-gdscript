@@ -1,9 +1,12 @@
 const pad = {x: 0, y: 0, angle: 0};
-const beacons = [{x: 120, y: 0}, {x: 120, y: 100}, {x: 0, y: 100}];
+const defaultBeacons = [{x: 120, y: 0}, {x: 120, y: 100}, {x: 0, y: 100}];
 const marker = "@rover ";
 const isNear = (a, b) => Math.hypot(a.x - b.x, a.y - b.y) <= 10;
 
 export function createTurtlePreview(stage) {
+  const beacons = stage.dataset.beacons
+    ? JSON.parse(stage.dataset.beacons).map(([x, y]) => ({x, y}))
+    : defaultBeacons;
   const canvas = stage.querySelector("canvas");
   const summary = stage.querySelector("[data-route-summary]");
   const ctx = canvas.getContext("2d");
@@ -87,7 +90,7 @@ export function createTurtlePreview(stage) {
     cancelAnimationFrame(frame);
     route = [pad];
     draw(pad, new Set(), []);
-    summary.textContent = "At the landing pad. Facing right. 0 of 3 beacons reached.";
+    summary.textContent = `At the landing pad. Facing right. 0 of ${beacons.length} beacons reached.`;
   }
 
   function play() {
@@ -106,7 +109,7 @@ export function createTurtlePreview(stage) {
         const angle = ((Math.round(from.angle) % 360) + 360) % 360;
         const home = visited.size === beacons.length && isNear(from, pad);
         draw(from, visited, trail);
-        summary.textContent = `${home ? "Mission complete! " : ""}Position (${coord(from.x)}, ${coord(from.y)}). Heading ${angle}°. ${visited.size} of 3 beacons reached.`;
+        summary.textContent = `${home ? "Mission complete! " : ""}Position (${coord(from.x)}, ${coord(from.y)}). Heading ${angle}°. ${visited.size} of ${beacons.length} beacons reached.`;
         return;
       }
       previousTime ??= time;
