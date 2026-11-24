@@ -81,6 +81,13 @@ const platformerLessons = {
     "task": "Disconnect and reconnect the goal signal, then test the difference by reaching the finish.",
     "file": "platformer_goal.gd"
   },
+  "coins": {
+    "title": "Platformer lesson 7 · Collect coins and count them",
+    "goal": "Collect coins on the ground and above the gap.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Set COIN_VALUE to 5 and add a fourth position to the coin list.",
+    "file": "platformer_coins.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;

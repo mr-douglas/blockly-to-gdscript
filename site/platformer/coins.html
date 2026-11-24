@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. Collect coins and count them | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="goal.html">Previous lesson</a> · Lesson 7</p>
+<h1>Collect coins and count them</h1>
+<p><strong>Objective.</strong> Use Area2D signals to award points and remove a pickup once.</p>
+<h2>Make every pickup count once</h2>
+<p>The level loops over three positions and creates a coin at each one. Each coin’s <code>body_entered</code> signal passes the body that touched it. <code>bind(coin)</code> also passes the specific coin, so the handler can remove that one. <code>queue_free()</code> removes it at the end of the frame.</p>
+<pre><code>func collect_coin(body: Node2D, coin: Area2D) -&gt; void:
+    if body != player or coin.is_queued_for_deletion():
+        return
+    coins += COIN_VALUE
+    coin_label.text = &quot;Coins: %d&quot; % coins
+    coin.queue_free()</code></pre>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable platformer" src="../play/?demo=platformer&amp;lesson=coins&amp;embed=1"></iframe>
+<p><a href="../play/?demo=platformer&amp;lesson=coins">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Walk through the first coin and then back through its old position. Predict how many points you will have.</li>
+<li>Set <code>COIN_VALUE</code> to 5. Predict the label after two pickups, then run your version to check.</li>
+<li>Add a fourth coin using a new <code>Vector2</code> position. Put it where you need to jump to reach it.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Each coin adds points once because it disappears. Two pickups worth five each give a total of ten.</p></details>
+<p><strong>Success criteria.</strong> Coins disappear when touched, the label matches your total, and the added coin can be picked up.</p>
+<p><strong>Apply it to your project.</strong> Make a coin scene with an Area2D, visible art, and a collision shape. Connect each coin’s signal to update one score value.</p>
+</main>
+<script type="module" src="lesson-editor.js"></script>
+</body>
+</html>
