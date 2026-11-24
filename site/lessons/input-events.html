@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 20 · Input and events</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="frame-independent-movement.html">Lesson 19</a> · Lesson 20</p>
+<h1>Input and events</h1>
+<p><strong>Learning objective.</strong> Distinguish reacting to one key event from checking input every frame.</p>
+<h2>Read the example</h2>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+        print(&quot;Jump&quot;)
+
+func _ready() -&gt; void:
+    var sample = InputEventKey.new()
+    sample.keycode = KEY_SPACE
+    sample.pressed = true
+    _unhandled_key_input(sample)</code></pre></section>
+<ul>
+<li><strong>Computer science.</strong> An event reports something that happened. A continuous check asks about the current state each time it runs.</li>
+<li><strong>GDScript.</strong> <code>event.pressed</code> tells you whether it was a press. <code>event.keycode</code> identifies the key. Comparing both lets the code react to one kind of event.</li>
+<li><strong>Godot.</strong> Godot can call <code>_unhandled_key_input()</code> for a key event. This browser lesson creates sample events in code. For a held action, use <code>Input.is_action_pressed()</code> in a frame callback in Godot.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>What will this sample key release print?</p>
+<pre><code>extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+        print(&quot;Jump&quot;)
+
+func _ready() -&gt; void:
+    var sample = InputEventKey.new()
+    sample.keycode = KEY_SPACE
+    sample.pressed = false
+    _unhandled_key_input(sample)</code></pre>
+<details><summary>Check the prediction</summary><p>There is no output. A release has <code>pressed</code> set to false.</p></details>
+<h2>Guided task · Test a press</h2>
+<p>Change the sample from releasing Space to pressing Space. Check for Jump in Output.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="Jump">
+<pre><code>extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+        print(&quot;Jump&quot;)
+
+func _ready() -&gt; void:
+    var sample = InputEventKey.new()
+    sample.keycode = KEY_SPACE
+    sample.pressed = false
+    _unhandled_key_input(sample)</code></pre>
+</section>
+<h2>Debugging task · Ignore the wrong key</h2>
+<p>The handler should react to Space. Fix the comparison and run this Space press again.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="Jump">
+<pre><code>extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and event.keycode == KEY_ENTER:
+        print(&quot;Jump&quot;)
+
+func _ready() -&gt; void:
+    var sample = InputEventKey.new()
+    sample.keycode = KEY_SPACE
+    sample.pressed = true
+    _unhandled_key_input(sample)</code></pre>
+</section>
+<h2>Independent task · Write an interact handler</h2>
+<p>Make the handler print Interact only on an E press. Test an E press, E release, and Space press.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+        print(&quot;Jump&quot;)
+
+func _ready() -&gt; void:
+    var sample = InputEventKey.new()
+    sample.keycode = KEY_SPACE
+    sample.pressed = true
+    _unhandled_key_input(sample)</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Only the E press prints Interact. The release and the other key produce no output.</p>
+<h2>Apply it to your project</h2>
+<p>In a Godot test scene, remove the sample <code>_ready()</code> code and try the key handler using the keyboard. Then choose a game action that should keep happening while held, such as moving right, and decide which kind of input check it needs. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Add <code>not event.echo</code> to ignore repeated key events from holding the key.</p>
+<h2>Reflection</h2>
+<p>Why is a continuous held-key check a good fit for walking and a press event a good fit for opening a menu?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
