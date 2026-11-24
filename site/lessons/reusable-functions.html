@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 14 · Functions</title><link rel="stylesheet" href="../assets/course.css?v=mobile-grid"></head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · <a href="dictionaries.html">Lesson 13</a> · Lesson 14</p>
+<h1>Functions</h1>
+<p><strong>Learning objective.</strong> Define and call a reusable function.</p>
+<h2>Read the same program in two forms</h2>
+<div class="comparison">
+<figure class="panel"><h3>Blockly</h3><img src="../assets/functions.png" alt="Define the award_coin procedure to print +1 coin!, then call award_coin."></figure>
+<section class="panel"><h3>GDScript</h3><pre><code>extends Node
+
+func award_coin():
+    print(&quot;+1 coin!&quot;)
+
+func _ready():
+    award_coin()</code></pre></section>
+</div>
+<ul>
+<li><strong>Computer science.</strong> A function groups statements under a name. A call runs that group.</li>
+<li><strong>GDScript.</strong> Define a function with <code>func name():</code> and indent its body. Call it with <code>name()</code>. Keep function definitions at the same indentation level as <code>_ready()</code>.</li>
+<li><strong>Godot.</strong> Godot calls <code>_ready()</code> when a node is ready. Call your own functions from there to test them.</li>
+</ul>
+<h2>Predict the output</h2>
+<p>How many times does the function body run?</p>
+<pre><code>extends Node
+
+func flash():
+    print(&quot;Shield&quot;)
+
+func _ready():
+    flash()
+    flash()</code></pre>
+<details><summary>Check the prediction</summary><p>It prints Shield twice. Defining the function adds no output; each call runs it once.</p></details>
+<h2>Guided task · Call the same action twice</h2>
+<p>Add a second call so the shield message prints twice.</p>
+<section class="panel" data-practice="full" data-editor-label="Guided task code" data-expected-output="Shield&#10;Shield">
+<pre><code>extends Node
+
+func flash():
+    print(&quot;Shield&quot;)
+
+func _ready():
+    flash()</code></pre>
+</section>
+<h2>Debugging task · Fix a call</h2>
+<p>Run the script and fix the spelling of the function call.</p>
+<section class="panel" data-practice="full" data-editor-label="Debugging task code" data-expected-output="Low health">
+<pre><code>extends Node
+
+func warn_player():
+    print(&quot;Low health&quot;)
+
+func _ready():
+    warn_plaer()</code></pre>
+</section>
+<h2>Independent task · Make a round intro</h2>
+<p>Define <code>show_intro()</code> to print two messages. Call it twice from <code>_ready()</code>.</p>
+<section class="panel" data-practice="full" data-editor-label="Independent task code">
+<pre><code>extends Node
+
+func _ready():
+    pass</code></pre>
+</section>
+<p><strong>Success criteria.</strong> Your two messages appear twice in the same order, using one definition and two calls.</p>
+<h2>Apply it to your project</h2>
+<p>Find two repeated instructions in your game script. Move them into one named function, call it from their original locations, and check that the game still behaves the same. <a href="../index.html#godot-setup">Godot editor setup</a></p>
+<h2>Optional extension</h2>
+<p>Change one message inside the function and run again to see both calls pick up the change.</p>
+<h2>Reflection</h2>
+<p>If you want to change the intro text everywhere, which line do you edit and why?</p>
+</main>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
