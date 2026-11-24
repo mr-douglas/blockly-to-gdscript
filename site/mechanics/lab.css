@@ -1,0 +1,11 @@
+.mechanics-nav { display: flex; flex-wrap: wrap; gap: .55rem 1.2rem; }
+.mechanics-nav [aria-current="page"] { font-weight: 700; }
+.lab-controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,12rem),1fr)); gap: .6rem 1rem; margin-bottom: 1rem; }
+.lab-controls label, .lab-time { display: grid; gap: .2rem; }
+.lab-controls input, .lab-time input { width: 100%; margin: 0; accent-color: #194da2; }
+.lab-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: .65rem; }
+.lab-actions button { font: inherit; color: inherit; background: #eff4fa; border: 1px solid #a9bbd1; border-radius: .45rem; padding: .5rem .8rem; cursor: pointer; }
+.lab-actions [data-play] { background: #194da2; border-color: #194da2; color: white; }
+[data-lab] canvas { display: block; border-radius: .55rem; width: 100%; height: auto; }
+[data-results] { min-height: 3.2em; font-variant-numeric: tabular-nums; }
+.mechanics-equations { overflow-wrap: anywhere; }

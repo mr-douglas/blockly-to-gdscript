@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulleys · 9709 Mechanics</title>
+<link rel="stylesheet" href="../assets/course.css"><link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="../index.html">Course home</a> · 9709 Mechanics</p>
+<h1>Two masses over a pulley</h1>
+<p><strong>Objective.</strong> Use Newton’s second law to find the acceleration and tension of two connected particles.</p>
+<p>Model two particles released from rest, joined by a light, inextensible string over a smooth pulley. Take <var>g</var> = 10 m/s². The string stays taut. Choose downward for B and upward for A as positive.</p>
+
+<h2>Predict, then test</h2>
+<ol>
+<li>Set A to 2 kg and B to 3 kg. Draw a force diagram for each mass. Calculate the signed acceleration of B and the tension.</li>
+<li>Run the model, then scrub to 1 s. Use your acceleration to predict B’s speed and displacement there.</li>
+<li>Set both masses to 2 kg. Predict the tension before testing. Then swap the original unequal masses and explain the sign change.</li>
+</ol>
+<section class="panel" aria-label="Pulley model" data-lab data-duration="1">
+  <div class="lab-controls">
+    <label>Mass A (kg) <output></output><input name="a" type="range" min="1" max="5" step="0.5" value="2" data-parameter></label>
+    <label>Mass B (kg) <output></output><input name="b" type="range" min="1" max="5" step="0.5" value="3" data-parameter></label>
+  </div>
+  <canvas width="720" height="370" role="img" aria-label="Two hanging blocks connected by a string; arrows show their acceleration directions."></canvas>
+  <div class="lab-actions"><button type="button" data-play>Run</button><button type="button" data-step>Step 0.25 s</button><button type="button" data-reset>Reset</button></div>
+  <label class="lab-time">Elapsed time <span data-time-label></span><input type="range" min="0" max="1" step="0.01" value="0" data-time></label>
+  <p data-results></p>
+</section>
+<h2>Check your working</h2>
+<details><summary>Show the equations and answers</summary>
+<p class="mechanics-equations">For A, <var>T</var> − <var>m</var><sub>A</sub><var>g</var> = <var>m</var><sub>A</sub><var>a</var>. For B, <var>m</var><sub>B</sub><var>g</var> − <var>T</var> = <var>m</var><sub>B</sub><var>a</var>. Add the equations to remove <var>T</var>, then substitute back for tension.</p>
+<p>With 2 kg and 3 kg, B accelerates down at 2 m/s² and the tension is 24 N. After 1 s, B is moving down at 2 m/s and is 1 m below its start. Equal 2 kg masses stay at rest and the tension is 20 N. Swapping 2 and 3 makes B’s acceleration −2 m/s², with tension still 24 N.</p>
+</details>
+<h2>Try the equation in GDScript</h2>
+<p>Change one mass and predict both values before running. Compare your result with the diagram.</p>
+<section class="panel" data-practice="snippet">
+<pre><code>var mass_a = 2.0
+var mass_b = 3.0
+var acceleration = 10.0 * (mass_b - mass_a) / (mass_a + mass_b)
+var tension = mass_a * (10.0 + acceleration)
+print(acceleration)
+print(tension)</code></pre>
+</section>
+</main>
+<script type="module" src="pulleys.js"></script>
+<script type="module" src="../assets/practice.js?v=lesson-1"></script>
+</body>
+</html>
