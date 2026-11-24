@@ -60,6 +60,13 @@ const platformerLessons = {
     "task": "Change GRAVITY and compare the time it takes to reach the floor.",
     "file": "platformer_gravity.gd"
   },
+  "jump": {
+    "title": "Platformer lesson 4 · Jump only from the floor",
+    "goal": "Jump onto the raised platform after landing.",
+    "controls": "Left and Right to move, Space to jump, R to restart.",
+    "task": "Compare JUMP_SPEED values of 240 and 440 on the same platform.",
+    "file": "platformer_jump.gd"
+  },
 };
 const lesson = requested === "platformer" && Object.hasOwn(platformerLessons, params.get("lesson"))
   ? params.get("lesson") : null;

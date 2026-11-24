@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Jump only from the floor | Build a 2D Platformer</title><link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Platformer course</a> · <a href="gravity.html">Previous lesson</a> · Lesson 4</p>
+<h1>Jump only from the floor</h1>
+<p><strong>Objective.</strong> Use one press and a grounded check to start a jump.</p>
+<h2>Set an upward speed once</h2>
+<p>Space is mapped to the <code>action</code> input. Check <code>is_action_just_pressed()</code> so holding the key does not repeatedly jump. Check <code>is_on_floor()</code> so a press in mid-air is ignored. Up is negative y. <code>super._physics_process(delta)</code> runs the previous lesson’s movement and gravity code.</p>
+<pre><code>if Input.is_action_just_pressed(&quot;action&quot;) and player.is_on_floor():
+    player.velocity.y = -JUMP_SPEED</code></pre>
+<p><a href="../play/?demo=platformer&amp;lesson=jump"><strong>Open the editable jump starter</strong></a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Wait until you land. Press Space and then press it again while airborne. Predict what each press will do.</li>
+<li>Change <code>JUMP_SPEED</code> to 240. Try to jump onto the raised platform. Restore 440 and try again.</li>
+<li>Temporarily remove the floor check. Test a second press while airborne, then repair the condition.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Only the first press starts a jump with the floor check. At 240 pixels/s, the jump is too low for the raised platform. Removing the floor check lets another press reset the upward speed in mid-air.</p></details>
+<p><strong>Success criteria.</strong> You can jump onto the platform. Holding Space does not keep bouncing, and pressing it again in mid-air does not restart the jump.</p>
+<p><strong>Apply it to your project.</strong> Add the <code>action</code> input and bind it to Space. Put the jump check before moving the CharacterBody2D, and apply gravity while it is airborne. Test a short jump and a jump onto a higher platform.</p>
+</main>
+</body>
+</html>
