@@ -1,6 +1,8 @@
 // Opens game examples from the built site in headless Chrome and saves
 // screenshots of the loading bar and of the running game, so the web build
-// can be checked exactly as students see it. Run by .github/workflows/browser.yml.
+// can be checked exactly as students see it. It also checks that the
+// "Click here to interact" prompt appears when the game loses focus and goes
+// away when the game is clicked. Run by .github/workflows/browser.yml.
 //   SITE=site SHOTS=out node .github/browser-shots.cjs
 const fs = require("node:fs");
 const http = require("node:http");
@@ -11,12 +13,14 @@ const site = path.resolve(process.env.SITE || "site");
 const shots = path.resolve(process.env.SHOTS || "shots");
 fs.mkdirSync(shots, {recursive: true});
 
+// The last value says whether the editor is embedded in a lesson page.
 const PAGES = [
-  ["racing-laps", "/play/?demo=racing&lesson=laps"],
-  ["racing-fixed", "/play/?demo=racing&lesson=fixed-track"],
-  ["platformer-3d", "/play/?demo=movement-3d&lesson=goal-3d"],
-  ["ui-start-menu", "/play/?demo=ui&lesson=start-menu"],
-  ["top-down", "/play/?demo=top-down"],
+  ["racing-laps", "/play/?demo=racing&lesson=laps", false],
+  ["racing-fixed", "/play/?demo=racing&lesson=fixed-track", false],
+  ["platformer-3d", "/play/?demo=movement-3d&lesson=goal-3d", false],
+  ["ui-start-menu", "/play/?demo=ui&lesson=start-menu", false],
+  ["top-down", "/play/?demo=top-down", false],
+  ["lesson-racing-laps", "/racing/laps.html", true],
 ];
 const TYPES = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css",
@@ -63,14 +67,47 @@ const server = http.createServer((request, response) => {
   next();
 });
 
-async function visit(browser, name, address, log) {
+async function hintShown(preview) {
+  return (await preview.locator("#focus-hint").getAttribute("hidden", {timeout: 5000})) === null;
+}
+
+// Click outside the game, then on it, and check the prompt each time.
+async function checkFocusHint(page, root, name, log) {
+  const preview = root.frameLocator(".play-stage iframe");
+  const stage = root.locator(".play-stage");
+  let ok = true;
+  await page.mouse.click(5, 5);
+  await page.waitForTimeout(800);
+  if (await hintShown(preview)) {
+    log.push(`${name} prompt shown after clicking outside the game`);
+  } else {
+    log.push(`${name} FAIL: no prompt after clicking outside the game`);
+    ok = false;
+  }
+  await stage.screenshot({path: path.join(shots, `${name}-unfocused.png`)});
+  await preview.locator("#game").click({position: {x: 40, y: 200}});
+  await page.waitForTimeout(800);
+  if (!(await hintShown(preview))) {
+    log.push(`${name} prompt hidden after clicking the game`);
+  } else {
+    log.push(`${name} FAIL: prompt still shown after clicking the game`);
+    ok = false;
+  }
+  await stage.screenshot({path: path.join(shots, `${name}-focused.png`)});
+  return ok;
+}
+
+async function visit(browser, name, address, embedded, log) {
   const page = await browser.newPage({viewport: {width: 1100, height: 1000}});
   page.on("pageerror", (error) => log.push(`${name} page error: ${error.message}`));
   await page.goto(address);
-  await page.waitForSelector("#start:not([disabled])", {timeout: 30000});
-  await page.click("#start");
-  const stage = page.locator(".play-stage");
-  const status = page.locator("#load-status");
+  const root = embedded ? page.frameLocator("iframe[data-platformer-editor]") : page;
+  const start = root.locator("#start");
+  await root.locator("#start:not([disabled])").waitFor({timeout: 30000});
+  await start.scrollIntoViewIfNeeded();
+  await start.click();
+  const stage = root.locator(".play-stage");
+  const status = root.locator("#load-status");
   const seen = new Set();
   const started = Date.now();
   let ready = false;
@@ -84,35 +121,26 @@ async function visit(browser, name, address, log) {
     const percent = Number((text.match(/(\d+)%/) || [])[1]);
     if (!seen.has("loading") && percent >= 25 && percent <= 75) {
       seen.add("loading");
-      log.push(`${name} progress: ${text}`);
-      await page.screenshot({path: path.join(shots, `${name}-loading.png`)});
-    }
-    if (!seen.has("starting") && text.startsWith("Starting")) {
-      seen.add("starting");
-      await stage.screenshot({path: path.join(shots, `${name}-starting.png`)});
+      await stage.screenshot({path: path.join(shots, `${name}-loading.png`)});
     }
     if (text.startsWith("Game ready")) {
       ready = true;
       break;
     }
-    if (/could not|too long|failed|requires/i.test(text)) {
+    if (/could not|too long|failed|requires|stopped/i.test(text)) {
       break;
     }
     await page.waitForTimeout(150);
   }
-  if (!ready) {
-    const preview = page.frameLocator(".play-stage iframe");
-    const caption = await preview.locator("#loading-text").textContent({timeout: 5000}).catch(() => "?");
-    const hidden = await preview.locator("#loading").getAttribute("hidden", {timeout: 5000}).catch(() => "?");
-    log.push(`${name} preview caption: ${caption}; overlay hidden attribute: ${hidden}`);
-  }
   log.push(`${name} ${ready ? "ready" : "NOT READY"} after ${((Date.now() - started) / 1000).toFixed(1)} s`);
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(3000);
   await stage.screenshot({path: path.join(shots, `${name}.png`)});
-  const messages = (await page.locator("#messages").textContent()) || "";
+  let ok = ready;
+  if (ready) ok = await checkFocusHint(page, root, name, log);
+  const messages = (await root.locator("#messages").textContent()) || "";
   if (messages.trim()) log.push(`${name} game output:\n${messages.trim()}`);
   await page.close();
-  return ready;
+  return ok;
 }
 
 (async () => {
@@ -122,8 +150,13 @@ async function visit(browser, name, address, log) {
   });
   const log = [];
   let failures = 0;
-  for (const [name, route] of PAGES) {
-    if (!(await visit(browser, name, `http://127.0.0.1:8000${route}`, log))) failures += 1;
+  for (const [name, route, embedded] of PAGES) {
+    try {
+      if (!(await visit(browser, name, `http://127.0.0.1:8000${route}`, embedded, log))) failures += 1;
+    } catch (error) {
+      log.push(`${name} FAIL: ${error.message.split("\n")[0]}`);
+      failures += 1;
+    }
   }
   await browser.close();
   server.close();

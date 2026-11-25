@@ -15,7 +15,12 @@ canvas{display:block;width:100%;height:100%;outline:none}
 #loading-bar{width:0;height:100%;background:#5fe0a8;border-radius:999px;transition:width .2s ease-out}
 .starting #loading-bar{background:repeating-linear-gradient(-45deg,#5fe0a8 0 14px,#3fb985 14px 28px);background-size:40px 40px;animation:busy 1s linear infinite}
 @keyframes busy{to{background-position:40px 0}}
-@media (prefers-reduced-motion:reduce){.starting #loading-bar{animation:none}}
+/* Clicks pass straight through to the game, which then takes focus. */
+#focus-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,18,34,.5);pointer-events:none}
+#focus-hint[hidden]{display:none}
+#focus-hint p{margin:0;padding:.7em 1.4em;border-radius:999px;background:#fff;color:#142842;font-size:clamp(1rem,3.2vw,1.6rem);box-shadow:0 4px 18px rgba(0,0,0,.45);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.starting #loading-bar,#focus-hint p{animation:none}}
 </style>
 </head>
 <body>
@@ -24,7 +29,8 @@ canvas{display:block;width:100%;height:100%;outline:none}
   <p id="loading-text">Loading the game…</p>
   <div class="loading-track"><div id="loading-bar"></div></div>
 </div>
+<div id="focus-hint" hidden><p>Click here to interact</p></div>
 <script src="godot.js"></script>
-<script src="preview.js?v=progress-1"></script>
+<script src="preview.js?v=focus-1"></script>
 </body>
 </html>

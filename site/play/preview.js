@@ -1,9 +1,12 @@
 const send = (type, text, extra = {}) => parent.postMessage({type, text, ...extra}, "*");
+const canvas = document.querySelector("#game");
 const overlay = document.querySelector("#loading");
 const bar = document.querySelector("#loading-bar");
 const caption = document.querySelector("#loading-text");
+const focusHint = document.querySelector("#focus-hint");
 
 let finished = false;
+let gameRunning = false;
 
 function showProgress(fraction, text) {
   // The engine can still report progress after the game has started.
@@ -15,11 +18,25 @@ function showProgress(fraction, text) {
   send("progress", caption.textContent, {percent});
 }
 
+// Keyboard input only reaches the game while this frame has focus. Show a
+// prompt whenever it does not, so students know to click the game first.
+function updateFocusHint() {
+  const focused = document.hasFocus();
+  if (focused && gameRunning && document.activeElement !== canvas) canvas.focus();
+  focusHint.hidden = !gameRunning || focused;
+}
+window.addEventListener("focus", updateFocusHint);
+window.addEventListener("blur", updateFocusHint);
+document.addEventListener("visibilitychange", updateFocusHint);
+setInterval(updateFocusHint, 250);
+
 window.reportPlaygroundReady = (success) => {
   finished = true;
   overlay.hidden = true;
   if (success) {
-    document.querySelector("#game").focus();
+    gameRunning = true;
+    canvas.focus();
+    updateFocusHint();
     send("ready");
   } else {
     send("failed");
@@ -87,7 +104,7 @@ window.addEventListener("message", async ({source, data}) => {
     };
     const engine = new Engine({
       executable: "godot",
-      canvas: document.querySelector("#game"),
+      canvas,
       canvasResizePolicy: 0,
       persistentPaths: [],
       onProgress: (current) => {
