@@ -85,7 +85,7 @@ async function visit(browser, name, address, log) {
     if (!seen.has("loading") && percent >= 25 && percent <= 75) {
       seen.add("loading");
       log.push(`${name} progress: ${text}`);
-      await stage.screenshot({path: path.join(shots, `${name}-loading.png`)});
+      await page.screenshot({path: path.join(shots, `${name}-loading.png`)});
     }
     if (!seen.has("starting") && text.startsWith("Starting")) {
       seen.add("starting");
