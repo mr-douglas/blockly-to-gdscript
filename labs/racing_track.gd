@@ -54,10 +54,12 @@ func add_sky_and_sun() -> void:
 	environment.sky = sky
 	# The sky is only the background. Lighting the scene from the bright blue sky
 	# washes everything out in the browser renderer, so use a soft, neutral
-	# ambient colour and switch off sky reflections instead.
+	# ambient colour and switch off sky reflections instead. Sun plus ambient
+	# stays a little under full brightness on surfaces facing the sun, so the
+	# grass, white kerbs and pale models do not glare.
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#d9e1e8")
-	environment.ambient_light_energy = 0.45
+	environment.ambient_light_energy = 0.3
 	environment.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
 	var world := WorldEnvironment.new()
 	world.environment = environment
@@ -66,7 +68,7 @@ func add_sky_and_sun() -> void:
 	var sun := DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-50, -35, 0)
 	sun.light_color = Color("#fff4e0")
-	sun.light_energy = 0.9
+	sun.light_energy = 0.75
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 45.0
 	add_child(sun)
