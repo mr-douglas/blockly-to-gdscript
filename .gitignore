@@ -22,6 +22,7 @@
 /labs/art/ui/*.part
 /site/play/playgrounds.pck
 /site/play/playgrounds-godot.zip
+/site/play/build.json
 /site/play/source/
 /.cache/godot/
 /site/play/godot.js
