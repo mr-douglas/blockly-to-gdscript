@@ -74,8 +74,13 @@ async function visit(browser, name, address, log) {
   const seen = new Set();
   const started = Date.now();
   let ready = false;
-  while (Date.now() - started < 180000) {
+  let last = "";
+  while (Date.now() - started < 90000) {
     const text = (await status.textContent()) || "";
+    if (!text.startsWith("Loading the game") && text !== last) {
+      log.push(`${name} status after ${((Date.now() - started) / 1000).toFixed(1)} s: ${text}`);
+    }
+    last = text;
     const percent = Number((text.match(/(\d+)%/) || [])[1]);
     if (!seen.has("loading") && percent >= 25 && percent <= 75) {
       seen.add("loading");
@@ -84,7 +89,6 @@ async function visit(browser, name, address, log) {
     }
     if (!seen.has("starting") && text.startsWith("Starting")) {
       seen.add("starting");
-      log.push(`${name} ${text} after ${((Date.now() - started) / 1000).toFixed(1)} s`);
       await stage.screenshot({path: path.join(shots, `${name}-starting.png`)});
     }
     if (text.startsWith("Game ready")) {
@@ -92,16 +96,19 @@ async function visit(browser, name, address, log) {
       break;
     }
     if (/could not|too long|failed|requires/i.test(text)) {
-      log.push(`${name} status: ${text}`);
       break;
     }
     await page.waitForTimeout(150);
   }
-  log.push(`${name} ${ready ? "ready" : "NOT READY"} after ${((Date.now() - started) / 1000).toFixed(1)} s`);
-  if (ready) {
-    await page.waitForTimeout(4000);
-    await stage.screenshot({path: path.join(shots, `${name}.png`)});
+  if (!ready) {
+    const preview = page.frameLocator(".play-stage iframe");
+    const caption = await preview.locator("#loading-text").textContent({timeout: 5000}).catch(() => "?");
+    const hidden = await preview.locator("#loading").getAttribute("hidden", {timeout: 5000}).catch(() => "?");
+    log.push(`${name} preview caption: ${caption}; overlay hidden attribute: ${hidden}`);
   }
+  log.push(`${name} ${ready ? "ready" : "NOT READY"} after ${((Date.now() - started) / 1000).toFixed(1)} s`);
+  await page.waitForTimeout(4000);
+  await stage.screenshot({path: path.join(shots, `${name}.png`)});
   const messages = (await page.locator("#messages").textContent()) || "";
   if (messages.trim()) log.push(`${name} game output:\n${messages.trim()}`);
   await page.close();
