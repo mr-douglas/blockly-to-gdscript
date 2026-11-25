@@ -4,11 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Godot game preview</title>
-<style>html,body{width:100%;height:100%;margin:0;background:#142842}canvas{display:block;width:100%;height:100%;outline:none}</style>
+<style>
+html,body{width:100%;height:100%;margin:0;background:#142842}
+body{position:relative;font:600 1.15rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+canvas{display:block;width:100%;height:100%;outline:none}
+#loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:#142842;color:#fff}
+#loading[hidden]{display:none}
+#loading p{margin:0}
+.loading-track{width:min(70%,30rem);height:1.4rem;padding:3px;box-sizing:border-box;background:#0b1a2e;border:2px solid #5d7ea8;border-radius:999px;overflow:hidden}
+#loading-bar{width:0;height:100%;background:#5fe0a8;border-radius:999px;transition:width .2s ease-out}
+.starting #loading-bar{background:repeating-linear-gradient(-45deg,#5fe0a8 0 14px,#3fb985 14px 28px);background-size:40px 40px;animation:busy 1s linear infinite}
+@keyframes busy{to{background-position:40px 0}}
+@media (prefers-reduced-motion:reduce){.starting #loading-bar{animation:none}}
+</style>
 </head>
 <body>
 <canvas id="game" width="768" height="432" tabindex="0" aria-label="Game canvas"></canvas>
+<div id="loading" role="progressbar" aria-label="Loading the game" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <p id="loading-text">Loading the game…</p>
+  <div class="loading-track"><div id="loading-bar"></div></div>
+</div>
 <script src="godot.js"></script>
-<script src="preview.js?v=platformer-1"></script>
+<script src="preview.js?v=progress-1"></script>
 </body>
 </html>

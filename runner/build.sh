@@ -76,6 +76,11 @@ smoke res://ci/smoke_racing.gd 'SMOKE PASSED'
 smoke res://ci/tour.gd 'TOUR PASSED'
 
 labs_godot --export-pack Web "$play/playgrounds.pck"
+# The game preview reads this for its loading bar. The version changes whenever
+# the game files change, so browsers never reuse an old copy.
+printf '{"version":"%s","pckSize":%s,"wasmSize":%s}\n' \
+  "$(sha256sum "$play/playgrounds.pck" | cut -c1-16)" \
+  "$(stat -c %s "$play/playgrounds.pck")" "$(stat -c %s "$play/godot.wasm")" > "$play/build.json"
 mkdir -p "$play/source"
 cp "$labs/"*.gd "$play/source/"
 mkdir -p "$project/../site/animation/assets"
