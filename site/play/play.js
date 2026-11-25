@@ -291,6 +291,7 @@ const messages = document.querySelector("#messages");
 let starter;
 let frame;
 let timer;
+const STALL_MS = 60000;
 
 function stopGame() {
   clearTimeout(timer);
@@ -298,6 +299,17 @@ function stopGame() {
   frame = undefined;
   start.hidden = false;
   stop.disabled = true;
+}
+
+// Give up only when loading makes no progress for a whole minute, so a slow
+// school network can still finish downloading the game.
+function watchForStall() {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    stopGame();
+    status.textContent = "The game stopped loading. Check your connection and try again.";
+    editorStatus.textContent = status.textContent;
+  }, STALL_MS);
 }
 
 function run() {
@@ -310,29 +322,28 @@ function run() {
   messages.textContent = "";
   consoleOutput.open = false;
   editorStatus.textContent = "Starting a new game with this code.";
-  status.textContent = "Loading Godot…";
+  status.textContent = "Loading the game…";
   start.hidden = true;
   stop.disabled = false;
   const preview = document.createElement("iframe");
   preview.title = `${demo.title} game preview`;
   preview.sandbox = "allow-scripts";
-  preview.src = "preview.html?v=platformer-1";
+  preview.src = "preview.html?v=progress-1";
   frame = preview;
   const code = source.value;
   preview.addEventListener("load", () => {
     if (preview === frame) preview.contentWindow.postMessage({type: "run-playground", key, code, lesson}, "*");
   }, {once: true});
   stage.append(preview);
-  timer = setTimeout(() => {
-    stopGame();
-    status.textContent = "Godot took too long to start. Try running the code again.";
-    editorStatus.textContent = status.textContent;
-  }, 45000);
+  watchForStall();
 }
 
 window.addEventListener("message", ({source: sender, data}) => {
   if (!frame || sender !== frame.contentWindow || !data) return;
-  if (data.type === "ready") {
+  if (data.type === "progress") {
+    status.textContent = data.text;
+    watchForStall();
+  } else if (data.type === "ready") {
     clearTimeout(timer);
     status.textContent = "Game ready. Click the preview, then use the keys shown above.";
     editorStatus.textContent = "Game restarted with the code in the editor.";
