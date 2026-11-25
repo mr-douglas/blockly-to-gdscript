@@ -3,7 +3,11 @@ const overlay = document.querySelector("#loading");
 const bar = document.querySelector("#loading-bar");
 const caption = document.querySelector("#loading-text");
 
+let finished = false;
+
 function showProgress(fraction, text) {
+  // The engine can still report progress after the game has started.
+  if (finished) return;
   const percent = Math.max(0, Math.min(100, Math.floor(fraction * 100)));
   bar.style.width = `${percent}%`;
   overlay.setAttribute("aria-valuenow", String(percent));
@@ -12,6 +16,7 @@ function showProgress(fraction, text) {
 }
 
 window.reportPlaygroundReady = (success) => {
+  finished = true;
   overlay.hidden = true;
   if (success) {
     document.querySelector("#game").focus();
@@ -113,6 +118,11 @@ window.addEventListener("message", async ({source, data}) => {
     engine.copyToFS("/student.gd", new TextEncoder().encode(data.code));
     await engine.start({args: ["--main-pack", "playgrounds.pck", "--", data.key]});
   } catch (error) {
+    if (finished) {
+      send("error", error.message);
+      return;
+    }
+    finished = true;
     overlay.hidden = true;
     send("failed", error.message);
   }
