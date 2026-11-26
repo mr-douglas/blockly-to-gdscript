@@ -29,11 +29,12 @@ func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 	world.environment = environment
 	add_child(world)
 
-	# Shadows must reach everything the camera can see. Keeping the reach
-	# tight keeps the shadow map sharp.
+	# The sun shines from the front-left, so shadows fall to the right of
+	# things where the camera can see them. Keeping the reach tight keeps the
+	# shadow map sharp.
 	var reach: float = camera_at.distance_to(target) + view_size
-	add_sun(Vector3(-55, -32, 0), 1.3, maxf(reach, 25.0))
-	add_fill(Vector3(-30, 150, 0), 0.2)
+	add_sun(Vector3(-50, -68, 0), 1.3, maxf(reach, 25.0))
+	add_fill(Vector3(-30, 125, 0), 0.2)
 
 ## Settings shared by every 3D scene: tonemapping and no sky reflections
 ## (which wash the browser renderer out).
@@ -51,9 +52,9 @@ func add_sun(angles: Vector3, energy: float, shadow_reach: float) -> Directional
 	sun.light_color = SUN_COLOR
 	sun.light_energy = energy
 	sun.shadow_enabled = true
-	sun.shadow_blur = 1.0
+	sun.shadow_blur = 0.8
 	sun.shadow_bias = 0.1
-	sun.shadow_normal_bias = 2.0
+	sun.shadow_normal_bias = 1.6
 	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
 	sun.directional_shadow_split_1 = 0.35
 	sun.directional_shadow_blend_splits = true
