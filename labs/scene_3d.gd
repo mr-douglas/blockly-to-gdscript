@@ -34,7 +34,9 @@ func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 	# shadow map sharp. Split shadow maps band on orthographic cameras, so
 	# these scenes use one shadow map for the whole view.
 	var reach: float = camera_at.distance_to(target) + view_size
-	add_sun(Vector3(-50, -68, 0), 1.3, maxf(reach, 25.0), false)
+	var sun := add_sun(Vector3(-50, -68, 0), 1.3, maxf(reach, 12.0), false)
+	sun.shadow_bias = 0.08
+	sun.shadow_normal_bias = 1.0
 	add_fill(Vector3(-30, 125, 0), 0.2)
 
 ## Settings shared by every 3D scene: tonemapping and no sky reflections
