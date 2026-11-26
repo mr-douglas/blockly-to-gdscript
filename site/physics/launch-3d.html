@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Knock down a crate pyramid in 3D | Physics and Collisions</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Physics course</a> · Lesson 5</p>
+<h1>Knock down a crate pyramid in 3D</h1>
+<p><strong>Objective.</strong> Build a 3D aiming direction from two angles, then throw a ball at a pyramid of crates.</p>
+<h2>Nested loops build the pyramid</h2>
+<p>The pyramid has three rows. Row 0 has 3 crates, row 1 has 2 and row 2 has 1, so the inner loop runs <code>3 - row</code> times. A third loop makes it two crates deep. The strong metal-banded crates go on the bottom row.</p>
+<h2>Aiming in 3D</h2>
+<p>In 2D one angle was enough. In 3D you need two: how far to tip the throw <em>up</em> (Up and Down) and how far to <em>turn</em> it left or right (Left and Right). The code starts with a direction along x, tips it up, then rotates it around the vertical axis:</p>
+<pre><code>var direction := Vector3(cos(up), sin(up), 0)
+return direction.rotated(Vector3.UP, deg_to_rad(turn))</code></pre>
+<p>The yellow arrow shows that direction. Space unfreezes the ball and gives it an impulse along the arrow, just like the 2D lesson.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=physics&amp;lesson=launch-3d&amp;embed=1"></iframe>
+<p><a href="../play/?demo=physics&amp;lesson=launch-3d">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Knock down all 12 crates. Which angle works best?</li>
+<li>Change <code>for row in 3</code> to 4 and <code>3 - row</code> to <code>4 - row</code>. How many crates are there now?</li>
+<li>Change <code>SPEED</code> to 6. Which angle do you need now?</li>
+<li>Change <code>Vector3.UP</code> to <code>Vector3.RIGHT</code> in <code>launch_direction()</code>, then press Left and Right. What happens to the arrow?</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Four rows two deep gives (4 + 3 + 2 + 1) × 2 = 20 crates. A slower ball needs a higher angle to reach the same distance. Rotating around <code>Vector3.RIGHT</code> (the x axis) rolls the arrow around itself instead of turning it, so Left and Right only tilt it sideways a little. The axis you rotate around matters.</p></details>
+<p><strong>Success criteria.</strong> You can aim in 3D and knock the pyramid down, and you can explain how the two angles make one direction.</p>
+<p><strong>Apply it to your project.</strong> Swap the red ball for your own imported model. Give the player three balls, and use a <code>Label</code> in a CanvasLayer to show how many crates are left.</p>
+<p><a href="./">Back to the Physics course</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

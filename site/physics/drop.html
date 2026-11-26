@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1. Drop a crate onto the ground | Physics and Collisions</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Physics course</a> · Lesson 1</p>
+<h1>Drop a crate onto the ground</h1>
+<p><strong>Objective.</strong> Make a body that the physics engine moves for you, and start it at a random angle.</p>
+<h2>Let the engine do the moving</h2>
+<p>A <code>CharacterBody2D</code> only moves when your code calls <code>move_and_slide()</code>. A <code>RigidBody2D</code> is different: once it is in the scene, Godot applies gravity, works out collisions and makes it bounce, slide and tip over. There is no <code>_physics_process</code> in this lesson at all.</p>
+<p>Every physics body needs a collision shape. <code>add_box()</code> gives the crate a 70 × 70 <code>RectangleShape2D</code>, and <code>block_art()</code> draws the Kenney wooden crate on top at the same size.</p>
+<pre><code>crate = RigidBody2D.new()
+crate.position = Vector2(384, 60)
+crate.rotation = randf_range(0, TAU)
+add_box(crate, CRATE_SIZE)
+block_art(crate, CRATE_SIZE, "wood")
+add_child(crate)</code></pre>
+<p>Rotation in Godot is measured in <strong>radians</strong>. A full turn is <code>TAU</code> (about 6.28) radians, which is 360 degrees. <code>randf_range(0, TAU)</code> picks a different starting angle every time the scene starts, so press R a few times and watch the crate land differently.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=physics&amp;lesson=drop&amp;embed=1"></iframe>
+<p><a href="../play/?demo=physics&amp;lesson=drop">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Replace the random angle with <code>crate.rotation = 0</code>. Predict how it lands, then test it.</li>
+<li>Try <code>crate.rotation = TAU / 8</code> (45 degrees). Does it always fall to the same side?</li>
+<li>Change the height in <code>crate.position</code> to 250. Does a lower drop make the crate bounce less?</li>
+<li>Change <code>CRATE_SIZE</code> to <code>Vector2(140, 70)</code>. Why does the picture change to a plank?</li>
+</ol>
+<details><summary>Check the prediction</summary><p>With a rotation of 0 the crate lands flat and stays still. At exactly 45 degrees it lands on a corner. In a perfect world it would balance, but tiny rounding errors in the physics push it one way, so it topples. <code>block_art()</code> chooses the plank picture for any size that is much wider than it is tall. The collision shape and the picture always use the same size.</p></details>
+<p><strong>Success criteria.</strong> The crate falls, hits the ground and settles. Each press of R gives a different starting angle.</p>
+<p><strong>Apply it to your project.</strong> In Godot, add a RigidBody2D with a Sprite2D and a CollisionShape2D as children. Run the scene, and it falls with no code. Add a StaticBody2D floor with its own CollisionShape2D for it to land on.</p>
+<p><a href="stack.html">Next lesson · Build a tower with mass and friction</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

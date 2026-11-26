@@ -13,6 +13,13 @@
 /labs/art/platformer3d/*.import
 /labs/art/platformer3d/*.part
 /labs/art/platformer3d/Textures/
+/labs/art/physics2d/*.png
+/labs/art/physics2d/*.import
+/labs/art/physics2d/*.part
+/labs/art/physics3d/*.glb
+/labs/art/physics3d/*.import
+/labs/art/physics3d/*.part
+/labs/art/physics3d/Textures/
 /labs/art/audio/*.ogg
 /labs/art/audio/*.import
 /labs/art/audio/*.part
