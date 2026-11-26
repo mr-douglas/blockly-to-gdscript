@@ -31,12 +31,12 @@ func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 
 	# The sun shines from the front-left, so shadows fall to the right of
 	# things where the camera can see them. Keeping the reach tight keeps the
-	# shadow map sharp. Split shadow maps band on orthographic cameras, so
-	# these scenes use one shadow map for the whole view.
+	# shadow map sharp. A larger depth bias stops striped "shadow acne" on the
+	# big flat floors seen by the orthographic camera.
 	var reach: float = camera_at.distance_to(target) + view_size
-	var sun := add_sun(Vector3(-50, -68, 0), 1.3, maxf(reach, 12.0), false)
-	sun.shadow_bias = 0.08
-	sun.shadow_normal_bias = 1.0
+	var sun := add_sun(Vector3(-50, -68, 0), 1.3, maxf(reach, 12.0))
+	sun.shadow_bias = 0.25
+	sun.shadow_normal_bias = 1.5
 	add_fill(Vector3(-30, 125, 0), 0.2)
 
 ## Settings shared by every 3D scene: tonemapping and no sky reflections
@@ -48,7 +48,7 @@ func finish_environment(environment: Environment) -> void:
 	environment.tonemap_white = 5.0
 
 ## The key light. It casts soft shadows.
-func add_sun(angles: Vector3, energy: float, shadow_reach: float, split := true) -> DirectionalLight3D:
+func add_sun(angles: Vector3, energy: float, shadow_reach: float) -> DirectionalLight3D:
 	var sun := DirectionalLight3D.new()
 	sun.name = "Sun"
 	sun.rotation_degrees = angles
@@ -58,12 +58,9 @@ func add_sun(angles: Vector3, energy: float, shadow_reach: float, split := true)
 	sun.shadow_blur = 0.8
 	sun.shadow_bias = 0.15
 	sun.shadow_normal_bias = 1.6
-	if split:
-		sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
-		sun.directional_shadow_split_1 = 0.35
-		sun.directional_shadow_blend_splits = true
-	else:
-		sun.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
+	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
+	sun.directional_shadow_split_1 = 0.35
+	sun.directional_shadow_blend_splits = true
 	sun.directional_shadow_max_distance = shadow_reach
 	add_child(sun)
 	return sun
