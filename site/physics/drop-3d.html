@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4. Drop a crate in 3D | Physics and Collisions</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Physics course</a> · Lesson 4</p>
+<h1>Drop a crate in 3D</h1>
+<p><strong>Objective.</strong> Move the first lesson into 3D with RigidBody3D and a random rotation around all three axes.</p>
+<h2>Same idea, one more dimension</h2>
+<p>Compare this with lesson 1. <code>RigidBody2D</code> becomes <code>RigidBody3D</code>, the shape is a <code>BoxShape3D</code>, and positions use <code>Vector3</code>. In 2D a body can only spin one way, so its rotation is a single number. In 3D it can spin around the x, y and z axes, so <code>rotation</code> is a <code>Vector3</code> of three angles.</p>
+<pre><code>crate.rotation = Vector3(randf_range(0, TAU), randf_range(0, TAU), randf_range(0, TAU))</code></pre>
+<p>The crate and the grassy island are models from Kenney’s Platformer Kit. <code>crate_art()</code> stretches the crate model to match the collision box exactly.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=physics&amp;lesson=drop-3d&amp;embed=1"></iframe>
+<p><a href="../play/?demo=physics&amp;lesson=drop-3d">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Set the rotation to <code>Vector3(0, randf_range(0, TAU), 0)</code>. Predict how it lands now.</li>
+<li>Change <code>shape.size</code> to <code>Vector3(2, 0.5, 1)</code>. What happens to the picture?</li>
+<li>Add <code>crate.mass = 10</code>. Does a heavier crate fall faster?</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Turning only around the y axis (up) spins the crate like a turntable, so it still lands flat. The model stretches to fit any box size. Mass does not change how fast things fall: without air resistance, heavy and light bodies fall together.</p></details>
+<p><strong>Success criteria.</strong> The crate lands differently each time you press R, and you can name the three rotation axes.</p>
+<p><strong>Apply it to your project.</strong> In a 3D scene, add a RigidBody3D with a MeshInstance3D (or an imported model) and a CollisionShape3D. Put a StaticBody3D floor below it and run the scene.</p>
+<p><a href="launch-3d.html">Next lesson · Knock down a crate pyramid in 3D</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

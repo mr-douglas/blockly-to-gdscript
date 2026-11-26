@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2. Build a tower with mass and friction | Physics and Collisions</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Physics course</a> · Lesson 2</p>
+<h1>Build a tower with mass and friction</h1>
+<p><strong>Objective.</strong> Use a function and a loop to build many rigid bodies, then change their mass and friction.</p>
+<h2>One function, many blocks</h2>
+<p>Every block needs the same five steps: make the body, place it, set its mass, give it a shape and draw it. <code>add_block()</code> does all five, so the tower is just a short loop. Each time round the loop builds one storey (two posts and a plank) and moves <code>base_y</code> up by 145 pixels for the next one.</p>
+<pre><code>for storey in 2:
+	add_block(Vector2(330, base_y - 55), Vector2(35, 110), "wood", WOOD_MASS)
+	add_block(Vector2(438, base_y - 55), Vector2(35, 110), "wood", WOOD_MASS)
+	add_block(Vector2(384, base_y - 127.5), Vector2(160, 35), "wood", WOOD_MASS)
+	base_y -= 145</code></pre>
+<h2>Mass and PhysicsMaterial</h2>
+<p><code>mass</code> sets how heavy a body is. Heavy bodies push light ones out of the way. A <code>PhysicsMaterial</code> describes the surface: <code>friction</code> (0 is ice, 1 is very grippy) and <code>bounce</code> (0 is a beanbag, 1 is a superball). Press Space to drop a stone block that is four times heavier than the wood.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=physics&amp;lesson=stack&amp;embed=1"></iframe>
+<p><a href="../play/?demo=physics&amp;lesson=stack">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Change <code>for storey in 2</code> to 3. Where does the third storey appear?</li>
+<li>Set <code>STONE_MASS</code> to 0.2 and drop the stone. Then try 20.</li>
+<li>Set <code>FRICTION</code> to 0.0. Predict what happens to the tower before you press Space.</li>
+<li>Set <code>surface.bounce</code> to 0.8 and drop the stone again.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>A third storey sits on top of the second because <code>base_y</code> keeps going up. A very light stone bounces off the plank, and a very heavy one smashes through. With no friction the planks slide off the posts as soon as anything wobbles. Bouncy blocks make the whole tower jitter and fly apart.</p></details>
+<p><strong>Success criteria.</strong> The tower stands until the stone hits it, and you can explain how mass and friction changed what happened.</p>
+<p><strong>Apply it to your project.</strong> In the Inspector, a RigidBody2D has <em>Mass</em> and a <em>Physics Material Override</em> slot. Create a new PhysicsMaterial there, then save it as a <code>.tres</code> file so many bodies can share it.</p>
+<p><a href="launch.html">Next lesson · Throw a ball at a tower</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Throw a ball at a tower | Physics and Collisions</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Physics course</a> · Lesson 3</p>
+<h1>Throw a ball at a tower</h1>
+<p><strong>Objective.</strong> Aim with the keyboard, launch a rigid body with an impulse, and check when the targets have been knocked out.</p>
+<h2>Freeze, aim, then push</h2>
+<p>The green alien is a <code>RigidBody2D</code> with <code>freeze = true</code>, so gravity ignores it while you aim. Up and Down change <code>angle</code>, Left and Right change <code>power</code>. <code>Vector2.from_angle()</code> turns the angle into a direction. Angles in Godot turn clockwise, and y points down the screen, so “up” needs a negative angle.</p>
+<pre><code>func launch_velocity() -&gt; Vector2:
+	return Vector2.from_angle(deg_to_rad(-angle)) * power
+...
+ball.freeze = false
+ball.apply_central_impulse(launch_velocity() * ball.mass)</code></pre>
+<p>An <strong>impulse</strong> is a sudden push, like a kick. A push of <code>velocity × mass</code> gives any ball exactly that velocity.</p>
+<h2>Predicting the path</h2>
+<p>The yellow line uses the equation of motion <code>position = start + velocity × t + ½ × gravity × t²</code> to draw the first 0.55 seconds of the flight. Godot’s engine uses the same rule, so the ball follows the line until it hits something.</p>
+<p>A target counts as knocked out once it has moved more than 30 pixels from where it started. <code>set_meta()</code> stores that starting position on each target.</p>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable game" src="../play/?demo=physics&amp;lesson=launch&amp;embed=1"></iframe>
+<p><a href="../play/?demo=physics&amp;lesson=launch">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Knock out both aliens. How many shots did it take?</li>
+<li>Change <code>ball.mass</code> to 10. The ball leaves at the same speed, so predict whether the tower falls more easily.</li>
+<li>Remove <code>* ball.mass</code> from the impulse line and keep the mass at 10. What happens to the shot, and does it still follow the yellow line?</li>
+<li>Call <code>build_tower(660)</code> as well, to add a second tower further away.</li>
+</ol>
+<details><summary>Check the prediction</summary><p>A heavier ball at the same speed carries more momentum, so it smashes through the tower. Without <code>* ball.mass</code>, the same push gives a heavy ball a tenth of the speed. It falls short of the yellow line, which assumes the full speed. The second tower adds two more aliens, and the counter changes to “/ 4” because it uses <code>targets.size()</code>.</p></details>
+<p><strong>Success criteria.</strong> You can aim, throw and knock out every alien, and you can explain why the impulse is multiplied by the mass.</p>
+<p><strong>Apply it to your project.</strong> Turn the knocked-out count into a score shown in a HUD (see the <a href="../ui/">interface course</a>), and give the player a limited number of shots.</p>
+<p><a href="drop-3d.html">Next lesson · Drop a crate in 3D</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
