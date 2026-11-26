@@ -10,8 +10,12 @@ const BRAKE_FORCE := 8000.0   # newtons slowing the car when you press back
 const REVERSE_FORCE := 2000.0 # newtons pushing the car backwards once stopped
 const DRAG := 60.0            # air resistance: force = DRAG * speed * speed
 const ROLLING := 80.0         # tyre rolling resistance: force = ROLLING * speed
-const GRIP := 6.0             # how quickly the tyres stop a sideways slide
-const STEERING := 2.6         # how fast the car turns at full lock
+const GRIP := 10.0            # how quickly the tyres stop a sideways slide
+const WHEELBASE := 0.8        # metres from the front wheels to the back wheels
+const REAR_AXLE := 0.46       # metres from the middle of the car to the back wheels
+const MAX_STEER := 35.0       # degrees the front wheels can turn when stopped
+const STEER_SPEED := 150.0    # degrees per second the front wheels turn
+const WHEEL_RADIUS := 0.14    # metres
 const WALL_BOUNCE := 0.35     # 0 = thud into the wall, 1 = perfect bounce
 const CAR_BOUNCE := 0.6       # how bouncy car-to-car bumps are
 var speedometer: Label
@@ -20,19 +24,32 @@ func _ready() -> void:
 	super._ready()
 	speedometer = label("")
 	speedometer.position.y = 76
+	for car in [car_a, car_b]:
+		car.set_meta("steer", 0.0)  # front wheel angle in degrees
+		car.set_meta("roll", 0.0)   # how far the wheels have rolled, in radians
 
 func drive(car: CharacterBody3D, turn: float, throttle: float, delta: float) -> void:
 	var forward := -car.transform.basis.z
 	var forward_speed := car.velocity.dot(forward)
 
-	# 1. Steering. A car turns by rolling its wheels, so it cannot turn when
-	#    it is stopped, and it steers the other way when reversing.
-	var steer := clampf(forward_speed / 3.0, -1.0, 1.0)
-	car.rotate_y(turn * STEERING * steer * delta)
+	# 1. Turn the front wheels towards where the player is steering. Like a
+	#    real car, the wheels turn less at high speed, so it does not spin out.
+	var lock := MAX_STEER / (1.0 + absf(forward_speed) / 5.0)
+	var steer: float = move_toward(car.get_meta("steer"), turn * lock, STEER_SPEED * delta)
+	car.set_meta("steer", steer)
+
+	# 2. The front wheels pull the car round a circle while the back wheels
+	#    follow them. Turning rate = speed * tan(wheel angle) / wheelbase.
+	#    Turn around the back wheels, so the back of the car does not swing out.
+	#    A stopped car cannot turn, and reversing turns the other way.
+	var turn_rate := forward_speed * tan(deg_to_rad(steer)) / WHEELBASE
+	var rear_wheels := car.position + car.transform.basis.z * REAR_AXLE
+	car.rotate_y(turn_rate * delta)
+	car.position = rear_wheels - car.transform.basis.z * REAR_AXLE
 	forward = -car.transform.basis.z
 	forward_speed = car.velocity.dot(forward)
 
-	# 2. Add up every force on the car.
+	# 3. Add up every force on the car.
 	var force := Vector3.ZERO
 	if throttle > 0:
 		force += forward * ENGINE_FORCE * throttle
@@ -43,18 +60,18 @@ func drive(car: CharacterBody3D, turn: float, throttle: float, delta: float) -> 
 	var speed := car.velocity.length()
 	force -= car.velocity * (DRAG * speed + ROLLING)
 
-	# 3. Newton's second law: acceleration = force / mass. The velocity is
+	# 4. Newton's second law: acceleration = force / mass. The velocity is
 	#    kept between frames, so the car carries its momentum.
 	var acceleration := force / MASS
 	car.velocity += acceleration * delta
 
-	# 4. Tyre grip. Remove part of the sideways slide each frame. Low grip
+	# 5. Tyre grip. Remove part of the sideways slide each frame. Low grip
 	#    lets the car drift wide on corners.
 	var right := car.transform.basis.x
 	var slide := car.velocity.dot(right)
 	car.velocity -= right * slide * minf(1.0, GRIP * delta)
 
-	# 5. Move, then react to anything we hit.
+	# 6. Move, then react to anything we hit.
 	var before := car.velocity
 	car.move_and_slide()
 	for i in car.get_slide_collision_count():
@@ -66,6 +83,20 @@ func drive(car: CharacterBody3D, turn: float, throttle: float, delta: float) -> 
 			bump(car, hit.get_collider(), normal, before)
 		else:
 			bounce_off_wall(car, normal, before)
+	turn_wheels(car, forward_speed, delta)
+
+# Show the steering angle on the front wheels, and roll all four wheels
+# along the road. A wheel rolls through (distance / radius) radians.
+func turn_wheels(car: CharacterBody3D, forward_speed: float, delta: float) -> void:
+	var roll: float = car.get_meta("roll") + forward_speed * delta / WHEEL_RADIUS
+	car.set_meta("roll", wrapf(roll, 0.0, TAU))
+	var steer := deg_to_rad(car.get_meta("steer"))
+	for wheel_name in ["wheelFrontLeft", "wheelFrontRight"]:
+		var wheel: Node3D = car.find_child(wheel_name, true, false)
+		wheel.rotation = Vector3(roll, steer, 0)
+	for wheel_name in ["wheelBackLeft", "wheelBackRight"]:
+		var wheel: Node3D = car.find_child(wheel_name, true, false)
+		wheel.rotation = Vector3(roll, 0, 0)
 
 # Reverse the part of the velocity going into the wall, and shrink it.
 func bounce_off_wall(car: CharacterBody3D, normal: Vector3, before: Vector3) -> void:
