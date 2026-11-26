@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6. Give the racing cars real physics | Physics and Collisions</title><link rel="stylesheet" href="../assets/course.css">
+<link rel="stylesheet" href="../platformer/lesson-editor.css">
+</head>
+<body>
+<header><div class="wrap"><a href="../index.html">Blockly to GDScript</a></div></header>
+<main class="wrap">
+<p><a href="./">Physics course</a> · <a href="launch-3d.html">Previous lesson</a> · Lesson 6</p>
+<h1>Give the racing cars real physics</h1>
+<p><strong>Objective.</strong> Replace the racing cars’ instant movement with forces, so they accelerate, carry momentum, slide on corners and bounce off walls and each other.</p>
+<h2>Start from the finished racer</h2>
+<p>This script <code>extends</code> the last lesson of <a href="../racing/laps.html">Build a Two-Player Racer</a>, so the track, shared camera, gates and laps are already there. It replaces just one function: <code>drive()</code>. The old version set the velocity straight to <code>throttle * SPEED</code> every frame. That means the cars reach full speed instantly, stop instantly and forget how fast they were going.</p>
+<pre><code>car.velocity = -car.transform.basis.z * throttle * SPEED</code></pre>
+<h2>Forces, then acceleration, then velocity</h2>
+<p>The new <code>drive()</code> never sets the velocity directly. It adds up the <strong>forces</strong> on the car, divides by the mass to get the <strong>acceleration</strong> (Newton’s second law, <code>a = F / m</code>), and adds that to the velocity a little every frame. Because the velocity is kept between frames, the car keeps moving when you let go. That is <strong>momentum</strong>.</p>
+<pre><code>force += forward * ENGINE_FORCE * throttle
+force -= car.velocity * (DRAG * speed + ROLLING)
+var acceleration := force / MASS
+car.velocity += acceleration * delta</code></pre>
+<p>Air <code>DRAG</code> grows with speed × speed. Eventually it balances the engine and the car stops speeding up. That is its <strong>top speed</strong>. <code>ROLLING</code> resistance makes a coasting car slow down and stop.</p>
+<h2>Grip, steering and collisions</h2>
+<ul>
+<li><strong>Grip.</strong> Tyres resist sliding sideways. Each frame the code removes part of the sideways velocity. With less <code>GRIP</code> the car drifts wide on corners.</li>
+<li><strong>Steering.</strong> The turn is scaled by the forward speed, so a stopped car cannot spin on the spot and a reversing car steers the other way.</li>
+<li><strong>Walls.</strong> <code>bounce_off_wall()</code> reverses only the part of the velocity going into the wall and shrinks it by <code>WALL_BOUNCE</code>. Glancing blows keep most of their speed.</li>
+<li><strong>Car bumps.</strong> <code>bump()</code> gives both cars equal and opposite pushes, so their total momentum is the same before and after. A fast car rams a slow one forward and slows down itself.</li>
+</ul>
+<h2>Try it on this page</h2>
+<iframe class="platformer-editor" data-platformer-editor title="Editable GDScript and playable racing" src="../play/?demo=physics&amp;lesson=racing&amp;embed=1"></iframe>
+<p><a href="../play/?demo=physics&amp;lesson=racing">Open the editor on its own page</a></p>
+<h2>Predict, change, and test</h2>
+<ol>
+<li>Hold Up for a few seconds and watch the speedometer. Predict the top speed, then halve <code>DRAG</code> and test again.</li>
+<li>Double <code>MASS</code>. What changes: the top speed, the acceleration, or both?</li>
+<li>Set <code>GRIP</code> to 1.0 and take a corner at full speed. Then try 30.0.</li>
+<li>Set <code>WALL_BOUNCE</code> to 1.0 and drive into a barrier at an angle. Then try 0.0.</li>
+<li>Park Green on the track and ram it with Orange. Which car ends up faster?</li>
+</ol>
+<details><summary>Check the prediction</summary><p>Top speed is where the engine force equals drag plus rolling resistance. Halving <code>DRAG</code> raises it, to about 9.8 m/s instead of 6.8 m/s. Doubling <code>MASS</code> halves the acceleration, so the car takes longer to get going and longer to stop. The top speed stays the same, because mass is not in the balance of forces. Low grip makes the car slide like it is on ice, and very high grip makes it feel like it is on rails. A wall bounce of 1.0 makes a perfect bounce, and 0.0 kills all speed into the wall. With <code>CAR_BOUNCE</code> at 0.6, Orange passes most of its speed to Green, so Green ends up faster.</p></details>
+<p><strong>Success criteria.</strong> The cars speed up and slow down smoothly, slide on fast corners, bounce off barriers and push each other. You can explain each change using force, mass, acceleration and momentum.</p>
+<p><strong>Apply it to your project.</strong> Give each car its own <code>MASS</code> and <code>ENGINE_FORCE</code> to make a heavy truck and a light kart, then race them. Godot also has a ready-made <code>VehicleBody3D</code> node with suspension and wheels for when you want even more realism.</p>
+<p><a href="./">Back to the Physics course</a></p>
+</main>
+<script type="module" src="../platformer/lesson-editor.js"></script>
+</body>
+</html>
