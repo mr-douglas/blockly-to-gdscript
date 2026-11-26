@@ -16,14 +16,13 @@ var status: Label
 
 func _ready() -> void:
 	stage(EYE, Vector3(3, 1, 0), 12.0)  # Lights.
-	outdoors()  # Sky, fields and distant trees.
+	outdoors()  # Sky, a solid grass field and trees.
 	# A perspective camera at head height. Things further away look smaller.
 	eye = Camera3D.new()
 	eye.fov = 60.0
 	eye.position = EYE
 	add_child(eye)
 	eye.current = true
-	island(Vector3(14, 1, 7))
 	# A pyramid of crates: 3 on the bottom, then 2, then 1. Two rows deep.
 	for row in 3:
 		for i in 3 - row:
