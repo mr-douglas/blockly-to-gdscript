@@ -1,0 +1,46 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 26.0.8-1ubuntu0.3 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 21.1.8, 256 bits)
+
+TOUR OK res://platformer_move.gd
+TOUR OK res://platformer_collision.gd
+TOUR OK res://platformer_gravity.gd
+TOUR OK res://platformer_jump.gd
+TOUR OK res://platformer_respawn.gd
+TOUR OK res://platformer_goal.gd
+TOUR OK res://platformer_coins.gd
+TOUR OK res://platformer_hazards.gd
+TOUR OK res://platformer_checkpoint.gd
+TOUR OK res://platformer_patrol.gd
+TOUR OK res://platformer_moving.gd
+TOUR OK res://platformer_coin_gate.gd
+TOUR OK res://platformer.gd
+TOUR OK res://top_down.gd
+TOUR OK res://art_sprite_2d.gd
+TOUR OK res://movement_3d.gd
+TOUR OK res://landing_pad_follow.gd
+TOUR OK res://physics_3d.gd
+TOUR OK res://platform3d_walk.gd
+TOUR OK res://platform3d_fall.gd
+TOUR OK res://platform3d_jump.gd
+TOUR OK res://platform3d_cameras.gd
+TOUR OK res://platform3d_goal.gd
+TOUR OK res://art_character_3d.gd
+TOUR OK res://racing_fixed.gd
+TOUR OK res://racing_shared_camera.gd
+TOUR OK res://racing_laps.gd
+TOUR OK res://ui_hud.gd
+TOUR OK res://ui_health.gd
+TOUR OK res://ui_game_over.gd
+TOUR OK res://ui_start_menu.gd
+TOUR OK res://ui_win_screen.gd
+TOUR OK res://art_sound_effects.gd
+TOUR OK res://art_music.gd
+TOUR OK res://physics_drop.gd
+TOUR OK res://physics_stack.gd
+TOUR OK res://physics_launch.gd
+TOUR OK res://physics_drop_3d.gd
+TOUR OK res://physics_launch_3d.gd
+TOUR OK res://physics_racing.gd
+TOUR PASSED
