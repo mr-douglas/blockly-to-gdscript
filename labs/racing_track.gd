@@ -54,16 +54,13 @@ func add_sky_and_sun() -> void:
 	environment.sky = sky
 	# The sky is only the background. Lighting the scene from the bright blue sky
 	# washes everything out in the browser renderer, so use a soft, neutral
-	# ambient colour and switch off sky reflections instead. Sun plus ambient
-	# stays a little under full brightness on surfaces facing the sun, so the
-	# grass, white kerbs and pale models do not glare. The racing scenes keep
-	# linear tonemapping because filmic made the big grass field too bright.
+	# ambient colour and switch off sky reflections instead. All the lights here
+	# are scaled by BRIGHTNESS in scene_3d.gd, so one number darkens or
+	# brightens every 3D scene.
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#d9e1e8")
-	environment.ambient_light_energy = 0.28
+	environment.ambient_light_energy = 0.28 * BRIGHTNESS
 	finish_environment(environment)
-	environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR
-	environment.tonemap_exposure = 1.0
 	var world := WorldEnvironment.new()
 	world.environment = environment
 	add_child(world)

@@ -3,11 +3,15 @@ extends Node3D
 # Shared set-up for the 3D lessons. Students never see this file: their lesson
 # scripts just call stage(). The lighting here is a small "three point" rig:
 # a warm sun that casts soft shadows, a weak cool fill light from the other
-# side so shadowed faces are not black, and a gentle sky-blue ambient. Filmic
-# tonemapping keeps bright colours from clipping to flat white in the browser.
+# side so shadowed faces are not black, and a gentle sky-blue ambient.
 const SUN_COLOR := Color("#fff0d6")
 const FILL_COLOR := Color("#bcd6ff")
 const AMBIENT_COLOR := Color("#b4cde6")
+# Scales every light in every 3D scene (sun, fill and ambient). In the browser
+# a value of 1.0 made sunlit surfaces brighter than their real colours, so
+# yellows, whites and pinks clipped to flat colour. Lower it to darken all
+# 3D scenes at once, raise it to brighten them.
+const BRIGHTNESS := 0.6
 
 func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 	var camera := Camera3D.new()
@@ -23,7 +27,7 @@ func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 	environment.background_color = Color("#132640")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = AMBIENT_COLOR
-	environment.ambient_light_energy = 0.36
+	environment.ambient_light_energy = 0.36 * BRIGHTNESS
 	finish_environment(environment)
 	var world := WorldEnvironment.new()
 	world.environment = environment
@@ -39,21 +43,20 @@ func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 	sun.shadow_normal_bias = 1.5
 	add_fill(Vector3(-30, 125, 0), 0.2)
 
-## Settings shared by every 3D scene: tonemapping and no sky reflections
-## (which wash the browser renderer out).
+## Settings shared by every 3D scene: no sky reflections (they wash the
+## browser renderer out) and a neutral tonemap.
 func finish_environment(environment: Environment) -> void:
 	environment.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
-	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.tonemap_exposure = 1.05
-	environment.tonemap_white = 5.0
+	environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR
+	environment.tonemap_exposure = 1.0
 
-## The key light. It casts soft shadows.
+## The key light. It casts soft shadows. `energy` is scaled by BRIGHTNESS.
 func add_sun(angles: Vector3, energy: float, shadow_reach: float) -> DirectionalLight3D:
 	var sun := DirectionalLight3D.new()
 	sun.name = "Sun"
 	sun.rotation_degrees = angles
 	sun.light_color = SUN_COLOR
-	sun.light_energy = energy
+	sun.light_energy = energy * BRIGHTNESS
 	sun.shadow_enabled = true
 	sun.shadow_blur = 0.8
 	sun.shadow_bias = 0.15
@@ -66,12 +69,13 @@ func add_sun(angles: Vector3, energy: float, shadow_reach: float) -> Directional
 	return sun
 
 ## A weak, cool light from the opposite side. It does not cast shadows.
+## `energy` is scaled by BRIGHTNESS.
 func add_fill(angles: Vector3, energy: float) -> DirectionalLight3D:
 	var fill := DirectionalLight3D.new()
 	fill.name = "Fill"
 	fill.rotation_degrees = angles
 	fill.light_color = FILL_COLOR
-	fill.light_energy = energy
+	fill.light_energy = energy * BRIGHTNESS
 	fill.light_specular = 0.0
 	add_child(fill)
 	return fill
