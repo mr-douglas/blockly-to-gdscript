@@ -15,7 +15,8 @@ var arrow: MeshInstance3D
 var status: Label
 
 func _ready() -> void:
-	stage(Vector3(3, 7, 13), Vector3(-0.5, 1, 0), 11.0)
+	# The camera looks from behind the thrower's left shoulder.
+	stage(Vector3(-9, 7, 9), Vector3(0, 0.8, 0), 10.0)
 	island(Vector3(14, 1, 7))
 	# A pyramid of crates: 3 on the bottom, then 2, then 1. Two rows deep.
 	for row in 3:
@@ -71,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		angle = clampf(angle + Input.get_axis("down", "up") * 30 * delta, 0, 70)
 		turn = clampf(turn + Input.get_axis("right", "left") * 30 * delta, -30, 30)
-		point_arrow(arrow, LAUNCH_AT, launch_direction(), 1.6)
+		point_arrow(arrow, LAUNCH_AT, launch_direction(), 2.5)
 		if Input.is_action_just_pressed("action"):
 			throw_ball()
 	var knocked := 0
