@@ -23,6 +23,38 @@ func island(size: Vector3) -> StaticBody3D:
 	decorate("flowers", Vector3(half.x - 1.2, 0, half.z - 0.6), 0.35)
 	return body
 
+## For first-person views: a sky, flat fields out to the horizon just below
+## y = 0, and trees dotted around in the distance. Call it after stage().
+func outdoors() -> void:
+	for child in get_children():
+		if child is WorldEnvironment:
+			var sky_material := ProceduralSkyMaterial.new()
+			sky_material.sky_top_color = Color("#3d7fd1")
+			sky_material.sky_horizon_color = Color("#cfe8f7")
+			sky_material.ground_horizon_color = Color("#cfe8f7")
+			sky_material.ground_bottom_color = Color("#4f8f4a")
+			var sky := Sky.new()
+			sky.sky_material = sky_material
+			# The sky is only the background: the lights still come from stage().
+			child.environment.background_mode = Environment.BG_SKY
+			child.environment.sky = sky
+	var field := StaticBody3D.new()
+	field.position.y = -0.02
+	add_shape(field, WorldBoundaryShape3D.new())
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(300, 300)
+	add_mesh(field, plane, Color("#5fbf6f"))
+	add_child(field)
+	var random := RandomNumberGenerator.new()
+	random.seed = 7
+	var placed := 0
+	while placed < 40:
+		var spot := Vector3(random.randf_range(-20.0, 45.0), 0, random.randf_range(-30.0, 30.0))
+		if absf(spot.x) < 8.0 and absf(spot.z) < 5.0:
+			continue
+		decorate("tree", spot, random.randf_range(1.2, 2.6))
+		placed += 1
+
 ## Draw a Kenney crate on `body`, stretched to `size`.
 func crate_art(body: Node3D, size: Vector3, strong := false) -> Node3D:
 	return kit_model(body, "crate-strong" if strong else "crate", size)
@@ -46,22 +78,3 @@ func decorate(model_name: String, at: Vector3, height: float) -> Node3D:
 	art.position = at - Vector3(box.get_center().x, box.position.y, box.get_center().z) * factor
 	add_child(art)
 	return art
-
-## Point a thin arrow from `from` along `direction`, `length` long.
-func point_arrow(arrow: MeshInstance3D, from: Vector3, direction: Vector3, length: float) -> void:
-	var mesh := arrow.mesh as BoxMesh
-	mesh.size = Vector3(0.08, 0.08, length)
-	arrow.global_transform = Transform3D(Basis.looking_at(direction, Vector3.UP),
-		from + direction.normalized() * length / 2)
-
-## A thin yellow arrow for aiming. Move it with point_arrow().
-func make_arrow() -> MeshInstance3D:
-	var arrow := MeshInstance3D.new()
-	arrow.mesh = BoxMesh.new()
-	var material := StandardMaterial3D.new()
-	material.albedo_color = Color("#ffd23f")
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	arrow.material_override = material
-	arrow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	add_child(arrow)
-	return arrow

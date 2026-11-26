@@ -2,12 +2,12 @@ extends "res://physics_art_3d.gd"
 
 # First person: you stand still at EYE, turn your head with the arrow keys
 # and shoot balls straight ahead, wherever the camera is looking.
-const EYE := Vector3(-5, 1.4, 0)
+const EYE := Vector3(-3, 1.3, 0)
 const SPEED := 14.0
 const LOOK_SPEED := 45.0  # degrees per second
 const CRATE := 0.8
 const FLIGHT_TIME := 4.0
-var look_up := 5.0
+var look_up := 3.0
 var look_left := 0.0
 var eye: Camera3D
 var shots := 0
@@ -15,10 +15,11 @@ var crates: Array[RigidBody3D] = []
 var status: Label
 
 func _ready() -> void:
-	stage(EYE, Vector3(3, 1, 0), 12.0)  # Sky and lights.
+	stage(EYE, Vector3(3, 1, 0), 12.0)  # Lights.
+	outdoors()  # Sky, fields and distant trees.
 	# A perspective camera at head height. Things further away look smaller.
 	eye = Camera3D.new()
-	eye.fov = 70.0
+	eye.fov = 60.0
 	eye.position = EYE
 	add_child(eye)
 	eye.current = true
