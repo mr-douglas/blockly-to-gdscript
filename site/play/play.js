@@ -282,9 +282,9 @@ const physicsLessons = {
   },
   "launch-3d": {
     "title": "Physics lesson 5 · Knock down a crate pyramid in 3D",
-    "goal": "Aim the red ball and knock down all 12 crates.",
-    "controls": "Up and Down to change the angle, Left and Right to turn, Space to throw, R to restart.",
-    "task": "Add a fourth row to the pyramid, then change SPEED and find a new angle that works.",
+    "goal": "Look through the player's eyes, aim with the crosshair and knock down all 12 crates.",
+    "controls": "Arrow keys to look left, right, up and down. Space to shoot. R to restart.",
+    "task": "Change SPEED to 7 and find where you must aim now. Then change eye.fov and compare the view.",
     "file": "physics_launch_3d.gd"
   },
   "racing": {
