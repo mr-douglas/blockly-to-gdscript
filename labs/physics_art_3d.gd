@@ -23,8 +23,8 @@ func island(size: Vector3) -> StaticBody3D:
 	decorate("flowers", Vector3(half.x - 1.2, 0, half.z - 0.6), 0.35)
 	return body
 
-## For first-person views: a sky, flat fields out to the horizon just below
-## y = 0, and trees dotted around in the distance. Call it after stage().
+## For first-person views: a sky, a solid grass field at y = 0 out to the
+## horizon, flowers nearby and trees in the distance. Call it after stage().
 func outdoors() -> void:
 	for child in get_children():
 		if child is WorldEnvironment:
@@ -38,8 +38,10 @@ func outdoors() -> void:
 			# The sky is only the background: the lights still come from stage().
 			child.environment.background_mode = Environment.BG_SKY
 			child.environment.sky = sky
+		elif child is DirectionalLight3D:
+			# Do not draw a sun disc in the sky for the sun and fill lights.
+			child.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
 	var field := StaticBody3D.new()
-	field.position.y = -0.02
 	add_shape(field, WorldBoundaryShape3D.new())
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(300, 300)
@@ -54,6 +56,8 @@ func outdoors() -> void:
 			continue
 		decorate("tree", spot, random.randf_range(1.2, 2.6))
 		placed += 1
+	for spot: Vector3 in [Vector3(1.0, 0, -2.6), Vector3(5.5, 0, 2.2), Vector3(-0.5, 0, 2.8), Vector3(6.5, 0, -3.0)]:
+		decorate("flowers", spot, 0.35)
 
 ## Draw a Kenney crate on `body`, stretched to `size`.
 func crate_art(body: Node3D, size: Vector3, strong := false) -> Node3D:
