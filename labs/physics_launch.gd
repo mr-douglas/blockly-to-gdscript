@@ -4,10 +4,12 @@ const LAUNCH_AT := Vector2(110, 300)
 const BALL_RADIUS := 22.0
 const MIN_POWER := 300.0
 const MAX_POWER := 1000.0
+const FLIGHT_TIME := 4.0
 var angle := 40.0
 var power := 650.0
 var ball: RigidBody2D
 var launched := false
+var flight := 0.0
 var shots := 0
 var targets: Array[RigidBody2D] = []
 var aim: Line2D
@@ -63,10 +65,11 @@ func new_ball() -> void:
 	# Frozen bodies ignore gravity until we let go of them.
 	ball.freeze = true
 	ball.continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
-	var circle := CollisionShape2D.new()
-	circle.shape = CircleShape2D.new()
-	circle.shape.radius = BALL_RADIUS
-	ball.add_child(circle)
+	var circle := CircleShape2D.new()
+	circle.radius = BALL_RADIUS
+	var collision := CollisionShape2D.new()
+	collision.shape = circle
+	ball.add_child(collision)
 	alien_art(ball, BALL_RADIUS, "green")
 	add_child(ball)
 	launched = false
@@ -76,7 +79,13 @@ func launch_velocity() -> Vector2:
 	return Vector2.from_angle(deg_to_rad(-angle)) * power
 
 func _physics_process(delta: float) -> void:
-	if not launched:
+	if launched:
+		# After a few seconds, clear the old ball away and load a new one.
+		flight += delta
+		if flight > FLIGHT_TIME:
+			ball.queue_free()
+			new_ball()
+	else:
 		angle = clampf(angle + Input.get_axis("down", "up") * 40 * delta, 5, 80)
 		power = clampf(power + Input.get_axis("left", "right") * 300 * delta, MIN_POWER, MAX_POWER)
 		draw_aim()
@@ -91,7 +100,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		status.text = "Angle %d (Up/Down)   Power %d (Left/Right)   Space to throw\nShots: %d   Aliens knocked out: %d / %d" % [angle, power, shots, knocked, targets.size()]
 
-# Show the first part of the ball's path: position = start + velocity * t + gravity * t * t / 2
+# Show the first part of the ball's path: start + velocity * t + gravity * t * t / 2
 func draw_aim() -> void:
 	var gravity := Vector2(0, ProjectSettings.get_setting("physics/2d/default_gravity"))
 	var points := PackedVector2Array()
@@ -102,12 +111,10 @@ func draw_aim() -> void:
 
 func throw_ball() -> void:
 	launched = true
+	flight = 0.0
 	shots += 1
 	aim.points = PackedVector2Array()
 	ball.freeze = false
 	# An impulse is a sudden push. Multiply by mass so the ball leaves at
 	# exactly launch_velocity() however heavy it is.
 	ball.apply_central_impulse(launch_velocity() * ball.mass)
-	await get_tree().create_timer(4.0).timeout
-	ball.queue_free()
-	new_ball()

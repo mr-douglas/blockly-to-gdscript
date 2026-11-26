@@ -3,10 +3,12 @@ extends "res://physics_art_3d.gd"
 const LAUNCH_AT := Vector3(-5, 1, 0)
 const SPEED := 11.0
 const CRATE := 0.8
+const FLIGHT_TIME := 4.0
 var angle := 20.0
 var turn := 0.0
 var ball: RigidBody3D
 var launched := false
+var flight := 0.0
 var shots := 0
 var crates: Array[RigidBody3D] = []
 var arrow: MeshInstance3D
@@ -52,6 +54,7 @@ func new_ball() -> void:
 	add_mesh(ball, mesh, Color("#e8574a"))
 	add_child(ball)
 	launched = false
+	arrow.visible = true
 
 # Start pointing along +x, tip it up by `angle`, then turn it by `turn`.
 func launch_direction() -> Vector3:
@@ -60,7 +63,12 @@ func launch_direction() -> Vector3:
 	return direction.rotated(Vector3.UP, deg_to_rad(turn))
 
 func _physics_process(delta: float) -> void:
-	if not launched:
+	if launched:
+		flight += delta
+		if flight > FLIGHT_TIME:
+			ball.queue_free()
+			new_ball()
+	else:
 		angle = clampf(angle + Input.get_axis("down", "up") * 30 * delta, 0, 70)
 		turn = clampf(turn + Input.get_axis("right", "left") * 30 * delta, -30, 30)
 		point_arrow(arrow, LAUNCH_AT, launch_direction(), 1.6)
@@ -74,11 +82,8 @@ func _physics_process(delta: float) -> void:
 
 func throw_ball() -> void:
 	launched = true
+	flight = 0.0
 	shots += 1
 	arrow.visible = false
 	ball.freeze = false
 	ball.apply_central_impulse(launch_direction() * SPEED * ball.mass)
-	await get_tree().create_timer(4.0).timeout
-	ball.queue_free()
-	new_ball()
-	arrow.visible = true

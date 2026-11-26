@@ -66,3 +66,21 @@ Author's pack and license: https://kenney.nl/assets/racing-kit
 GLB distribution (pinned commit): https://github.com/kidscancode/3d_car_sphere/tree/cabc5c0019e68913012fc41d7b2ded6dcef3be31/assets/kenney_racing_kit
 License: https://creativecommons.org/publicdomain/zero/1.0/
 racing/fetch.sh downloads these files and checks each one against its git blob hash.
+
+physics2d/*.png
+Background (colored_grass), grass and dirt tiles, wood and stone blocks
+(elementWood012, 019, 022 and elementStone013, 020, 023), alienGreen_round and
+alienPink_square from Physics Assets by Kenney, CC0 1.0.
+Author's pack and license: https://kenney.nl/assets/physics-assets
+PNG distribution (pinned commit): https://github.com/crystal-bit/angry-aliens/tree/e676d009ba96cffb0eb7e6676985284d08a082cf/Assets/graphics/kenney_physicsAssets_v2
+License: https://creativecommons.org/publicdomain/zero/1.0/
+physics2d/fetch.sh downloads these files, checks each one against its git blob hash
+and gives it a short name.
+
+physics3d/*.glb and physics3d/Textures/colormap.png
+crate, crate-strong, block-grass-large, tree and flowers from Platformer Kit by
+Kenney, CC0 1.0.
+Author's pack and license: https://kenney.nl/assets/platformer-kit
+GLB distribution (pinned commit): https://github.com/levinzonr/godot-asset-placer/tree/7b4c4c1f54cfd8a9fef6d606c3026aa10fd6130b/demo/assets/kenney_platformer_kit
+License: https://creativecommons.org/publicdomain/zero/1.0/
+physics3d/fetch.sh downloads these files and checks each one against its git blob hash.
