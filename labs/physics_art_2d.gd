@@ -7,7 +7,7 @@ extends "res://scene_2d.gd"
 const BACKGROUND := preload("res://art/physics2d/background.png")
 const GRASS := preload("res://art/physics2d/grass.png")
 const DIRT := preload("res://art/physics2d/dirt.png")
-# Square, plank (wide) and post (tall) pieces for each material.
+# Square, plank (wide) and post (tall) pieces for each kind of block.
 const BLOCKS := {
 	"wood": [preload("res://art/physics2d/wood-square.png"),
 		preload("res://art/physics2d/wood-plank.png"), preload("res://art/physics2d/wood-post.png")],
@@ -47,16 +47,15 @@ func tiles(tile: Texture2D, area: Rect2) -> void:
 	var art := TextureRect.new()
 	art.texture = tile
 	art.stretch_mode = TextureRect.STRETCH_TILE
-	art.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	art.position = area.position
 	art.size = area.size
 	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(art)
 
-## Draw a wood or stone block on `body`, stretched to `size` pixels. Wide
+## Draw a "wood" or "stone" block on `body`, stretched to `size` pixels. Wide
 ## sizes use a plank, tall sizes use a post, and the rest use a square.
-func block_art(body: Node2D, size: Vector2, material := "wood") -> Sprite2D:
-	var pieces: Array = BLOCKS[material]
+func block_art(body: Node2D, size: Vector2, kind := "wood") -> Sprite2D:
+	var pieces: Array = BLOCKS[kind]
 	var texture: Texture2D = pieces[0]
 	if size.x > size.y * 1.8:
 		texture = pieces[1]
@@ -68,7 +67,7 @@ func block_art(body: Node2D, size: Vector2, material := "wood") -> Sprite2D:
 	body.add_child(sprite)
 	return sprite
 
-## Draw an alien `radius` pixels across from its centre to its edge.
+## Draw a "green" or "pink" alien, `radius` pixels from its centre to its edge.
 func alien_art(body: Node2D, radius: float, colour := "green") -> Sprite2D:
 	var sprite := Sprite2D.new()
 	sprite.texture = ALIENS[colour]
