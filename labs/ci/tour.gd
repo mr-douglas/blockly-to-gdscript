@@ -19,7 +19,7 @@ const SCENES := [
 	"res://ui_start_menu.gd", "res://ui_win_screen.gd",
 	"res://art_sound_effects.gd", "res://art_music.gd",
 	"res://physics_drop.gd", "res://physics_stack.gd", "res://physics_launch.gd",
-	"res://physics_drop_3d.gd", "res://physics_launch_3d.gd",
+	"res://physics_drop_3d.gd", "res://physics_launch_3d.gd", "res://physics_racing.gd",
 ]
 const KEYS := [&"left", &"right", &"up", &"down", &"action", &"reset", &"view",
 	&"p2_left", &"p2_right", &"p2_up", &"p2_down"]
@@ -87,8 +87,9 @@ func visit(path: String) -> void:
 		scene.call(&"out_of_health")
 		await wait(5)
 		await shoot(label + "-4")
-	elif scene.has_method(&"throw_ball"):
-		# Show where the thrown ball ends up in the physics lessons.
+	elif scene.has_method(&"throw_ball") or scene.has_method(&"bump"):
+		# Show where things end up in the physics lessons: the thrown ball,
+		# or the racing cars coasting on their momentum.
 		await wait(90)
 		await shoot(label + "-3")
 	paused = false

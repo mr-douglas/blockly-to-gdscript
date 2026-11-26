@@ -60,6 +60,7 @@ jobs:
           sheet audio art_sound_effects-*.png art_music-*.png
           sheet physics-2d physics_drop-*.png physics_stack-*.png physics_launch-*.png
           sheet physics-3d physics_drop_3d-*.png physics_launch_3d-*.png
+          sheet physics-racing physics_racing-*.png racing_laps-*.png
       - name: Publish to the ci-screenshots branch
         if: always()
         run: |

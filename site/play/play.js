@@ -287,6 +287,13 @@ const physicsLessons = {
     "task": "Add a fourth row to the pyramid, then change SPEED and find a new angle that works.",
     "file": "physics_launch_3d.gd"
   },
+  "racing": {
+    "title": "Physics lesson 6 · Give the racing cars real physics",
+    "goal": "Race two laps with cars that accelerate, carry momentum, slide on corners and bump each other.",
+    "controls": "Orange uses arrows. Green uses WASD. Up or W accelerates. Down or S brakes, then reverses. Left and Right or A and D steer. R restarts.",
+    "task": "Change DRAG, MASS and GRIP one at a time. Predict and then test how each one changes top speed, acceleration and cornering.",
+    "file": "physics_racing.gd"
+  },
 };
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},

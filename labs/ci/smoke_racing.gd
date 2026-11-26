@@ -2,7 +2,8 @@ extends SceneTree
 
 # Headless smoke test for the racing lessons, run by runner/build.sh.
 # Each lesson must load, build its track, and let both cars drive forward.
-const LESSONS := ["res://racing_fixed.gd", "res://racing_shared_camera.gd", "res://racing_laps.gd"]
+const LESSONS := ["res://racing_fixed.gd", "res://racing_shared_camera.gd", "res://racing_laps.gd",
+	"res://physics_racing.gd"]
 const KEYS := [&"left", &"right", &"up", &"down", &"action", &"reset", &"view",
 	&"p2_left", &"p2_right", &"p2_up", &"p2_down"]
 
