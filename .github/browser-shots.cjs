@@ -18,6 +18,7 @@ const PAGES = [
   ["racing-laps", "/play/?demo=racing&lesson=laps", false],
   ["racing-fixed", "/play/?demo=racing&lesson=fixed-track", false],
   ["platformer-3d", "/play/?demo=movement-3d&lesson=goal-3d", false],
+  ["landing-pad", "/play/?demo=movement-3d", false],
   ["ui-start-menu", "/play/?demo=ui&lesson=start-menu", false],
   ["top-down", "/play/?demo=top-down", false],
   ["lesson-racing-laps", "/racing/laps.html", true],
