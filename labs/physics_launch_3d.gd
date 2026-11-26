@@ -16,7 +16,7 @@ var status: Label
 
 func _ready() -> void:
 	# The camera looks from behind the thrower's left shoulder.
-	stage(Vector3(-9, 7, 9), Vector3(0, 0.8, 0), 10.0)
+	stage(Vector3(-9, 7.7, 9), Vector3(0, 1.5, 0), 11.0)
 	island(Vector3(14, 1, 7))
 	# A pyramid of crates: 3 on the bottom, then 2, then 1. Two rows deep.
 	for row in 3:
