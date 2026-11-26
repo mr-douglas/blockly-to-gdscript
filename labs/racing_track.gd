@@ -56,22 +56,20 @@ func add_sky_and_sun() -> void:
 	# washes everything out in the browser renderer, so use a soft, neutral
 	# ambient colour and switch off sky reflections instead. Sun plus ambient
 	# stays a little under full brightness on surfaces facing the sun, so the
-	# grass, white kerbs and pale models do not glare.
+	# grass, white kerbs and pale models do not glare. The racing scenes keep
+	# linear tonemapping because filmic made the big grass field too bright.
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("#d9e1e8")
-	environment.ambient_light_energy = 0.3
-	environment.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
+	environment.ambient_light_energy = 0.28
+	finish_environment(environment)
+	environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR
+	environment.tonemap_exposure = 1.0
 	var world := WorldEnvironment.new()
 	world.environment = environment
 	add_child(world)
 
-	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-50, -35, 0)
-	sun.light_color = Color("#fff4e0")
-	sun.light_energy = 0.75
-	sun.shadow_enabled = true
-	sun.directional_shadow_max_distance = 45.0
-	add_child(sun)
+	add_sun(Vector3(-50, -35, 0), 0.7, 45.0)
+	add_fill(Vector3(-30, 145, 0), 0.1)
 
 func label(text: String) -> Label:
 	var status: Label = super(text)
