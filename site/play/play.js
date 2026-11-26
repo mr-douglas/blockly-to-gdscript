@@ -251,12 +251,50 @@ const uiLessons = {
     "file": "ui_win_screen.gd"
   },
 };
+const physicsLessons = {
+  "drop": {
+    "title": "Physics lesson 1 · Drop a crate onto the ground",
+    "goal": "Watch the crate fall from a random angle and settle on the ground.",
+    "controls": "R to drop the crate again at a new angle.",
+    "task": "Set crate.rotation to 0, then to TAU / 8, and predict how the crate lands each time.",
+    "file": "physics_drop.gd"
+  },
+  "stack": {
+    "title": "Physics lesson 2 · Build a tower with mass and friction",
+    "goal": "Drop a heavy stone block onto the wooden tower.",
+    "controls": "Space to drop the stone. R to rebuild the tower.",
+    "task": "Change STONE_MASS and FRICTION one at a time and compare what happens to the tower.",
+    "file": "physics_stack.gd"
+  },
+  "launch": {
+    "title": "Physics lesson 3 · Throw a ball at a tower",
+    "goal": "Aim the green alien and knock out both pink aliens in as few shots as you can.",
+    "controls": "Up and Down to change the angle, Left and Right to change the power, Space to throw, R to restart.",
+    "task": "Change ball.mass to 10, then remove * ball.mass from the impulse and compare the shots.",
+    "file": "physics_launch.gd"
+  },
+  "drop-3d": {
+    "title": "Physics lesson 4 · Drop a crate in 3D",
+    "goal": "Watch the crate tumble from a random 3D rotation onto the island.",
+    "controls": "R to drop the crate again at a new rotation.",
+    "task": "Only randomise the y rotation and predict how the crate lands.",
+    "file": "physics_drop_3d.gd"
+  },
+  "launch-3d": {
+    "title": "Physics lesson 5 · Knock down a crate pyramid in 3D",
+    "goal": "Aim the red ball and knock down all 12 crates.",
+    "controls": "Up and Down to change the angle, Left and Right to turn, Space to throw, R to restart.",
+    "task": "Add a fourth row to the pyramid, then change SPEED and find a new angle that works.",
+    "file": "physics_launch_3d.gd"
+  },
+};
 const lessonCourses = {
   platformer: {path: "platformer", lessons: platformerLessons},
   "movement-3d": {path: "platformer-3d", lessons: platformer3DLessons},
   racing: {path: "racing", lessons: racingLessons},
   animation: {path: "animation", lessons: artLessons},
   ui: {path: "ui", lessons: uiLessons},
+  physics: {path: "physics", lessons: physicsLessons},
 };
 const course = Object.hasOwn(lessonCourses, requested) ? lessonCourses[requested] : null;
 const lesson = course && Object.hasOwn(course.lessons, params.get("lesson"))
