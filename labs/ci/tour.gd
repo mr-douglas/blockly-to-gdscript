@@ -87,7 +87,7 @@ func visit(path: String) -> void:
 		scene.call(&"out_of_health")
 		await wait(5)
 		await shoot(label + "-4")
-	elif scene.has_method(&"throw_ball") or scene.has_method(&"bump"):
+	elif scene.has_method(&"throw_ball") or scene.has_method(&"shoot") or scene.has_method(&"bump"):
 		# Show where things end up in the physics lessons: the thrown ball,
 		# or the racing cars coasting on their momentum.
 		await wait(90)
