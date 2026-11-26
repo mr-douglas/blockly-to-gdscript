@@ -23,17 +23,17 @@ func stage(camera_at: Vector3, target: Vector3, view_size: float) -> void:
 	environment.background_color = Color("#132640")
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = AMBIENT_COLOR
-	environment.ambient_light_energy = 0.42
+	environment.ambient_light_energy = 0.36
 	finish_environment(environment)
 	var world := WorldEnvironment.new()
 	world.environment = environment
 	add_child(world)
 
-	# Shadows must reach everything the camera can see, including the far
-	# corners of the view and anything a follow camera looks at later.
-	var reach: float = camera_at.distance_to(target) + view_size * 1.5
-	add_sun(Vector3(-55, -32, 0), 1.25, maxf(reach, 30.0))
-	add_fill(Vector3(-30, 150, 0), 0.28)
+	# Shadows must reach everything the camera can see. Keeping the reach
+	# tight keeps the shadow map sharp.
+	var reach: float = camera_at.distance_to(target) + view_size
+	add_sun(Vector3(-55, -32, 0), 1.3, maxf(reach, 25.0))
+	add_fill(Vector3(-30, 150, 0), 0.2)
 
 ## Settings shared by every 3D scene: tonemapping and no sky reflections
 ## (which wash the browser renderer out).
@@ -51,12 +51,11 @@ func add_sun(angles: Vector3, energy: float, shadow_reach: float) -> Directional
 	sun.light_color = SUN_COLOR
 	sun.light_energy = energy
 	sun.shadow_enabled = true
-	sun.shadow_blur = 1.5
-	sun.shadow_bias = 0.04
-	sun.shadow_normal_bias = 1.2
-	sun.shadow_opacity = 0.85
+	sun.shadow_blur = 1.0
+	sun.shadow_bias = 0.1
+	sun.shadow_normal_bias = 2.0
 	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
-	sun.directional_shadow_split_1 = 0.3
+	sun.directional_shadow_split_1 = 0.35
 	sun.directional_shadow_blend_splits = true
 	sun.directional_shadow_max_distance = shadow_reach
 	add_child(sun)
