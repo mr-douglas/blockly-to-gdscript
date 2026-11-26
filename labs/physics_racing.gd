@@ -5,11 +5,11 @@ extends "res://racing_laps.gd"
 # uses them to change the velocity, and keeps that velocity from one frame to
 # the next. That gives the cars acceleration, momentum and sliding.
 const MASS := 800.0           # kg
-const ENGINE_FORCE := 6000.0  # newtons pushing the car forward
-const BRAKE_FORCE := 9000.0   # newtons slowing the car when you press back
-const REVERSE_FORCE := 2500.0 # newtons pushing the car backwards once stopped
-const DRAG := 100.0           # air resistance: force = DRAG * speed * speed
-const ROLLING := 200.0        # tyre rolling resistance: force = ROLLING * speed
+const ENGINE_FORCE := 4000.0  # newtons pushing the car forward
+const BRAKE_FORCE := 8000.0   # newtons slowing the car when you press back
+const REVERSE_FORCE := 2000.0 # newtons pushing the car backwards once stopped
+const DRAG := 60.0            # air resistance: force = DRAG * speed * speed
+const ROLLING := 80.0         # tyre rolling resistance: force = ROLLING * speed
 const GRIP := 6.0             # how quickly the tyres stop a sideways slide
 const STEERING := 2.6         # how fast the car turns at full lock
 const WALL_BOUNCE := 0.35     # 0 = thud into the wall, 1 = perfect bounce
